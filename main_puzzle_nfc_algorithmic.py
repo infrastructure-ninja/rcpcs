@@ -3,6 +3,7 @@
 from class_puzzle_nfc_algorithmic import AlgorithmicPuzzleNFC
 
 puzzle = AlgorithmicPuzzleNFC('tty:USB0:pn532', Debug = True)
+#puzzle = AlgorithmicPuzzleNFC('tty:AMA0:pn532', Debug = True)
 
 puzzle.AppendToSolutionPattern('shoreline.nt.altar.bible')
 puzzle.AppendToSolutionPattern('shoreline.nt.altar.torah')
@@ -36,4 +37,4 @@ except Exception as e:
 
 finally:
     puzzle.Cleanup()
-    
+#end try    
