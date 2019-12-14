@@ -1,5 +1,5 @@
-# rcpcs
-RCPCS - Room Control and Puzzle Coordination System
+# RCPCS - Room Control and Puzzle Coordination System
+(It's prounounced rick-picks.)
 
 # Elements of the system:
 
@@ -13,6 +13,11 @@ RCPCS - Room Control and Puzzle Coordination System
 
 
 ## Puzzle Controller(s)
+- **Simu-Puzzle** :: A tool written in Python3 that implements all of the
+back-and-forth communication protocols that are supported inside the
+RCPCS infrastructure. This let's you build an entire puzzle room (by running
+multiple instances of the tool) virtually, so you can focus on building and
+testing gameplay, activation logic, multimedia and lighting cues, etc.
 
 - **NFC-ALGO** :: A single NFC reader for an arbitrary number of tags in play.
 In order to solve the puzzle, each tag must be read by the reader in the
