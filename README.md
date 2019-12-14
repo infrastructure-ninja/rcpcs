@@ -1,18 +1,18 @@
 # RCPCS - Room Control and Puzzle Coordination System
 (It's prounounced rick-picks.)
 
-# Elements of the system:
+## Elements of the system:
 
-## Room Controller
-
-
-## Media Controller
+### Room Controller
 
 
-## Lighting Controller
+### Media Controller
 
 
-## Puzzle Controller(s)
+### Lighting Controller
+
+
+### Puzzle Controller(s)
 - **Simu-Puzzle** :: A tool written in Python3 that implements all of the
 back-and-forth communication protocols that are supported inside the
 RCPCS infrastructure. This let's you build an entire puzzle room (by running
