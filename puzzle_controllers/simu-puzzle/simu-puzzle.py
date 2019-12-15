@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+# SIMU-PUZZLE for RCPCS ecosystem
+# DEC 14, 2019 - JOEL CATURIA <jcaturia@katratech.com>
+
 # Python3 Dependencies:
 #  - paho-mqtt-client
 #  $> sudo pip3 install paho-mqtt
@@ -16,12 +19,17 @@ import paho.mqtt.client as mqtt
 import time
 import json
 import curses
-from curses import wrapper
+from   curses import wrapper
 
-parser = argparse.ArgumentParser(description='Simulate a puzzle in an MQTT ecosystem.')
+
+__platform__ = 'Simu-Puzzle'
+__version__  = '0.9'
+
+
+parser = argparse.ArgumentParser(description='Simulate a puzzle in the RCPCS ecosystem.')
 
 parser.add_argument('mqttHost', metavar='<MQTT BROKER>', help='The IP/hostname of the MQTT broker to connect to.')
-parser.add_argument('puzzleID', metavar='<PUZZLE ID>', help='The name of the puzzle. Will be used in all other places to reference this puzzle controller.')
+parser.add_argument('puzzleID', metavar='<PUZZLE ID>', help='The ID of the puzzle to simulate. Will be used in all other places to reference this puzzle controller.')
 parser.add_argument('--always-active', action='store_true', dest='alwaysActive', help='Puzzle will always be in active state (and will skip the AUTO state).')
 
 args = parser.parse_args()
@@ -52,12 +60,8 @@ def on_message(client, userdata, message):
         if incomingCommand in ['RESET', 'ACTIVATE', 'SOLVE']:
 
             if incomingCommand == 'RESET':
+                updatePuzzleState('AUTO')
                 
-                if flagAlwaysActive is True:
-                    updatePuzzleState('ACTIVE')
-                else:
-                    updatePuzzleState('AUTO')
-                #end if
             
             elif incomingCommand == 'ACTIVATE':
                 updatePuzzleState('ACTIVE')
@@ -81,19 +85,26 @@ def buildInterface():
 
     screen.clear()
 
-    screen.addstr(0,0, '**************************************************')
-    screen.addstr(1,0, '**     Simu-Puzzle for MQTT Ecosystem Demo      **')
-    screen.addstr(2,0, '**    Joel Caturia <jcaturia@katratech.com>     **')
-    screen.addstr(3,0, '**************************************************')
-    screen.addstr(4,0, '*  MQTT BROKER   ->                              *')
-    screen.addstr(5,0, '*  PUZZLE ID     ->                              *')
-    screen.addstr(6,0, '*  ALWAYS ACTIVE ->                              *')
-    screen.addstr(7,0, '**************************************************')
-    screen.addstr(8,0, '*  HEARTBEAT: [  ]  *  PUZZLE STATE:             *')
-    screen.addstr(9,0, '**************************************************')
-    screen.addstr(10,0, '*  Press "s" to solve the puzzle                 *')
-    screen.addstr(11,0, '*  Press "q" to quit Simu-Puzzle                 *')
-    screen.addstr(12,0, '**************************************************')
+    screen.addstr(0,0,  '**************************************************')
+    screen.addstr(1,0,  '**   Simu-Puzzle for RCPCS ecosystem v{}'.format(__version__))
+    screen.addstr(1,48, '**')
+
+    screen.addstr(2,0,  '**   by Joel Caturia <jcaturia@katratech.com>   **')
+    screen.addstr(3,0,  '**************************************************')
+    screen.addstr(4,0,  '*  MQTT BROKER   ->                              *')
+    screen.addstr(5,0,  '*  PUZZLE ID     ->                              *')
+    screen.addstr(6,0,  '*  ALWAYS ACTIVE ->                              *')
+    screen.addstr(7,0,  '**************************************************')
+    screen.addstr(8,0,  '*  HEARTBEAT: [  ]  *  PUZZLE STATE:             *')
+    screen.addstr(9,0,  '**************************************************')
+    screen.addstr(10,0, '* COMMANDS:                                      *')
+    screen.addstr(11,0, '*  - "r" to RESET the puzzle                     *')
+    screen.addstr(12,0, '*  - "a" to ACTIVATE the puzzle                  *')
+#    screen.addstr(13,0, '*  - "f" to FAIL the puzzle                      *')  #future functionality!
+    screen.addstr(13,0, '*  - "s" to SOLVE the puzzle                     *')
+#    screen.addstr(15,0, '*  - "z" to REBOOT the puzzle                    *')  #future functionality!
+    screen.addstr(14,0, '*  - "q" to QUIT Simu-Puzzle                     *')
+    screen.addstr(15,0, '**************************************************')
 
     screen.addstr(4,21, '[{}]'.format(brokerIP) )
     screen.addstr(5,21, '[{}]'.format(puzzleName) )
@@ -104,19 +115,17 @@ def buildInterface():
 #end def    
 
 
-def get_uptime():
-    with open('/proc/uptime', 'r') as f:
-        uptime_seconds = float(f.readline().split()[0])
-
-    return uptime_seconds
-#end def
 
 
 def updatePuzzleState(newPuzzleState = None):
     global puzzleState
 
     if newPuzzleState is not None:
-        puzzleState = newPuzzleState
+        if (flagAlwaysActive is True) and newPuzzleState == 'AUTO':
+            puzzleState = 'ACTIVE'
+        else:
+            puzzleState = newPuzzleState
+        #end if
 
     if puzzleState == 'AUTO':
         colorNumber = 1
@@ -134,8 +143,13 @@ def updatePuzzleState(newPuzzleState = None):
 #end def
 
 
-#heartNumber = 0
-#heartbeatIcons = ['/', '-', '\\', '|' ]
+def get_uptime():
+    with open('/proc/uptime', 'r') as f:
+        uptime_seconds = float(f.readline().split()[0])
+
+    return uptime_seconds
+#end def
+
 
 def process_pong():
     if pingPongFlash is True:
@@ -145,17 +159,15 @@ def process_pong():
         screen.addstr(8, 16, 'k')
     #end if
 
-    #screen.addstr(8, 16, 'K')
     screen.refresh()
 #end def
+
 
 pingPongFlash = True
 
 def send_ping():
-    #global heartNumber
     global pingPongFlash
 
-    #screen.addstr(8, 15, heartbeatIcons[heartNumber])
     if pingPongFlash is True:
         screen.addstr(8, 15, 'O ')
         pingPongFlash = False
@@ -167,17 +179,15 @@ def send_ping():
 
     screen.refresh()
 
-    #if heartNumber >= 3:
-    #    heartNumber = 0
-    #else:
-    #    heartNumber += 1
-    #end if
-
     data = {}
-    data['timestamp'] = time.time()
-    data['puzzleID'] = puzzleName
-    data['ipAddress'] = '127.0.0.1'
-    data['uptime'] = get_uptime()
+    data['timestamp']    = time.time()
+    data['puzzleID']     = puzzleName
+    data['ipAddress']    = '127.0.0.1'
+    data['uptime']       = get_uptime()
+    data['platform']     = __platform__ + ' v' + __version__
+    data['role']         = 'puzzle'
+    data['temperature']  = 'n/a'
+    data['currentState'] = puzzleState
     json_data = json.dumps(data)
 
     client.publish('CIPO/PING/' + puzzleName, json_data )
@@ -194,9 +204,7 @@ try:
 
 except:
     print('\r\nERROR: unable to communicate with MQTT broker. Exiting...')
-#    curses.endwin()
     exit()
-
 #end try
 
 
@@ -224,24 +232,46 @@ send_ping()
 try:
     while True:
 
-        inChar = screen.getch() 
-        if inChar == ord('q'):        # (q)uit
-            curses.endwin()
-            exit()
+        inChar = screen.getch()
 
-        elif inChar == ord('s'):      # (s)olve      
-            updatePuzzleState('SOLVED')
-        #end if 
+        if inChar > 0:
+            menuSelection = chr(inChar)
 
-        if time.time() - t > 2:        # send a controller ping every 10 seconds
-            t=time.time()
+            if  menuSelection in ['q', 'Q']:  # (q)uit
+                curses.endwin()
+                print('Simu-Puzzle terminating normally..\r\n')
+                exit()
+
+            elif menuSelection in ['a', 'A']: # (a)ctivate      
+                updatePuzzleState('ACTIVE')
+
+            elif menuSelection in ['r', 'R']: # (r)eset      
+                updatePuzzleState('AUTO')
+
+            elif menuSelection in ['s', 'A']: # (s)olve      
+                updatePuzzleState('SOLVED')
+            #end if 
+
+        #end if
+
+
+        if time.time() - t > 10:        # send a controller ping every 10 seconds
+            t = time.time()
             send_ping()
         #end if
 
-        time.sleep(.1)
+        time.sleep(.2)
 
     #end while
 
-except:
+except KeyboardInterrupt:
     curses.endwin()
+    print('\r\nCTRL+C detected, exiting..\r\n')
+
+except Exception as e:
+    curses.endwin()
+    print(e)
+
+finally:
+    pass
 #end try
