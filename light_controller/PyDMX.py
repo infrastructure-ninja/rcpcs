@@ -1,3 +1,8 @@
+# This is from the PyDMXProject
+# Available at: http://pydmx.sourceforge.net/
+#
+
+
 import serial
 import time
 import numpy as np

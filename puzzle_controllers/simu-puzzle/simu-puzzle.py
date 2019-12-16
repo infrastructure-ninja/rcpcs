@@ -1,18 +1,37 @@
 #!/usr/bin/python3
 
-# SIMU-PUZZLE for RCPCS ecosystem
-# DEC 14, 2019 - JOEL CATURIA <jcaturia@katratech.com>
+
+# SIMU-PUZZLE Tool (Puzzle Protocol Simulation Tool)
+# Part of the RCPCS project (Room Control and Puzle Coordination System)
+# Copyright (C) 2019  Joel D. Caturia
+#
+#
+# Required positional arguments: 
+#  * MQTT host
+#  * Puzzle ID
+#
+# Optional parameter(s):
+#  * --always-active  ::  Always active (does not require activation phase)
+#
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 
 # Python3 Dependencies:
 #  - paho-mqtt-client
 #  $> sudo pip3 install paho-mqtt
 
-
-# required positional arguments: 
-#  - MQTT host
-#  - puzzle ID
-# optional parameter(s):
-#  - always active (does not require activation phase)
 
 import argparse
 import paho.mqtt.client as mqtt
@@ -100,11 +119,11 @@ def buildInterface():
     screen.addstr(10,0, '* COMMANDS:                                      *')
     screen.addstr(11,0, '*  - "r" to RESET the puzzle                     *')
     screen.addstr(12,0, '*  - "a" to ACTIVATE the puzzle                  *')
-#    screen.addstr(13,0, '*  - "f" to FAIL the puzzle                      *')  #future functionality!
-    screen.addstr(13,0, '*  - "s" to SOLVE the puzzle                     *')
+    screen.addstr(13,0, '*  - "f" to FAIL the puzzle                      *')  #future functionality!
+    screen.addstr(14,0, '*  - "s" to SOLVE the puzzle                     *')
 #    screen.addstr(15,0, '*  - "z" to REBOOT the puzzle                    *')  #future functionality!
-    screen.addstr(14,0, '*  - "q" to QUIT Simu-Puzzle                     *')
-    screen.addstr(15,0, '**************************************************')
+    screen.addstr(15,0, '*  - "q" to QUIT Simu-Puzzle                     *')
+    screen.addstr(16,0, '**************************************************')
 
     screen.addstr(4,21, '[{}]'.format(brokerIP) )
     screen.addstr(5,21, '[{}]'.format(puzzleName) )
@@ -129,10 +148,15 @@ def updatePuzzleState(newPuzzleState = None):
 
     if puzzleState == 'AUTO':
         colorNumber = 1
+
     elif puzzleState == 'ACTIVE':
         colorNumber = 2
+
     elif puzzleState == 'SOLVED':
         colorNumber = 3
+
+    elif puzzleState == 'FAILED':
+        colorNumber = 4
     #end if
 
     screen.addstr(8, 37, '[' + puzzleState + ']   ', curses.color_pair(colorNumber))
@@ -219,8 +243,9 @@ curses.start_color()
 curses.noecho()
 
 curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
-curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
+curses.init_pair(2, curses.COLOR_CYAN, curses.COLOR_BLACK)
 curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK)
+curses.init_pair(4, curses.COLOR_MAGENTA, curses.COLOR_BLACK)
 
 
 buildInterface()
@@ -248,6 +273,9 @@ try:
             elif menuSelection in ['r', 'R']: # (r)eset      
                 updatePuzzleState('AUTO')
 
+            elif menuSelection in ['f', 'F']: # (f)ailed      
+                updatePuzzleState('FAILED')
+
             elif menuSelection in ['s', 'A']: # (s)olve      
                 updatePuzzleState('SOLVED')
             #end if 
@@ -255,7 +283,7 @@ try:
         #end if
 
 
-        if time.time() - t > 10:        # send a controller ping every 10 seconds
+        if time.time() - t > 5:        # send a controller ping every 10 seconds
             t = time.time()
             send_ping()
         #end if
