@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# Puzzle Controller Class :: AND Match Contact Solve (with configurable delay allowance)
+# Puzzle Controller Class :: Algorithmic Contact Match
 # Part of the RCPCS project (Room Control and Puzle Coordination System)
 # Copyright (C) 2019  Joel D. Caturia
 #
@@ -32,30 +32,70 @@
 import gpiozero
 import time
 
-class ANDMatchPuzzleContacts:
+class AlgoMatchPuzzleContacts:
 
-    def __init__(self, Debug = False, AlwaysActive = False, DelayAllowance = 1000):
+    def __init__(self, Debug = False, AlwaysActive = False):
     
         self.__debugFlag       = Debug
-        self.__delayAllowance  = DelayAllowance      # How much time is allowed to elapse (in milliseconds) between the different contact closures
+#        self.__delayAllowance  = DelayAllowance      # How much time is allowed to elapse (in milliseconds) between the different contact closures
         self.__callbacks       = {}        
 
-        self.__puzzleInputPinObjects     = {}   #FIXME: I need to let you define these as active LO/HI
+        self.__puzzleInputPinObjects     = []   #FIXME: I need to let you define these as active LO/HI        
+        self.__puzzleOutputPinObjects	 = []
+
         self.__puzzleActiveOutputObjects = []   #FIXME: I need to let you define these as active LO/HI
         self.__puzzleSolvedOutputObjects = []   #FIXME: I need to let you define these as active LO/HI
-        self.__puzzleInputPinTimers      = {}
+        self.__puzzleFailedOutputObjects = []
         
+        self.__puzzlePatternPosition     = 0
         self.__puzzleAlwaysActive        = AlwaysActive
         self.__puzzleActive              = AlwaysActive
         self.__puzzleSolved              = False
-
+        self.__puzzleFailed		 = False
+        
     #end def
     
+    
+    def SetAlgorithmInputs(self, inputPins, FailPin = None):
+    
+        if self.__debugFlag is True:
+            print('>> Added Puzzle Pattern Inputs #[{}], Fail Pin: [{}]'.format(inputPins, FailPin))
+        #end if
+    
+        self.__puzzleInputPinObjects.clear()
+        
+        for individualPin in inputPins:
+            tmpButtonObject = gpiozero.Button(individualPin, pull_up=True, active_state=None)   #FIXME - this is where we fix active HI/LO
+            tmpButtonObject.when_pressed  = self.__handlerContactCallback 
 
-    def SetDelay(self, delay):
-        self.__delayAllowance = delay
-    #end def (SetDelay)
+            self.__puzzleInputPinObjects.append(tmpButtonObject)
+        #end for
 
+        if FailPin is not None:
+            tmpButtonObject = gpiozero.Button(FailPin, pull_up=True, active_state=None)   #FIXME - this is where we fix active HI/LO
+            tmpButtonObject.when_pressed  = self.__handlerContactCallback 
+        #end if
+                    
+    #end def (SetAlgorithmInputs)
+
+    
+    def SetAlgorithmOutputs(self, outputPins):
+        if self.__debugFlag is True:
+            print('>> Added Puzzle Pattern Outputs #[{}]'.format(outputPins))
+        #end if
+
+        self.__puzzleOutputPinObjects.clear()
+            
+        for individualOutput in outputPins:
+            tmpOutputObject = gpiozero.PWMLED(individualOutput)
+            tmpOutputObject.off()
+            
+            self.__puzzleOutputPinObjects.append(tmpOutputObject)
+        #end for
+    
+    #end def (SetAlgorithmOutputs)
+    
+    
     
     def AddActiveOutput(self, activeOutputPinNumber):
         if self.__debugFlag is True:
@@ -81,19 +121,16 @@ class ANDMatchPuzzleContacts:
     #end def (AddActiveOutput)
 
 
-    def AddContact(self, inputContactPinNumber):
+    def AddFailedOutput(self, activeOutputPinNumber):
         if self.__debugFlag is True:
-            print('>> Added Input Contact Pin #[{}]'.format(inputContactPinNumber))
+            print('>> Added Puzzle Failed Output Pin #[{}]'.format(activeOutputPinNumber))
         #end if
-
-        tmpButtonObject = gpiozero.Button(inputContactPinNumber, pull_up=True, active_state=None)   #FIXME - this is where we fix active HI/LO
-        tmpButtonObject.when_pressed  = self.__handlerContactCallback 
-        tmpButtonObject.when_released = self.__handlerContactCallback
-
-        self.__puzzleInputPinObjects.update ({ tmpButtonObject.pin : tmpButtonObject } )
         
-        self.__puzzleInputPinTimers.update( { tmpButtonObject.pin :  None } )
-    #end def (AddContact)
+#        tmpOutputObject = gpiozero.LED(activeOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
+        tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
+        tmpOutputObject.off()
+        self.__puzzleFailedOutputObjects.append(tmpOutputObject)
+    #end def (AddFailedOutput)
 
 
     def __handlerContactCallback(self, btnObject):
@@ -101,48 +138,33 @@ class ANDMatchPuzzleContacts:
         if self.__debugFlag is True:
             print('>> Input Contact Pin [{}] is ACTIVE: [{}]'.format(btnObject.pin, btnObject.is_active))
         #end if
-        
+
         # We don't want to process any more events when we're in a solved state
-        if ( self.__puzzleActive is True ) and ( self.__puzzleSolved is False ):
-
+        if  ( self.__puzzleActive is True ) and ( self.__puzzleSolved is False ):
             if btnObject.is_active is True:
-                currentMilliseconds = round( time.monotonic_ns() / 1000000 )
-                self.__puzzleInputPinTimers[btnObject.pin] = currentMilliseconds
+                if ( btnObject.pin is self.__puzzleInputPinObjects[self.__puzzlePatternPosition].pin ):
+                    self.__puzzleOutputPinObjects[self.__puzzlePatternPosition].pulse()
 
-                self.__checkForSolve()
+                    self.__puzzlePatternPosition += 1
 
-            else:
-                self.__puzzleInputPinTimers[btnObject.pin] = None
-                return False
-            #end if
-        #end if
+                    self.__checkForSolve()
+
+                else:
+                    self.Fail()
+                #end if            
     #end def (__handlerContactCallback)
 
 
     def __checkForSolve(self):
 
-        currentMilliseconds = round( time.monotonic_ns() / 1000000 )
-
-        for pinName, pinMilliseconds in self.__puzzleInputPinTimers.items():
-            if self.__debugFlag is True:
-                print('>> Pin: [{}], Milliseconds: [{}]'.format(pinName, pinMilliseconds))
-            #end if
-
-            if pinMilliseconds is None:
-                return False
-                
-            elif ( currentMilliseconds - pinMilliseconds ) < self.__delayAllowance:
-                pass
-
-            else:
-                return False
-            #end if
-        #end for
-
-        # If we get down to here, then we have checked all of our input contacts and we're ready to solve!
-        self.Solve()
-
-        return True
+        if self.__puzzlePatternPosition == len(self.__puzzleInputPinObjects):
+            self.Solve()
+            return True
+            
+        else:
+            return False
+        #end if
+        
     #end def (__checkForSolve)
 
     
@@ -196,20 +218,61 @@ class ANDMatchPuzzleContacts:
     #end def (Solve)
 
 
+    def Fail(self):
+        self.__puzzleFailed = True
+        self.__puzzleActive = False
+        
+        if self.__debugFlag is True:
+            print('>> PUZZLE FAILED!')
+        #end if
+
+        for individualOutputObjects in self.__puzzleOutputPinObjects:
+            individualOutputObjects.off()
+        #end for
+
+        for individualOutputObject in self.__puzzleActiveOutputObjects:
+            individualOutputObject.off()            
+        #end for
+
+        for individualOutputObject in self.__puzzleFailedOutputObjects:
+            individualOutputObject.on()
+        #end for
+            
+        try:
+            self.__callbacks['failed']()
+        except:
+            pass
+        #end try
+    
+    #end def (Fail)
+
+
     def Reset(self):
         
         if self.__debugFlag is True:
             print('>> PUZZLE RESET')
         #end if
 
+        self.__puzzlePatternPosition = 0                
+
         self.__puzzleSolved = False
         self.__puzzleActive = False
+        self.__puzzleFailed = False
+
+
+        for individualOutputObjects in self.__puzzleOutputPinObjects:
+            individualOutputObjects.off()
+        #end for
                 
         for individualOutputObjects in self.__puzzleActiveOutputObjects:
             individualOutputObjects.off()
         #end for
 
         for individualOutputObjects in self.__puzzleSolvedOutputObjects:
+            individualOutputObjects.off()
+        #end for
+
+        for individualOutputObjects in self.__puzzleFailedOutputObjects:
             individualOutputObjects.off()
         #end for
 
