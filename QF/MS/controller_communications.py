@@ -42,9 +42,16 @@ import socket
 import uuid
 import re
 import math
+import sys
 
-__platform__ = 'RCPCS/Python/RasPi'
 __version__  = '0.9'
+
+print('\r\n----------------------------------------------------------')
+print('Room Controller Communications Class v{}'.format(__version__))
+print('Room Control and Puzzle Coordination System (RCPCS)')
+print('(c)2019 Joel Caturia <jcaturia@katratech.com>')
+print('----------------------------------------------------------\r\n')
+
 
 class ControllerCommunications:
 
@@ -60,10 +67,11 @@ class ControllerCommunications:
     self.__puzzleState = None
     self.__callbacks = {}
     self.__MQTTConnected = False
+
     
     
     def handlerMQTTonConnect(client, userdata, flags, rc):
-      print('>> Puzzle ID [{}] connected to MQTT Broker [{}:{}]..'.format(self.puzzleID, self.mqttBroker, self.mqttPort) )
+      print('>> Puzzle ID [{}] successfully connected to MQTT Broker [{}:{}]..'.format(self.puzzleID, self.mqttBroker, self.mqttPort) )
       
       self.__MQTTConnected = True
       
@@ -78,6 +86,7 @@ class ControllerCommunications:
 
     def handlerMQTTonDisconnect(client, userdata, rc):
         
+      self.__MQTTConnected = False
 
       if self.__puzzleState == 'REBOOTING':
         self.mqttClient.loop_stop()
@@ -146,6 +155,17 @@ class ControllerCommunications:
       except:
         print('>> Unable to connect to MQTT broker! Sleeping for {} seconds..'.format(backOffTimer) )
         time.sleep(backOffTimer)
+        
+        # Incremement the backoff timer util we get over 30, then we just leave it there.
+        # This logic will actually ensure we spend one cycle over 30 (at 64, in fact). I am OK with this.
+        if backOffTimer == 30:
+          pass
+        elif backOffTimer > 30:
+          backOffTimer = 30
+        else:
+          backOffTimer = backOffTimer * 2
+        #end if
+        
       #end try
     #end while
         
@@ -159,6 +179,8 @@ class ControllerCommunications:
 
   def SendPing(self):
 
+    platform = 'RCPCS v{}/Python v{}.{}.{}/{}'.format(__version__, sys.version_info[0], sys.version_info[1], sys.version_info[2], self.__getRaspberryPiVersion() )
+ 
     #TODO - add wireless signal strength as well
     data = {}
     data['timestamp']    = time.time()
@@ -168,7 +190,7 @@ class ControllerCommunications:
     data['MACaddress']   = self.__getMACaddress()
     data['temperature']  = self.__getTemperature()
     data['role']         = 'puzzle'
-    data['platform']     = __platform__ + ' v' + __version__
+    data['platform']     = platform
     data['currentStatus'] = self.__puzzleState
     json_data = json.dumps(data)
     
@@ -181,7 +203,7 @@ class ControllerCommunications:
 
   def ProcessEvents(self):
   
-    if time.time() - self.__timestampLastPing > self.__pingDelay:        # send a controller ping every 10 seconds
+    if time.time() - self.__timestampLastPing > self.__pingDelay:        # send a controller ping periodically
       self.__timestampLastPing = time.time()
       self.SendPing()
     #end if
@@ -251,4 +273,16 @@ class ControllerCommunications:
     return ':'.join(re.findall('..', '%012x' % uuid.getnode() ))
   #end def (__getMACaddress)
     
-    
+  
+  def __getRaspberryPiVersion(self):
+  
+    # Only Raspberry Pi's will have this, so we catch the error to mean we're running on some other platform (Simu-Puzzle perhaps?)
+#    try:
+    with open('/proc/device-tree/model', 'r') as f:
+      model = f.readline()
+      return model
+        
+#    except:
+#      return 'Unknown'
+      #end try
+  #end def (__getRaspberryPiVersion)

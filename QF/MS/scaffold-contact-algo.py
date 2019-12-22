@@ -52,12 +52,12 @@ import time
 
 #from class_puzzle_contact_and import ANDMatchPuzzleContacts as ANDMatchPuzzleContactClass
 from class_puzzle_contact_algo import AlgoMatchPuzzleContacts as AlgoMatchPuzzleContactClass
-#from controller_communications import ControllerCommunications
+from controller_communications import ControllerCommunications
 
 #FIXME - let's move this to a config file and/or command-line arguments someday
-MQTTserver = '192.168.1.220'
-#DebugFlag  = True
-DebugFlag = False
+MQTTserver = '192.168.200.138'
+DebugFlag  = True
+#DebugFlag = False
 
 ######################################
 ## PUZZLE CONTROLLER -> FUEL PUZZLE ##
@@ -139,7 +139,7 @@ def handlerFuelRoomControllerPong():
   pass
 #end def
 
-#FuelRoomController = ControllerCommunications('fuel', MQTTserver)
+FuelRoomController = ControllerCommunications('fuel', MQTTserver)
 
 #FuelRoomController.RegisterCallback('command_reboot', handlerFuelRoomControllerReboot)
 #FuelRoomController.RegisterCallback('command_reset', handlerFuelRoomControllerReset)

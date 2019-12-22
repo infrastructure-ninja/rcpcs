@@ -46,39 +46,36 @@
 #POWER SOLVED INDICATOR OUTPUT -> 5
 
 
-import RPi.GPIO as GPIO
 import os
 import time
 
 from class_puzzle_contact_and import ANDMatchPuzzleContacts as ANDMatchPuzzleContactClass
-#from controller_communications import ControllerCommunications
+from controller_communications import ControllerCommunications
 
 #FIXME - let's move this to a config file and/or command-line arguments someday
-MQTTserver = '192.168.1.220'
-#DebugFlag  = True
-DebugFlag = False
+MQTTserver = '192.168.200.138'
+DebugFlag  = True
+#DebugFlag = False
 
 ######################################
 ## PUZZLE CONTROLLER -> FUEL PUZZLE ##
 ######################################
 def handlerFuelPuzzleReset():
+  FuelRoomController.PublishStatus('RESET')
   print('PUBLISH -> PUZZLE WAS RESET')
-#  FuelRoomController.PublishStatus('RESET')
 
 #  time.sleep(2)
 #  FuelPuzzle.Activate()
 #end def
 
 def handlerFuelPuzzleActivated():
+  FuelRoomController.PublishStatus('ACTIVE')
   print('PUBLISH -> PUZZLE WAS ACTIVATED')
-#  FuelRoomController.PublishStatus('ACTIVE')
 #end def
 
 def handlerFuelPuzzleSolved():
+  FuelRoomController.PublishStatus('SOLVED')
   print('PUBLISH -> PUZZLE WAS SOLVED')
-  time.sleep(4)
-  FuelPuzzle.Reset()
-#  FuelRoomController.PublishStatus('SOLVED')
 #end def
 
 #FuelPuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive=False)
@@ -129,14 +126,14 @@ def handlerFuelRoomControllerPong():
   pass
 #end def
 
-#FuelRoomController = ControllerCommunications('fuel', MQTTserver)
+FuelRoomController = ControllerCommunications('fuel', MQTTserver)
 
-#FuelRoomController.RegisterCallback('command_reboot', handlerFuelRoomControllerReboot)
-#FuelRoomController.RegisterCallback('command_reset', handlerFuelRoomControllerReset)
-#FuelRoomController.RegisterCallback('command_activate', handlerFuelRoomControllerActivate)
-#FuelRoomController.RegisterCallback('command_solve', handlerFuelRoomControllerSolve)
-#FuelRoomController.RegisterCallback('ping', handlerFuelRoomControllerPing)
-#FuelRoomController.RegisterCallback('pong', handlerFuelRoomControllerPong)
+FuelRoomController.RegisterCallback('command_reboot', handlerFuelRoomControllerReboot)
+FuelRoomController.RegisterCallback('command_reset', handlerFuelRoomControllerReset)
+FuelRoomController.RegisterCallback('command_activate', handlerFuelRoomControllerActivate)
+FuelRoomController.RegisterCallback('command_solve', handlerFuelRoomControllerSolve)
+FuelRoomController.RegisterCallback('ping', handlerFuelRoomControllerPing)
+FuelRoomController.RegisterCallback('pong', handlerFuelRoomControllerPong)
 #####################################################
 ## (END) ROOM CONTROL COMMUNICATION -> FUEL PUZZLE ##
 #####################################################
@@ -157,7 +154,7 @@ try:
   while True:
     FuelPuzzle.ProcessEvents()
 
-#    FuelRoomController.ProcessEvents()
+    FuelRoomController.ProcessEvents()
   #end while
   
 except (KeyboardInterrupt, SystemExit):
