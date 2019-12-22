@@ -1,0 +1,27 @@
+*Raspberry Pi (common)*
+ 
+
+# Disable the security warnings for default password
+apt-get purge libpam-chksshpwd
+
+SETUP WIRELESS -> /etc/wpa_supplicant/wpa_supplicant.conf
+
+--------------------------------------------------------
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=US
+
+network={
+        ssid="QUESTFACTOR"
+        psk="1207questfactory"
+        key_mgmt=WPA-PSK
+        disabled=1
+}
+--------------------------------------------------------
+
+
+
+Raspberry Pi (Room Controller)
+Install nodered from script (much newer version!)
+
+Raspberry Pi (Puzzle Controller)
