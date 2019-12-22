@@ -93,13 +93,13 @@ def handlerFuelPuzzleFailed():
 FuelPuzzle = AlgoMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = True)
 
 
-FuelPuzzle.SetAlgorithmInputs( [17,  27, 5, 6] )
-#FuelPuzzle.SetAlgorithmInputs( [17, 5, 6], FailPin = 27 )
+#FuelPuzzle.SetAlgorithmInputs( [17,  27, 5, 6] )
+FuelPuzzle.SetAlgorithmInputs( [17, 27, 5], FailPin = 6 )
 
 FuelPuzzle.SetAlgorithmOutputs( [13, 19, 26, 20] )
 
 
-FuelPuzzle.AddFailedOutput(21)
+#FuelPuzzle.AddFailedOutput(21)
 FuelPuzzle.AddSolvedOutput(24)
 FuelPuzzle.AddActiveOutput(23)
 

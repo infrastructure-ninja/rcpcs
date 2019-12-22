@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# Example Puzzle Controller :: Touchscreen Finger Pattern (Android Unlock Screen)
+# Amalgum Puzzle Controller :: Demonstrates multiple puzzle classes and room communication happening in one file
 # Part of the RCPCS project (Room Control and Puzle Coordination System)
 # Copyright (C) 2019  Joel D. Caturia
 #
@@ -46,7 +46,7 @@
 #POWER SOLVED INDICATOR OUTPUT -> 5
 
 
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import os
 import time
 
@@ -54,7 +54,8 @@ from class_puzzle_contact_and import ANDMatchPuzzleContacts as ANDMatchPuzzleCon
 from controller_communications import ControllerCommunications
 
 #FIXME - let's move this to a config file and/or command-line arguments someday
-MQTTserver = '192.168.1.220'
+#MQTTserver = '192.168.1.220'
+MQTTserver = '192.168.200.138'
 DebugFlag  = True
 
 ######################################
@@ -77,8 +78,8 @@ FuelPuzzle.AddContact(7)
 FuelPuzzle.AddSolvedOutput(6)
 
 FuelPuzzle.RegisterCallback('activated', handlerFuelPuzzleActivated)
-FuelPuzzle.RegisterCallback('solved', handlerFuelPuzzleSolved)
-FuelPuzzle.RegisterCallback('reset', handlerFuelPuzzleReset)
+FuelPuzzle.RegisterCallback('solved',    handlerFuelPuzzleSolved)
+FuelPuzzle.RegisterCallback('reset',     handlerFuelPuzzleReset)
 #####################################################
 ## (END) PUZZLE CONTROLLER -> FUEL PUZZLE ##
 #####################################################
@@ -113,12 +114,12 @@ def handlerFuelRoomControllerPong():
 
 FuelRoomController = ControllerCommunications('fuel', MQTTserver)
 
-FuelRoomController.RegisterCallback('command_reboot', handlerFuelRoomControllerReboot)
-FuelRoomController.RegisterCallback('command_reset', handlerFuelRoomControllerReset)
+FuelRoomController.RegisterCallback('command_reboot',   handlerFuelRoomControllerReboot)
+FuelRoomController.RegisterCallback('command_reset',    handlerFuelRoomControllerReset)
 FuelRoomController.RegisterCallback('command_activate', handlerFuelRoomControllerActivate)
-FuelRoomController.RegisterCallback('command_solve', handlerFuelRoomControllerSolve)
-FuelRoomController.RegisterCallback('ping', handlerFuelRoomControllerPing)
-FuelRoomController.RegisterCallback('pong', handlerFuelRoomControllerPong)
+FuelRoomController.RegisterCallback('command_solve',    handlerFuelRoomControllerSolve)
+FuelRoomController.RegisterCallback('ping',             handlerFuelRoomControllerPing)
+FuelRoomController.RegisterCallback('pong',             handlerFuelRoomControllerPong)
 #####################################################
 ## (END) ROOM CONTROL COMMUNICATION -> FUEL PUZZLE ##
 #####################################################
@@ -147,8 +148,8 @@ PowerPuzzle.AddContact(27)
 PowerPuzzle.AddSolvedOutput(5)
 
 PowerPuzzle.RegisterCallback('activated', handlerPowerPuzzleActivated)
-PowerPuzzle.RegisterCallback('solved', handlerPowerPuzzleSolved)
-PowerPuzzle.RegisterCallback('reset', handlerPowerPuzzleReset)
+PowerPuzzle.RegisterCallback('solved',    handlerPowerPuzzleSolved)
+PowerPuzzle.RegisterCallback('reset',     handlerPowerPuzzleReset)
 #####################################################
 ## (END) PUZZLE CONTROLLER -> POWER PUZZLE ##
 #####################################################
@@ -183,12 +184,12 @@ def handlerPowerRoomControllerPong():
 
 PowerRoomController = ControllerCommunications('power', MQTTserver)
 
-PowerRoomController.RegisterCallback('command_reboot', handlerPowerRoomControllerReboot)
-PowerRoomController.RegisterCallback('command_reset', handlerPowerRoomControllerReset)
+PowerRoomController.RegisterCallback('command_reboot',   handlerPowerRoomControllerReboot)
+PowerRoomController.RegisterCallback('command_reset',    handlerPowerRoomControllerReset)
 PowerRoomController.RegisterCallback('command_activate', handlerPowerRoomControllerActivate)
-PowerRoomController.RegisterCallback('command_solve', handlerPowerRoomControllerSolve)
-PowerRoomController.RegisterCallback('ping', handlerPowerRoomControllerPing)
-PowerRoomController.RegisterCallback('pong', handlerPowerRoomControllerPong)
+PowerRoomController.RegisterCallback('command_solve',    handlerPowerRoomControllerSolve)
+PowerRoomController.RegisterCallback('ping',             handlerPowerRoomControllerPing)
+PowerRoomController.RegisterCallback('pong',             handlerPowerRoomControllerPong)
 #####################################################
 ## (END) ROOM CONTROL COMMUNICATION -> POWER PUZZLE ##
 #####################################################
@@ -214,11 +215,11 @@ def handlerPressurePuzzleSolved():
 
 PressurePuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = True)
 PressurePuzzle.AddContact(17)
-PressurePuzzle.AddSolvedOutput(21)
+#PressurePuzzle.AddSolvedOutput(21)
 
 PressurePuzzle.RegisterCallback('activated', handlerPressurePuzzleActivated)
-PressurePuzzle.RegisterCallback('solved', handlerPressurePuzzleSolved)
-PressurePuzzle.RegisterCallback('reset', handlerPressurePuzzleReset)
+PressurePuzzle.RegisterCallback('solved',    handlerPressurePuzzleSolved)
+PressurePuzzle.RegisterCallback('reset',     handlerPressurePuzzleReset)
 ################################################
 ## (END) PUZZLE CONTROLLER -> PRESSURE PUZZLE ##
 ################################################
@@ -253,12 +254,12 @@ def handlerPressureRoomControllerPong():
 
 PressureRoomController = ControllerCommunications('pressure', MQTTserver)
 
-PressureRoomController.RegisterCallback('command_reboot', handlerPressureRoomControllerReboot)
-PressureRoomController.RegisterCallback('command_reset', handlerPressureRoomControllerReset)
+PressureRoomController.RegisterCallback('command_reboot',   handlerPressureRoomControllerReboot)
+PressureRoomController.RegisterCallback('command_reset',    handlerPressureRoomControllerReset)
 PressureRoomController.RegisterCallback('command_activate', handlerPressureRoomControllerActivate)
-PressureRoomController.RegisterCallback('command_solve', handlerPressureRoomControllerSolve)
-PressureRoomController.RegisterCallback('ping', handlerPressureRoomControllerPing)
-PressureRoomController.RegisterCallback('pong', handlerPressureRoomControllerPong)
+PressureRoomController.RegisterCallback('command_solve',    handlerPressureRoomControllerSolve)
+PressureRoomController.RegisterCallback('ping',             handlerPressureRoomControllerPing)
+PressureRoomController.RegisterCallback('pong',             handlerPressureRoomControllerPong)
 #########################################################
 ## (END) ROOM CONTROL COMMUNICATION -> PRESSURE PUZZLE ##
 #########################################################
@@ -288,8 +289,8 @@ PatchPuzzle.AddContact(22)
 #PatchPuzzle.AddSolvedOutput()
 
 PatchPuzzle.RegisterCallback('activated', handlerPatchPuzzleActivated)
-PatchPuzzle.RegisterCallback('solved', handlerPatchPuzzleSolved)
-PatchPuzzle.RegisterCallback('reset', handlerPatchPuzzleReset)
+PatchPuzzle.RegisterCallback('solved',    handlerPatchPuzzleSolved)
+PatchPuzzle.RegisterCallback('reset',     handlerPatchPuzzleReset)
 #####################################################
 ## (END) PUZZLE CONTROLLER -> PATCH PUZZLE ##
 #####################################################
@@ -324,12 +325,12 @@ def handlerPatchRoomControllerPong():
 
 PatchRoomController = ControllerCommunications('patch', MQTTserver)
 
-PatchRoomController.RegisterCallback('command_reboot', handlerPatchRoomControllerReboot)
-PatchRoomController.RegisterCallback('command_reset', handlerPatchRoomControllerReset)
+PatchRoomController.RegisterCallback('command_reboot',   handlerPatchRoomControllerReboot)
+PatchRoomController.RegisterCallback('command_reset',    handlerPatchRoomControllerReset)
 PatchRoomController.RegisterCallback('command_activate', handlerPatchRoomControllerActivate)
-PatchRoomController.RegisterCallback('command_solve', handlerPatchRoomControllerSolve)
-PatchRoomController.RegisterCallback('ping', handlerPatchRoomControllerPing)
-PatchRoomController.RegisterCallback('pong', handlerPatchRoomControllerPong)
+PatchRoomController.RegisterCallback('command_solve',    handlerPatchRoomControllerSolve)
+PatchRoomController.RegisterCallback('ping',             handlerPatchRoomControllerPing)
+PatchRoomController.RegisterCallback('pong',             handlerPatchRoomControllerPong)
 #####################################################
 ## (END) ROOM CONTROL COMMUNICATION -> PATCH PUZZLE ##
 #####################################################
@@ -355,13 +356,14 @@ def handlerKeysPuzzleSolved():
 
 KeysPuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = False)
 KeysPuzzle.AddContact(8)
-#KeysPuzzle.AddContact(25)
+#KeysPuzzle.AddContact(25)   #FIXME - Add this when we're ready for the full puzzle
+
 KeysPuzzle.AddActiveOutput(14)
-KeysPuzzle.AddSolvedOutput(5)
+KeysPuzzle.SetDelay(2000)
 
 KeysPuzzle.RegisterCallback('activated', handlerKeysPuzzleActivated)
-KeysPuzzle.RegisterCallback('solved', handlerKeysPuzzleSolved)
-KeysPuzzle.RegisterCallback('reset', handlerKeysPuzzleReset)
+KeysPuzzle.RegisterCallback('solved',    handlerKeysPuzzleSolved)
+KeysPuzzle.RegisterCallback('reset',     handlerKeysPuzzleReset)
 #####################################################
 ## (END) PUZZLE CONTROLLER -> KEYS PUZZLE ##
 #####################################################
@@ -396,12 +398,12 @@ def handlerKeysRoomControllerPong():
 
 KeysRoomController = ControllerCommunications('keys', MQTTserver)
 
-KeysRoomController.RegisterCallback('command_reboot', handlerKeysRoomControllerReboot)
-KeysRoomController.RegisterCallback('command_reset', handlerKeysRoomControllerReset)
+KeysRoomController.RegisterCallback('command_reboot',   handlerKeysRoomControllerReboot)
+KeysRoomController.RegisterCallback('command_reset',    handlerKeysRoomControllerReset)
 KeysRoomController.RegisterCallback('command_activate', handlerKeysRoomControllerActivate)
-KeysRoomController.RegisterCallback('command_solve', handlerKeysRoomControllerSolve)
-KeysRoomController.RegisterCallback('ping', handlerKeysRoomControllerPing)
-KeysRoomController.RegisterCallback('pong', handlerKeysRoomControllerPong)
+KeysRoomController.RegisterCallback('command_solve',    handlerKeysRoomControllerSolve)
+KeysRoomController.RegisterCallback('ping',             handlerKeysRoomControllerPing)
+KeysRoomController.RegisterCallback('pong',             handlerKeysRoomControllerPong)
 #####################################################
 ## (END) ROOM CONTROL COMMUNICATION -> KEYS PUZZLE ##
 #####################################################
@@ -438,17 +440,10 @@ try:
   #end while
   
 except (KeyboardInterrupt, SystemExit):
-  FuelPuzzle.Cleanup()
-  PowerPuzzle.Cleanup()
-  PressurePuzzle.Cleanup()
-  PatchPuzzle.Cleanup()
-  KeysPuzzle.Cleanup()
-
-  print("Exiting..")
+  print("\r\nExiting..")
   quit()
 
 except:
-  #GPIO.cleanup()
   raise
 
 #end try

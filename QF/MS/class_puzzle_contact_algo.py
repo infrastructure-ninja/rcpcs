@@ -41,6 +41,7 @@ class AlgoMatchPuzzleContacts:
         self.__callbacks       = {}        
 
         self.__puzzleInputPinObjects     = []   #FIXME: I need to let you define these as active LO/HI        
+        self.__puzzleInputFailPinObjects = []
         self.__puzzleOutputPinObjects	 = []
 
         self.__puzzleActiveOutputObjects = []   #FIXME: I need to let you define these as active LO/HI
@@ -74,6 +75,8 @@ class AlgoMatchPuzzleContacts:
         if FailPin is not None:
             tmpButtonObject = gpiozero.Button(FailPin, pull_up=True, active_state=None)   #FIXME - this is where we fix active HI/LO
             tmpButtonObject.when_pressed  = self.__handlerContactCallback 
+
+            self.__puzzleInputFailPinObjects.append(tmpButtonObject)
         #end if
                     
     #end def (SetAlgorithmInputs)
@@ -143,7 +146,12 @@ class AlgoMatchPuzzleContacts:
         if  ( self.__puzzleActive is True ) and ( self.__puzzleSolved is False ):
             if btnObject.is_active is True:
                 if ( btnObject.pin is self.__puzzleInputPinObjects[self.__puzzlePatternPosition].pin ):
-                    self.__puzzleOutputPinObjects[self.__puzzlePatternPosition].pulse()
+                    
+                    try:  # if we don't have an output pin established for this input, we should silently fail
+                        self.__puzzleOutputPinObjects[self.__puzzlePatternPosition].pulse()
+                    except:
+                        pass
+                    #end try
 
                     self.__puzzlePatternPosition += 1
 
@@ -226,9 +234,22 @@ class AlgoMatchPuzzleContacts:
             print('>> PUZZLE FAILED!')
         #end if
 
-        for individualOutputObjects in self.__puzzleOutputPinObjects:
-            individualOutputObjects.off()
+        try:
+            self.__callbacks['failed']()
+        except:
+            pass
+        #end try
+
+
+        for x in range(0, 2):
+            for individualOutputObjects in self.__puzzleOutputPinObjects:
+                individualOutputObjects.off()
+                individualOutputObjects.on()
+                time.sleep(.10)
+                individualOutputObjects.off()
+            #end for
         #end for
+
 
         for individualOutputObject in self.__puzzleActiveOutputObjects:
             individualOutputObject.off()            
@@ -238,12 +259,6 @@ class AlgoMatchPuzzleContacts:
             individualOutputObject.on()
         #end for
             
-        try:
-            self.__callbacks['failed']()
-        except:
-            pass
-        #end try
-    
     #end def (Fail)
 
 
