@@ -57,36 +57,49 @@ class ANDMatchPuzzleContacts:
     #end def (SetDelay)
 
     
-    def AddActiveOutput(self, activeOutputPinNumber):
+    def AddActiveOutput(self, activeOutputPinNumber, ActiveLow=False):
         if self.__debugFlag is True:
             print('>> Added Puzzle Active Output Pin #[{}]'.format(activeOutputPinNumber))
         #end if
         
-#        tmpOutputObject = gpiozero.LED(activeOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
-        tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
+        if ActiveLow is False:
+            tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber, active_high = True)
+        else:
+            tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber, active_high = False)
+        #end if
+
         tmpOutputObject.off()
         self.__puzzleActiveOutputObjects.append(tmpOutputObject)
     #end def (AddActiveOutput)
 
 
-    def AddSolvedOutput(self, solvedOutputPinNumber):
+    def AddSolvedOutput(self, solvedOutputPinNumber, ActiveLow=False):
         if self.__debugFlag is True:
             print('>> Added Puzzle Solved Output Pin #[{}]'.format(solvedOutputPinNumber))
         #end if
 
-        #tmpOutputObject = gpiozero.LED(solvedOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
-        tmpOutputObject = gpiozero.PWMLED(solvedOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
+        if ActiveLow is False:
+            tmpOutputObject = gpiozero.PWMLED(solvedOutputPinNumber, active_high = True)	#FIXME - this is where we'll add stuff about active HI/LO
+        else:
+            tmpOutputObject = gpiozero.PWMLED(solvedOutputPinNumber, active_high = False)    #FIXME - this is where we'll add stuff about active HI/LO
+        #end if
+
         tmpOutputObject.off()
         self.__puzzleSolvedOutputObjects.append(tmpOutputObject)
     #end def (AddActiveOutput)
 
 
-    def AddContact(self, inputContactPinNumber):
+    def AddContact(self, inputContactPinNumber, ActiveLow = False):
         if self.__debugFlag is True:
             print('>> Added Input Contact Pin #[{}]'.format(inputContactPinNumber))
         #end if
 
-        tmpButtonObject = gpiozero.Button(inputContactPinNumber, pull_up=True, active_state=None)   #FIXME - this is where we fix active HI/LO
+        if ActiveLow is False:
+            tmpButtonObject = gpiozero.Button(inputContactPinNumber, pull_up=True)  #FIXME?, active_state=None)   #FIXME - this is where we fix active HI/LO
+        else:
+            tmpButtonObject = gpiozero.Button(inputContactPinNumber, pull_up=False)  #FIXME?, active_state=None)   #FIXME - this is where we fix active HI/LO
+        #end if
+
         tmpButtonObject.when_pressed  = self.__handlerContactCallback 
         tmpButtonObject.when_released = self.__handlerContactCallback
 
@@ -106,7 +119,8 @@ class ANDMatchPuzzleContacts:
         if ( self.__puzzleActive is True ) and ( self.__puzzleSolved is False ):
 
             if btnObject.is_active is True:
-                currentMilliseconds = round( time.monotonic_ns() / 1000000 )
+                #currentMilliseconds = round( time.monotonic_ns() / 1000000 )
+                currentMilliseconds = round( time.monotonic() / 1000000 ) #FIME-HP
                 self.__puzzleInputPinTimers[btnObject.pin] = currentMilliseconds
 
                 self.__checkForSolve()
@@ -121,7 +135,8 @@ class ANDMatchPuzzleContacts:
 
     def __checkForSolve(self):
 
-        currentMilliseconds = round( time.monotonic_ns() / 1000000 )
+#        currentMilliseconds = round( time.monotonic_ns() / 1000000 )  #FIXME-HP
+        currentMilliseconds = round( time.monotonic() / 1000000 )  #FIXME-HP
 
         for pinName, pinMilliseconds in self.__puzzleInputPinTimers.items():
             if self.__debugFlag is True:

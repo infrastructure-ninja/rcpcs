@@ -45,17 +45,18 @@
 #POWER SOLVED INPUT -> pin 27
 #POWER SOLVED INDICATOR OUTPUT -> 5
 
+#"stable": 16, "engaged" : 20}
 
-#import RPi.GPIO as GPIO
+
 import os
 import time
+import gpiozero
 
 from class_puzzle_contact_and import ANDMatchPuzzleContacts as ANDMatchPuzzleContactClass
 from controller_communications import ControllerCommunications
 
 #FIXME - let's move this to a config file and/or command-line arguments someday
-#MQTTserver = '192.168.1.220'
-MQTTserver = '192.168.200.138'
+MQTTserver = 'ms-roomcontroller.local'
 DebugFlag  = True
 
 ######################################
@@ -74,8 +75,8 @@ def handlerFuelPuzzleSolved():
 #end def
 
 FuelPuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = True)
-FuelPuzzle.AddContact(7)
-FuelPuzzle.AddSolvedOutput(6)
+FuelPuzzle.AddContact(7, ActiveLow = True)
+FuelPuzzle.AddSolvedOutput(6, ActiveLow = True)
 
 FuelPuzzle.RegisterCallback('activated', handlerFuelPuzzleActivated)
 FuelPuzzle.RegisterCallback('solved',    handlerFuelPuzzleSolved)
@@ -89,7 +90,7 @@ FuelPuzzle.RegisterCallback('reset',     handlerFuelPuzzleReset)
 ###############################################
 def handlerFuelRoomControllerReboot():
   print('>> Processing a remote reboot command!')
-  #os.system('sudo reboot')
+  os.system('sudo reboot')
 #end def
 
 def handlerFuelRoomControllerReset():
@@ -144,8 +145,8 @@ def handlerPowerPuzzleSolved():
 #end def
 
 PowerPuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = True)
-PowerPuzzle.AddContact(27)
-PowerPuzzle.AddSolvedOutput(5)
+PowerPuzzle.AddContact(27, ActiveLow = True)
+PowerPuzzle.AddSolvedOutput(5, ActiveLow = True)
 
 PowerPuzzle.RegisterCallback('activated', handlerPowerPuzzleActivated)
 PowerPuzzle.RegisterCallback('solved',    handlerPowerPuzzleSolved)
@@ -159,7 +160,7 @@ PowerPuzzle.RegisterCallback('reset',     handlerPowerPuzzleReset)
 ###############################################
 def handlerPowerRoomControllerReboot():
   print('>> Processing a remote reboot command!')
-  #os.system('sudo reboot')
+  os.system('sudo reboot')
 #end def
 
 def handlerPowerRoomControllerReset():
@@ -214,8 +215,8 @@ def handlerPressurePuzzleSolved():
 #end def
 
 PressurePuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = True)
-PressurePuzzle.AddContact(17)
-#PressurePuzzle.AddSolvedOutput(21)
+PressurePuzzle.AddContact(17, ActiveLow = True)
+PressurePuzzle.AddSolvedOutput(21, ActiveLow = True)
 
 PressurePuzzle.RegisterCallback('activated', handlerPressurePuzzleActivated)
 PressurePuzzle.RegisterCallback('solved',    handlerPressurePuzzleSolved)
@@ -229,7 +230,7 @@ PressurePuzzle.RegisterCallback('reset',     handlerPressurePuzzleReset)
 ###################################################
 def handlerPressureRoomControllerReboot():
   print('>> Processing a remote reboot command!')
-  #os.system('sudo reboot')
+  os.system('sudo reboot')
 #end def
 
 def handlerPressureRoomControllerReset():
@@ -284,7 +285,7 @@ def handlerPatchPuzzleSolved():
 #end def
 
 PatchPuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = True)
-PatchPuzzle.AddContact(22)
+PatchPuzzle.AddContact(22, ActiveLow = True)
 #PatchPuzzle.AddActiveOutput()
 #PatchPuzzle.AddSolvedOutput()
 
@@ -300,7 +301,7 @@ PatchPuzzle.RegisterCallback('reset',     handlerPatchPuzzleReset)
 ###############################################
 def handlerPatchRoomControllerReboot():
   print('>> Processing a remote reboot command!')
-  #os.system('sudo reboot')
+  os.system('sudo reboot')
 #end def
 
 def handlerPatchRoomControllerReset():
@@ -355,10 +356,13 @@ def handlerKeysPuzzleSolved():
 #end def
 
 KeysPuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = False)
-KeysPuzzle.AddContact(8)
-#KeysPuzzle.AddContact(25)   #FIXME - Add this when we're ready for the full puzzle
+KeysPuzzle.AddContact(8, ActiveLow = True)
+#KeysPuzzle.AddContact(25, ActiveLow = True)   #FIXME - Add this when we're ready for the full puzzle
 
-KeysPuzzle.AddActiveOutput(14)
+KeysPuzzle.AddActiveOutput(14, ActiveLow = True)  # LED on keys
+KeysPuzzle.AddSolvedOutput(26, ActiveLow = True)  # power to probe
+KeysPuzzle.AddSolvedOutput(13, ActiveLow = True)  # LED on probe to probe
+
 KeysPuzzle.SetDelay(2000)
 
 KeysPuzzle.RegisterCallback('activated', handlerKeysPuzzleActivated)
@@ -373,7 +377,7 @@ KeysPuzzle.RegisterCallback('reset',     handlerKeysPuzzleReset)
 ###############################################
 def handlerKeysRoomControllerReboot():
   print('>> Processing a remote reboot command!')
-  #os.system('sudo reboot')
+  os.system('sudo reboot')
 #end def
 
 def handlerKeysRoomControllerReset():
@@ -410,6 +414,65 @@ KeysRoomController.RegisterCallback('pong',             handlerKeysRoomControlle
 
 
 
+engagedLED =    gpiozero.LED(20, active_high=False)
+stableLED  =    gpiozero.LED(16, active_high=False)
+smokeMachine1 = gpiozero.LED(15, active_high=False)
+smokeMachine2 = gpiozero.LED(18, active_high=False)
+# "stable": 16, "engaged" : 20}
+
+###########################################################
+## ROOM CONTROL COMMUNICATION -> FINAL SUCCESS/FAIL CUES ##
+###########################################################
+def handlerFinalCuesRoomControllerReboot():
+  print('>> Processing a remote reboot command!')
+  os.system('sudo reboot')
+#end def
+
+def handlerFinalCuesRoomControllerReset():
+  engagedLED.off()
+  stableLED.off()
+#end def
+
+def handlerFinalCuesRoomControllerActivate():
+  engagedLED.on()
+  stableLED.off()
+#end def
+
+def handlerFinalCuesRoomControllerSolve():
+  engagedLED.on()
+  stableLED.on()
+#end def
+
+def handlerFinalCuesRoomControllerFail():
+  stableLED.off()
+  engagedLED.off()
+  smokeMachine1.blink(on_time=1, n=1)
+  smokeMachine2.blink(on_time=1, n=1)
+#end def
+
+def handlerFinalCuesRoomControllerPing():
+  pass
+#end def
+
+def handlerFinalCuesRoomControllerPong():
+  pass
+#end def
+
+FinalCuesController = ControllerCommunications('finalcues', MQTTserver)
+
+FinalCuesController.RegisterCallback('command_reboot',   handlerFinalCuesRoomControllerReboot)
+FinalCuesController.RegisterCallback('command_reset',    handlerFinalCuesRoomControllerReset)
+FinalCuesController.RegisterCallback('command_activate', handlerFinalCuesRoomControllerActivate)
+FinalCuesController.RegisterCallback('command_solve',    handlerFinalCuesRoomControllerSolve)
+FinalCuesController.RegisterCallback('command_fail',     handlerFinalCuesRoomControllerFail)
+FinalCuesController.RegisterCallback('ping',             handlerFinalCuesRoomControllerPing)
+FinalCuesController.RegisterCallback('pong',             handlerFinalCuesRoomControllerPong)
+#################################################################
+## (END) ROOM CONTROL COMMUNICATION -> FINAL SUCCESS/FAIL CUES ##
+#################################################################
+
+
+
 
 
 ##################################################
@@ -437,6 +500,7 @@ try:
     PressureRoomController.ProcessEvents()
     PatchRoomController.ProcessEvents()
     KeysRoomController.ProcessEvents()
+    FinalCuesController.ProcessEvents()
   #end while
   
 except (KeyboardInterrupt, SystemExit):

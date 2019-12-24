@@ -1,0 +1,7865 @@
+[
+    {
+        "id": "99c79979.bfcad8",
+        "type": "tab",
+        "label": "Room Main UI",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9c0dfef0.e3929",
+        "type": "tab",
+        "label": "Sound Cues and Control",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "512d279b.4ca158",
+        "type": "tab",
+        "label": "1) FUEL",
+        "disabled": false,
+        "info": "Puzzle: Fuel"
+    },
+    {
+        "id": "be750b2a.827588",
+        "type": "tab",
+        "label": "2) PRESSURE",
+        "disabled": false,
+        "info": "Puzzle: Pressure"
+    },
+    {
+        "id": "62fad8ec.96f7a8",
+        "type": "tab",
+        "label": "3) POWER",
+        "disabled": false,
+        "info": "Puzzle: Power"
+    },
+    {
+        "id": "5f25f351.1372ac",
+        "type": "tab",
+        "label": "4) PATCH",
+        "disabled": false,
+        "info": "Puzzle: Patch"
+    },
+    {
+        "id": "c227dc9a.9174e",
+        "type": "tab",
+        "label": "Keys Activation Gate",
+        "disabled": false,
+        "info": "AND-Solve Logic"
+    },
+    {
+        "id": "24f803df.6be70c",
+        "type": "tab",
+        "label": "5) KEYS",
+        "disabled": false,
+        "info": "Puzzle: Keys"
+    },
+    {
+        "id": "61f84baa.8c8894",
+        "type": "tab",
+        "label": "6) REACTOR",
+        "disabled": false,
+        "info": "Puzzle: Reactor"
+    },
+    {
+        "id": "bef63805.4b44b8",
+        "type": "tab",
+        "label": "External Game Timer",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "89bb5440.869c68",
+        "type": "tab",
+        "label": "Heartbeat and Health Management",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "df4a0162.dfe4a",
+        "type": "subflow",
+        "name": "CIPO Logic",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 125.4444408416748,
+                "y": 126.77778244018555,
+                "wires": []
+            }
+        ],
+        "out": [],
+        "env": []
+    },
+    {
+        "id": "2314bf76.4267c",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "Demo",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "status",
+        "birthQos": "1",
+        "birthRetain": "true",
+        "birthPayload": "CONNECTED",
+        "closeTopic": "status",
+        "closeQos": "1",
+        "closeRetain": "true",
+        "closePayload": "NOT CONNECTED",
+        "willTopic": "status",
+        "willQos": "1",
+        "willRetain": "true",
+        "willPayload": "DISCONNECTED"
+    },
+    {
+        "id": "c82f5183.9a8a",
+        "type": "ui_group",
+        "z": "",
+        "name": "First Group",
+        "tab": "",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "ee62f818.acb6a8",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#8d1ab9",
+                "baseFont": "Trebuchet MS,Helvetica,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#560080",
+                "baseFont": "Verdana,Verdana,Geneva,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Quest Factor",
+                "default": "#4B7930",
+                "baseColor": "#8a1d9a",
+                "baseFont": "Verdana,Verdana,Geneva,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#4B7930",
+                    "value": "#8a1d9a",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#000000",
+                    "edited": true
+                },
+                "page-backgroundColor": {
+                    "value": "#000000",
+                    "edited": true
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#000000",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#c12cd7",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0726a3",
+                    "edited": true
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "Verdana,Verdana,Geneva,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "QuestFactor - MAD SCIENTIST",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "927afc1a.c4882",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "8dbfd990.a443f8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "MAIN",
+        "icon": "fa-puzzle-piece",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "5943de0.d3ff024",
+        "type": "ui_group",
+        "z": "",
+        "name": "FUEL",
+        "tab": "8dbfd990.a443f8",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "c8d65b06.a653d8",
+        "type": "ui_group",
+        "z": "",
+        "name": "First Group",
+        "tab": "",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "53c620c5.663e3",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "94ccaae3.cad168",
+        "type": "ui_group",
+        "z": "",
+        "name": "PRESSURE",
+        "tab": "8dbfd990.a443f8",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "5ad158a1.d39508",
+        "type": "ui_group",
+        "z": "",
+        "name": "OVERVIEW",
+        "tab": "8dbfd990.a443f8",
+        "order": 2,
+        "disp": false,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "55f9d81b.fb91b8",
+        "type": "ui_group",
+        "z": "",
+        "name": "REACTOR",
+        "tab": "8dbfd990.a443f8",
+        "order": 8,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "32dabca5.537cb4",
+        "type": "ui_group",
+        "z": "",
+        "name": "PATCH",
+        "tab": "8dbfd990.a443f8",
+        "order": 6,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "6fb87e15.fde1f",
+        "type": "ui_tab",
+        "z": "",
+        "name": "ADVANCED",
+        "icon": "fa-cogs",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c4c9e234.e4812",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "fda5fcf7.c212f",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "",
+        "order": 2,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "b2a4f9fb.888c78",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "",
+        "order": 2,
+        "width": "3",
+        "height": 1
+    },
+    {
+        "id": "7956ed12.01e8d4",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "",
+        "order": 8,
+        "width": "3",
+        "height": 1
+    },
+    {
+        "id": "4a716f9d.87e68",
+        "type": "ui_group",
+        "z": "",
+        "name": "POWER",
+        "tab": "8dbfd990.a443f8",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "490e54df.d9d60c",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "",
+        "order": 4,
+        "width": "3",
+        "height": 1
+    },
+    {
+        "id": "1e6589b1.6c0476",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "",
+        "order": 6,
+        "width": "3",
+        "height": 1
+    },
+    {
+        "id": "b486328a.4aa6",
+        "type": "ui_group",
+        "z": "",
+        "name": "STATUS VIEW",
+        "tab": "6fb87e15.fde1f",
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "34c89c9f.e0d0c4",
+        "type": "ui_tab",
+        "z": "",
+        "name": "LIGHT DEMO",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "46fec4aa.b4c85c",
+        "type": "ui_group",
+        "z": "",
+        "name": "BUTTONS",
+        "tab": "34c89c9f.e0d0c4",
+        "disp": false,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "d99cebb4.4adc38",
+        "type": "ui_group",
+        "z": "",
+        "name": "KEYS",
+        "tab": "8dbfd990.a443f8",
+        "order": 7,
+        "disp": true,
+        "width": 6,
+        "collapse": false
+    },
+    {
+        "id": "38ad5138.e2443e",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "e87c9b5.a8c8068",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "86a7952f.061a38",
+        "type": "ui_group",
+        "z": "",
+        "name": "REBOOT DEVICES",
+        "tab": "6fb87e15.fde1f",
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "9d7dd131.92b7b",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "5943de0.d3ff024",
+        "order": 2,
+        "width": "6",
+        "height": 1
+    },
+    {
+        "id": "d9197f02.ed0f",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "5943de0.d3ff024",
+        "order": 5,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "940945c7.f34c38",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "94ccaae3.cad168",
+        "order": 2,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "6e291047.03ef4",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "94ccaae3.cad168",
+        "order": 5,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "83abcef3.94212",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "4a716f9d.87e68",
+        "order": 2,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "981e2eeb.a0ef4",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "4a716f9d.87e68",
+        "order": 5,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "ffd1f1c8.c8666",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "32dabca5.537cb4",
+        "order": 2,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "3126b6ae.a18dea",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "32dabca5.537cb4",
+        "order": 5,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "bf28e080.4466c",
+        "type": "ui_group",
+        "z": "",
+        "name": "Default",
+        "tab": "cfe0dfff.4b87c",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "cfe0dfff.4b87c",
+        "type": "ui_tab",
+        "z": "24f803df.6be70c",
+        "name": "Home",
+        "icon": "link",
+        "order": 1
+    },
+    {
+        "id": "bc061b5a.165388",
+        "type": "ui_group",
+        "name": "Group 3",
+        "tab": "6fb87e15.fde1f",
+        "order": 3,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "14eb5227.670f9e",
+        "type": "ui_text",
+        "z": "99c79979.bfcad8",
+        "group": "5ad158a1.d39508",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "name": "TIME LEFT",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 857.928596496582,
+        "y": 469.5714168548584,
+        "wires": []
+    },
+    {
+        "id": "6de6c483.097b4c",
+        "type": "inject",
+        "z": "99c79979.bfcad8",
+        "name": "",
+        "topic": "",
+        "payload": "puzzleTimerSecondsRemaining",
+        "payloadType": "global",
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 250.3571014404297,
+        "y": 468.28571128845215,
+        "wires": [
+            [
+                "aa8905ff.bd77a8"
+            ]
+        ]
+    },
+    {
+        "id": "a66f88c.6429978",
+        "type": "ui_button",
+        "z": "99c79979.bfcad8",
+        "name": "",
+        "group": "5ad158a1.d39508",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "START GAME",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "RESET",
+        "payloadType": "str",
+        "topic": "",
+        "x": 141.33335876464844,
+        "y": 110.66666412353516,
+        "wires": [
+            [
+                "cdef4200.dbf4",
+                "af8f8caf.82f92",
+                "bdd667e4.85fb58"
+            ]
+        ]
+    },
+    {
+        "id": "95df6302.822fb",
+        "type": "ui_button",
+        "z": "99c79979.bfcad8",
+        "name": "",
+        "group": "5ad158a1.d39508",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "+5 MINUTES",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "",
+        "x": 157.19050216674805,
+        "y": 275.23805046081543,
+        "wires": [
+            [
+                "ca70ac2f.45e9c"
+            ]
+        ]
+    },
+    {
+        "id": "aa8905ff.bd77a8",
+        "type": "function",
+        "z": "99c79979.bfcad8",
+        "name": "DECREMENT TIMER VARIABLE",
+        "func": "var puzzleTimerRunning = global.get('puzzleTimerRunning') || false;\n\nif (puzzleTimerRunning === true)\n{\n    var puzzleSecondsRemaining = msg.payload;\n    \n    if ( puzzleSecondsRemaining > 0 )\n    {\n        puzzleSecondsRemaining = puzzleSecondsRemaining - 1;\n        global.set('puzzleTimerSecondsRemaining', puzzleSecondsRemaining);\n    \n        msg.payload = puzzleSecondsRemaining;\n\n        return [msg, null];\n    }  \n    else\n    {\n        var msg = { payload: 0 };\n        var msg1 = { payload:\"TIMER EXPIRED\" };\n        \n        global.set('puzzleTimerSecondsRemaining', 0);\n        global.set('puzzleTimerRunning', false)\n\n        return [msg, msg1];\n    }\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 285.9285430908203,
+        "y": 514.42857837677,
+        "wires": [
+            [
+                "2c72b826.49bd78"
+            ],
+            [
+                "55eb32d6.92d60c",
+                "9c4bcd2.08d493"
+            ]
+        ]
+    },
+    {
+        "id": "cdef4200.dbf4",
+        "type": "function",
+        "z": "99c79979.bfcad8",
+        "name": "SET PUZZLE TIMER = 60 MIN",
+        "func": "var puzzleTimer = 3600;\n//var puzzleTimer = 30;\n\nglobal.set('puzzleTimerSecondsRemaining', puzzleTimer);\nglobal.set('puzzleTimerRunning', true)\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 438.61905670166016,
+        "y": 113.5238151550293,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bdd667e4.85fb58",
+        "type": "link out",
+        "z": "99c79979.bfcad8",
+        "name": "RESET ALL PUZZLES",
+        "links": [
+            "3aa5f357.602d0c",
+            "5e00f371.3874bc",
+            "6fad1a38.bc9c84",
+            "7a7ca965.a26ad8",
+            "8eb36549.076828",
+            "8fd575c8.1cddf8",
+            "5239b2d9.9c913c",
+            "bbed6836.536918",
+            "f5b9cf50.76976",
+            "e477d51d.d2ca38"
+        ],
+        "x": 332.90476989746094,
+        "y": 199.95241165161133,
+        "wires": []
+    },
+    {
+        "id": "f1c3b857.0f2268",
+        "type": "function",
+        "z": "99c79979.bfcad8",
+        "name": "COMPUTER PERCENTAGE OF PUZZLES SOLVED",
+        "func": "var totalNumberOfPuzzles = 6;\n\nvar fuelSolved = global.get('fuel_solved') || 0;\nvar pressureSolved = global.get('pressure_solved') || 0;\nvar powerSolved = global.get('power_solved') || 0;\nvar patchSolved = global.get('patch_solved') || 0;\nvar keysSolved = global.get('keys_solved') || 0;\nvar reactorSolved = global.get('reactor_solved') || 0;\n\nvar numberOfSolvedPuzzles = fuelSolved + pressureSolved + powerSolved + patchSolved + keysSolved + reactorSolved;\nvar percentageOfSolvedPuzzles =  Math.floor( (numberOfSolvedPuzzles / totalNumberOfPuzzles) * 100 );\n\nmsg.ui_control = {min:0, max:100}\nmsg.payload = percentageOfSolvedPuzzles;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 431.7856903076172,
+        "y": 859.0000171661377,
+        "wires": [
+            [
+                "a071235b.2a7ac"
+            ]
+        ]
+    },
+    {
+        "id": "21b45c4b.0f6a54",
+        "type": "inject",
+        "z": "99c79979.bfcad8",
+        "name": "",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 162.7856903076172,
+        "y": 858.0000171661377,
+        "wires": [
+            [
+                "f1c3b857.0f2268"
+            ]
+        ]
+    },
+    {
+        "id": "a071235b.2a7ac",
+        "type": "ui_gauge",
+        "z": "99c79979.bfcad8",
+        "name": "PERCENTAGE COMPLETE",
+        "group": "5ad158a1.d39508",
+        "order": 2,
+        "width": 4,
+        "height": 3,
+        "gtype": "donut",
+        "title": "COMPLETED",
+        "label": "%",
+        "format": "{{msg.payload}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#ca3838",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 783.119026184082,
+        "y": 857.6666851043701,
+        "wires": []
+    },
+    {
+        "id": "ca70ac2f.45e9c",
+        "type": "function",
+        "z": "99c79979.bfcad8",
+        "name": "+5 minutes",
+        "func": "var puzzleTimerSecondsRemaining = global.get('puzzleTimerSecondsRemaining')\n\npuzzleTimerSecondsRemaining = puzzleTimerSecondsRemaining + 300;\n\nglobal.set('puzzleTimerSecondsRemaining', puzzleTimerSecondsRemaining);\n\nmsg.payload = puzzleTimerSecondsRemaining;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390.6191101074219,
+        "y": 275.6666259765625,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a32dd4fc.2aea08",
+        "type": "mqtt in",
+        "z": "61f84baa.8c8894",
+        "name": "",
+        "topic": "CIPO/reactor/STATE",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 202.00002670288086,
+        "y": 179.99999809265137,
+        "wires": [
+            [
+                "8ae1e89e.969b28"
+            ]
+        ]
+    },
+    {
+        "id": "9c97f8b4.193af8",
+        "type": "ui_button",
+        "z": "61f84baa.8c8894",
+        "name": "BTN-ACTIVATE",
+        "group": "55f9d81b.fb91b8",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "ACTIVATE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "ACTIVATE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 208.42858123779297,
+        "y": 550.0000534057617,
+        "wires": [
+            [
+                "34c9990f.620376"
+            ]
+        ]
+    },
+    {
+        "id": "2f155efc.3f7402",
+        "type": "ui_button",
+        "z": "61f84baa.8c8894",
+        "name": "BTN-SOLVE",
+        "group": "55f9d81b.fb91b8",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "SOLVE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "SOLVE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 219.50000762939453,
+        "y": 593,
+        "wires": [
+            [
+                "34c9990f.620376"
+            ]
+        ]
+    },
+    {
+        "id": "34c9990f.620376",
+        "type": "mqtt out",
+        "z": "61f84baa.8c8894",
+        "name": "",
+        "topic": "COPI/reactor/COMMANDS",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 528.5238037109375,
+        "y": 582.6349487304688,
+        "wires": []
+    },
+    {
+        "id": "7a7ca965.a26ad8",
+        "type": "link in",
+        "z": "61f84baa.8c8894",
+        "name": "FROM GAME RESET",
+        "links": [
+            "a4c6dec0.a43b7",
+            "bdd667e4.85fb58"
+        ],
+        "x": 275.64288330078125,
+        "y": 633.1428833007812,
+        "wires": [
+            [
+                "34c9990f.620376"
+            ]
+        ]
+    },
+    {
+        "id": "5de27108.d344e",
+        "type": "link in",
+        "z": "61f84baa.8c8894",
+        "name": "ACTIVATE PUZZLE",
+        "links": [
+            "c29e7773.933a18"
+        ],
+        "x": 268.57144594192505,
+        "y": 501.5714302062988,
+        "wires": [
+            [
+                "730fed4b.ac0714"
+            ]
+        ]
+    },
+    {
+        "id": "1aca420f.13642e",
+        "type": "function",
+        "z": "61f84baa.8c8894",
+        "name": "GLOBAL/reactor_solved=TRUE",
+        "func": "\nglobal.set('reactor_solved', 1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1006.5000114440918,
+        "y": 197.666654586792,
+        "wires": [
+            [
+                "877d29a2.503cb8",
+                "6620b6b7.108958"
+            ]
+        ]
+    },
+    {
+        "id": "2c72b826.49bd78",
+        "type": "function",
+        "z": "99c79979.bfcad8",
+        "name": "format seconds as HH:MM:SS",
+        "func": "var seconds = msg.payload;\n\nvar date = new Date(null);\ndate.setSeconds(seconds);\nmsg.payload = date.toISOString().substr(11, 8);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 593.6428375244141,
+        "y": 469.5714054107666,
+        "wires": [
+            [
+                "14eb5227.670f9e"
+            ]
+        ]
+    },
+    {
+        "id": "4617e835.2070c8",
+        "type": "comment",
+        "z": "99c79979.bfcad8",
+        "name": "RESET All Puzzles",
+        "info": "",
+        "x": 218.47621726989746,
+        "y": 199.23810958862305,
+        "wires": []
+    },
+    {
+        "id": "ee91f49c.ccfa58",
+        "type": "ui_button",
+        "z": "61f84baa.8c8894",
+        "name": "BTN-REBOOT",
+        "group": "86a7952f.061a38",
+        "order": 3,
+        "width": "4",
+        "height": "1",
+        "passthru": true,
+        "label": "REACTOR",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "REBOOT",
+        "payloadType": "str",
+        "topic": "",
+        "x": 212.85714721679688,
+        "y": 729.2857055664062,
+        "wires": [
+            [
+                "34c9990f.620376"
+            ]
+        ]
+    },
+    {
+        "id": "d85d79c0.48ebf8",
+        "type": "comment",
+        "z": "99c79979.bfcad8",
+        "name": "Show the total percentage of puzzles solved",
+        "info": "",
+        "x": 249.7856903076172,
+        "y": 815.0000171661377,
+        "wires": []
+    },
+    {
+        "id": "bf7d5d74.bde2d",
+        "type": "comment",
+        "z": "99c79979.bfcad8",
+        "name": "Countdown timer for game",
+        "info": "",
+        "x": 172.21430206298828,
+        "y": 420.19048023223877,
+        "wires": []
+    },
+    {
+        "id": "2e9b9a8b.6dd356",
+        "type": "link in",
+        "z": "61f84baa.8c8894",
+        "name": "LOST HEARTBEAT",
+        "links": [
+            "c46cb70c.b1bc08"
+        ],
+        "x": 278.78575897216797,
+        "y": 240.9999828338623,
+        "wires": [
+            [
+                "8ae1e89e.969b28"
+            ]
+        ]
+    },
+    {
+        "id": "13326e1a.b594d2",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "LOST HEARTBEAT",
+        "info": "",
+        "x": 167.00002670288086,
+        "y": 242.28571701049805,
+        "wires": []
+    },
+    {
+        "id": "fffd3138.051f2",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "PUZZLE RESET",
+        "info": "",
+        "x": 165.71424865722656,
+        "y": 634.0000610351562,
+        "wires": []
+    },
+    {
+        "id": "b335fcc0.42758",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "SOLVED OUT",
+        "info": "",
+        "x": 1427.0002479553223,
+        "y": 196.47617530822754,
+        "wires": []
+    },
+    {
+        "id": "7a00d3c6.b5cd6c",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "PUZZLE ACTIVATE",
+        "info": "",
+        "x": 148.1428680419922,
+        "y": 503.42864990234375,
+        "wires": []
+    },
+    {
+        "id": "877d29a2.503cb8",
+        "type": "link out",
+        "z": "61f84baa.8c8894",
+        "name": "SOLVED CUE",
+        "links": [
+            "1e2d2b11.a65645"
+        ],
+        "x": 1323.190668106079,
+        "y": 197.6190423965454,
+        "wires": []
+    },
+    {
+        "id": "d4536f50.a5adc",
+        "type": "link out",
+        "z": "61f84baa.8c8894",
+        "name": "FAILED CUE",
+        "links": [
+            "41b5a5a2.e4635c",
+            "a035421f.36f45"
+        ],
+        "x": 1324.1905841827393,
+        "y": 241.1904592514038,
+        "wires": []
+    },
+    {
+        "id": "71e5c8f1.8c67a8",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "FAILED OUT",
+        "info": "",
+        "x": 1428.9046592712402,
+        "y": 240.5237865447998,
+        "wires": []
+    },
+    {
+        "id": "ac5d6d8f.d8bde",
+        "type": "link in",
+        "z": "c227dc9a.9174e",
+        "name": "FROM FUEL",
+        "links": [
+            "d746f313.d3223"
+        ],
+        "x": 212.8571319580078,
+        "y": 170.47618865966797,
+        "wires": [
+            [
+                "2d47b339.8cec6c"
+            ]
+        ]
+    },
+    {
+        "id": "a475891f.48ea18",
+        "type": "link out",
+        "z": "c227dc9a.9174e",
+        "name": "TO KEYS",
+        "links": [
+            "41b5a5a2.e4635c"
+        ],
+        "x": 713.0951614379883,
+        "y": 250.23814392089844,
+        "wires": []
+    },
+    {
+        "id": "702b8868.6aaf48",
+        "type": "link in",
+        "z": "c227dc9a.9174e",
+        "name": "FROM PRESSURE",
+        "links": [
+            "af16e110.ed8ce"
+        ],
+        "x": 213.57144927978516,
+        "y": 227.6190528869629,
+        "wires": [
+            [
+                "2d47b339.8cec6c"
+            ]
+        ]
+    },
+    {
+        "id": "c699384f.513648",
+        "type": "link in",
+        "z": "c227dc9a.9174e",
+        "name": "FROM POWER",
+        "links": [
+            "c617f3a8.b35cb",
+            "b6f3b40f.ce9d98",
+            "8388d297.d0ce9",
+            "a4002d2e.fce43"
+        ],
+        "x": 212.8571491241455,
+        "y": 279.5238256454468,
+        "wires": [
+            [
+                "2d47b339.8cec6c"
+            ]
+        ]
+    },
+    {
+        "id": "c4fed6e4.d37c68",
+        "type": "link in",
+        "z": "c227dc9a.9174e",
+        "name": "FROM PATCH",
+        "links": [
+            "187ffaad.407375",
+            "a93efe2a.bb20d"
+        ],
+        "x": 213.57144737243652,
+        "y": 334.76194953918457,
+        "wires": [
+            [
+                "2d47b339.8cec6c"
+            ]
+        ]
+    },
+    {
+        "id": "2d47b339.8cec6c",
+        "type": "function",
+        "z": "c227dc9a.9174e",
+        "name": "ALL 4 PUZZLES MUST BE SOLVED",
+        "func": "var neededNumberOfPuzzles = 4;\n\nvar fuelSolved = global.get('fuel_solved') || 0;\nvar pressureSolved = global.get('pressure_solved') || 0;\nvar powerSolved = global.get('power_solved') || 0;\nvar patchSolved = global.get('patch_solved') || 0;\n\nvar numberOfSolvedPuzzles = fuelSolved + pressureSolved + powerSolved + patchSolved;\n\nif (numberOfSolvedPuzzles == neededNumberOfPuzzles)\n{\n    msg.payload = numberOfSolvedPuzzles;\n    return msg;\n}\nelse\n{\n    return null;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460.7143325805664,
+        "y": 249.04766464233398,
+        "wires": [
+            [
+                "a475891f.48ea18",
+                "c06d967c.124c48"
+            ]
+        ]
+    },
+    {
+        "id": "2e2b7b2f.83e384",
+        "type": "http in",
+        "z": "bef63805.4b44b8",
+        "name": "/gettime",
+        "url": "/gettime",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 75.5,
+        "y": 68,
+        "wires": [
+            [
+                "58929aa2.aeda74"
+            ]
+        ]
+    },
+    {
+        "id": "f5cc141.1891ce8",
+        "type": "template",
+        "z": "bef63805.4b44b8",
+        "name": "JSON Output",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"time\": {{payload}} }",
+        "output": "json",
+        "x": 423.5,
+        "y": 70,
+        "wires": [
+            [
+                "2ced5048.a9af4"
+            ]
+        ]
+    },
+    {
+        "id": "58929aa2.aeda74",
+        "type": "change",
+        "z": "bef63805.4b44b8",
+        "name": "Retrieve Number of Seconds Remaining",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "puzzleTimerSecondsRemaining",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 235.5,
+        "y": 119,
+        "wires": [
+            [
+                "f5cc141.1891ce8"
+            ]
+        ]
+    },
+    {
+        "id": "726ea799.0a8288",
+        "type": "comment",
+        "z": "bef63805.4b44b8",
+        "name": "Provide Current Game Timer",
+        "info": "",
+        "x": 142.5,
+        "y": 30,
+        "wires": []
+    },
+    {
+        "id": "64e0fcc6.6918e4",
+        "type": "http in",
+        "z": "bef63805.4b44b8",
+        "name": "/timer/index.html",
+        "url": "/timer/index.html",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 105,
+        "y": 208,
+        "wires": [
+            [
+                "1dc896cc.2d13b9"
+            ]
+        ]
+    },
+    {
+        "id": "1dc896cc.2d13b9",
+        "type": "file in",
+        "z": "bef63805.4b44b8",
+        "name": "Read File",
+        "filename": "/home/pi/Documents/node-red-static/timer/index.html",
+        "format": "",
+        "sendError": true,
+        "x": 323,
+        "y": 209,
+        "wires": [
+            [
+                "8dd8f1ea.5375f"
+            ]
+        ]
+    },
+    {
+        "id": "8dd8f1ea.5375f",
+        "type": "change",
+        "z": "bef63805.4b44b8",
+        "name": "text/html",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "text/html",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 489,
+        "y": 210,
+        "wires": [
+            [
+                "4ae27d0c.cff594"
+            ]
+        ]
+    },
+    {
+        "id": "ff6614ac.ef0328",
+        "type": "http in",
+        "z": "bef63805.4b44b8",
+        "name": "/timer/img/bg.jpg",
+        "url": "/timer/img/bg.jpg",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 104,
+        "y": 299,
+        "wires": [
+            [
+                "9b8ac2a4.d2065"
+            ]
+        ]
+    },
+    {
+        "id": "9b8ac2a4.d2065",
+        "type": "file in",
+        "z": "bef63805.4b44b8",
+        "name": "Read File",
+        "filename": "/home/pi/Documents/node-red-static/timer/img/bg.jpg",
+        "format": "",
+        "sendError": true,
+        "x": 328,
+        "y": 300,
+        "wires": [
+            [
+                "75dc1622.ec08d8"
+            ]
+        ]
+    },
+    {
+        "id": "75dc1622.ec08d8",
+        "type": "change",
+        "z": "bef63805.4b44b8",
+        "name": "image/jpeg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "image/jpeg",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 499,
+        "y": 299,
+        "wires": [
+            [
+                "4ae27d0c.cff594"
+            ]
+        ]
+    },
+    {
+        "id": "851987ad.9af4b8",
+        "type": "http in",
+        "z": "bef63805.4b44b8",
+        "name": "/css/bootstrap.min.css",
+        "url": "/timer/css/bootstrap.min.css",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 125,
+        "y": 399,
+        "wires": [
+            [
+                "11a900b.e27d9ff"
+            ]
+        ]
+    },
+    {
+        "id": "11a900b.e27d9ff",
+        "type": "file in",
+        "z": "bef63805.4b44b8",
+        "name": "Read File",
+        "filename": "/home/pi/Documents/node-red-static/timer/css/bootstrap.min.css",
+        "format": "",
+        "sendError": true,
+        "x": 328,
+        "y": 398,
+        "wires": [
+            [
+                "dd56c41c.f57928"
+            ]
+        ]
+    },
+    {
+        "id": "dd56c41c.f57928",
+        "type": "change",
+        "z": "bef63805.4b44b8",
+        "name": "text/css",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.Content-Type",
+                "pt": "msg",
+                "to": "text/css",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 485,
+        "y": 397,
+        "wires": [
+            [
+                "4ae27d0c.cff594"
+            ]
+        ]
+    },
+    {
+        "id": "14740704.eab7d9",
+        "type": "http in",
+        "z": "bef63805.4b44b8",
+        "name": "/js/bootstrap.min.js",
+        "url": "/timer/js/bootstrap.min.js",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 117,
+        "y": 482,
+        "wires": [
+            [
+                "63b95d5e.a0c584"
+            ]
+        ]
+    },
+    {
+        "id": "63b95d5e.a0c584",
+        "type": "file in",
+        "z": "bef63805.4b44b8",
+        "name": "Read File",
+        "filename": "/home/pi/Documents/node-red-static/timer/js/bootstrap.min.js",
+        "format": "",
+        "sendError": true,
+        "x": 327,
+        "y": 481,
+        "wires": [
+            [
+                "4497c867.70bbb8"
+            ]
+        ]
+    },
+    {
+        "id": "4497c867.70bbb8",
+        "type": "change",
+        "z": "bef63805.4b44b8",
+        "name": "application/javascript",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "application/javascript",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 523,
+        "y": 504,
+        "wires": [
+            [
+                "4ae27d0c.cff594"
+            ]
+        ]
+    },
+    {
+        "id": "bdd44474.52ace8",
+        "type": "http in",
+        "z": "bef63805.4b44b8",
+        "name": "/js/jquery-1.11.0.js",
+        "url": "/timer/js/jquery-1.11.0.js",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 117,
+        "y": 533,
+        "wires": [
+            [
+                "e5152006.9ba91"
+            ]
+        ]
+    },
+    {
+        "id": "e5152006.9ba91",
+        "type": "file in",
+        "z": "bef63805.4b44b8",
+        "name": "Read File",
+        "filename": "/home/pi/Documents/node-red-static/timer/js/jquery-1.11.0.js",
+        "format": "",
+        "sendError": true,
+        "x": 327,
+        "y": 532,
+        "wires": [
+            [
+                "4497c867.70bbb8"
+            ]
+        ]
+    },
+    {
+        "id": "f893ec66.31236",
+        "type": "comment",
+        "z": "bef63805.4b44b8",
+        "name": "Static Timer Page Assets",
+        "info": "",
+        "x": 133,
+        "y": 170,
+        "wires": []
+    },
+    {
+        "id": "2ced5048.a9af4",
+        "type": "change",
+        "z": "bef63805.4b44b8",
+        "name": "application/json",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "application/json",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 537,
+        "y": 118,
+        "wires": [
+            [
+                "4ae27d0c.cff594"
+            ]
+        ]
+    },
+    {
+        "id": "4ae27d0c.cff594",
+        "type": "http response",
+        "z": "bef63805.4b44b8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670.5,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7760a76a.1dfb38",
+        "type": "mqtt in",
+        "z": "89bb5440.869c68",
+        "name": "PING/power",
+        "topic": "CIPO/PING/power",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 150,
+        "y": 218,
+        "wires": [
+            [
+                "446417a1.a70ed8"
+            ]
+        ]
+    },
+    {
+        "id": "446417a1.a70ed8",
+        "type": "mqtt out",
+        "z": "89bb5440.869c68",
+        "name": "PONG/power",
+        "topic": "COPI/power/PONG",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 421.5,
+        "y": 218,
+        "wires": []
+    },
+    {
+        "id": "e448e9ae.b438f8",
+        "type": "mqtt in",
+        "z": "89bb5440.869c68",
+        "name": "PING/pressure",
+        "topic": "CIPO/PING/pressure",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 159,
+        "y": 161,
+        "wires": [
+            [
+                "ca3242d4.73a7a"
+            ]
+        ]
+    },
+    {
+        "id": "ca3242d4.73a7a",
+        "type": "mqtt out",
+        "z": "89bb5440.869c68",
+        "name": "PONG/pressure",
+        "topic": "COPI/pressure/PONG",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 432.5,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "97acc574.154538",
+        "type": "mqtt in",
+        "z": "89bb5440.869c68",
+        "name": "PING/fuel",
+        "topic": "CIPO/PING/fuel",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 135,
+        "y": 103,
+        "wires": [
+            [
+                "f00cb75b.342f68"
+            ]
+        ]
+    },
+    {
+        "id": "f00cb75b.342f68",
+        "type": "mqtt out",
+        "z": "89bb5440.869c68",
+        "name": "PONG/fuel",
+        "topic": "COPI/fuel/PONG",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 421.5,
+        "y": 105,
+        "wires": []
+    },
+    {
+        "id": "ed4f4115.f0b26",
+        "type": "comment",
+        "z": "89bb5440.869c68",
+        "name": "PUZZLE PING/PONG HANDLERS",
+        "info": "",
+        "x": 214.5,
+        "y": 59,
+        "wires": []
+    },
+    {
+        "id": "8f3bfb25.60cbe8",
+        "type": "mqtt in",
+        "z": "89bb5440.869c68",
+        "name": "PING/patch",
+        "topic": "CIPO/PING/patch",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 622.8571395874023,
+        "y": 105.42859077453613,
+        "wires": [
+            [
+                "c02cfd44.f0bfd"
+            ]
+        ]
+    },
+    {
+        "id": "c02cfd44.f0bfd",
+        "type": "mqtt out",
+        "z": "89bb5440.869c68",
+        "name": "PONG/patch",
+        "topic": "COPI/patch/PONG",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 889.3571395874023,
+        "y": 104.42859077453613,
+        "wires": []
+    },
+    {
+        "id": "c38ebd19.6faac",
+        "type": "mqtt in",
+        "z": "89bb5440.869c68",
+        "name": "PING/keys",
+        "topic": "CIPO/PING/keys",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 612.8571395874023,
+        "y": 159.42859077453613,
+        "wires": [
+            [
+                "d4b50861.f1d1a8"
+            ]
+        ]
+    },
+    {
+        "id": "d4b50861.f1d1a8",
+        "type": "mqtt out",
+        "z": "89bb5440.869c68",
+        "name": "PONG/keys",
+        "topic": "COPI/keys/PONG",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 889.3571395874023,
+        "y": 158.42859077453613,
+        "wires": []
+    },
+    {
+        "id": "e78ec359.43b5",
+        "type": "mqtt in",
+        "z": "89bb5440.869c68",
+        "name": "PING/reactor",
+        "topic": "CIPO/PING/reactor",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 624.9999828338623,
+        "y": 218.4285888671875,
+        "wires": [
+            [
+                "8aed8f74.21ce4"
+            ]
+        ]
+    },
+    {
+        "id": "8aed8f74.21ce4",
+        "type": "mqtt out",
+        "z": "89bb5440.869c68",
+        "name": "PONG/reactor",
+        "topic": "COPI/reactor/PONG",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 906.4999828338623,
+        "y": 218.4285888671875,
+        "wires": []
+    },
+    {
+        "id": "17aec7a6.8e9938",
+        "type": "trigger",
+        "z": "89bb5440.869c68",
+        "op1": "",
+        "op2": "LOST HEARTBEAT",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "15",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "POWER HEARTBEAT TIMER",
+        "x": 761.1666831970215,
+        "y": 582,
+        "wires": [
+            [
+                "52da98ed.e2c0d8"
+            ]
+        ]
+    },
+    {
+        "id": "52da98ed.e2c0d8",
+        "type": "link out",
+        "z": "89bb5440.869c68",
+        "name": "LOST HEARTBEAT - PUZZLE 3",
+        "links": [
+            "1c89cc62.690124",
+            "a1db25c7.2f41b8",
+            "ba10a799.5ea6a8"
+        ],
+        "x": 961.8809757232666,
+        "y": 582.4286022186279,
+        "wires": []
+    },
+    {
+        "id": "2676fec6.de8f42",
+        "type": "template",
+        "z": "89bb5440.869c68",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<table cellspacing=6 border=1>\n    <tr>\n        <th nowrap>Puzzle ID</th>\n        <th nowrap>Role</th>\n        <th nowrap>IP Address</th>\n        <th nowrap>MAC Address</th>\n        <th nowrap>Platform</th>\n        <th nowrap>Uptime</th>\n        <th nowrap>Last Check-In</th>\n        <th nowrap>Temperature</th>\n        <th nowrap>Current State</th>\n    </tr>\n    \n    {{#payload}}\n    <tr>\n        <td nowrap>{{puzzleID}}</td>\n        <td nowrap>{{role}}</td>\n        <td nowrap>{{ipAddress}}</td>\n        <td nowrap>{{MACaddress}}</td>\n        <td nowrap>{{platform}}</td>\n        <td align=\"right\" nowrap>{{uptime}}</td>\n        <td nowrap>{{lastCheckin}}</td>\n        <td nowrap>{{temperature}}</td>\n        <td nowrap>{{currentState}}</td>\n    </tr>\n    {{/payload}}\n</table>",
+        "output": "str",
+        "x": 1044.8333129882812,
+        "y": 427.3332233428955,
+        "wires": [
+            [
+                "7e341015.b264b"
+            ]
+        ]
+    },
+    {
+        "id": "7e341015.b264b",
+        "type": "ui_template",
+        "z": "89bb5440.869c68",
+        "group": "b486328a.4aa6",
+        "name": "",
+        "order": 0,
+        "width": "12",
+        "height": "8",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 1179.8333129882812,
+        "y": 425.3332233428955,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "341634d9.75d62c",
+        "type": "trigger",
+        "z": "89bb5440.869c68",
+        "op1": "",
+        "op2": "LOST HEARTBEAT",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "15",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "PRESSURE HEARTBEAT TIMER",
+        "x": 768.6666831970215,
+        "y": 530,
+        "wires": [
+            [
+                "f6854979.580c08"
+            ]
+        ]
+    },
+    {
+        "id": "f6854979.580c08",
+        "type": "link out",
+        "z": "89bb5440.869c68",
+        "name": "LOST HEARTBEAT - PUZZLE 2",
+        "links": [
+            "652aac45.0a1a94"
+        ],
+        "x": 960.8809585571289,
+        "y": 529.9999980926514,
+        "wires": []
+    },
+    {
+        "id": "c83a3e15.8a0b4",
+        "type": "trigger",
+        "z": "89bb5440.869c68",
+        "op1": "",
+        "op2": "LOST HEARTBEAT",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "15",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "PATCH HEARTBEAT TIMER",
+        "x": 753.1666831970215,
+        "y": 635,
+        "wires": [
+            [
+                "dfd645c2.f28538"
+            ]
+        ]
+    },
+    {
+        "id": "dfd645c2.f28538",
+        "type": "link out",
+        "z": "89bb5440.869c68",
+        "name": "LOST HEARTBEAT - PUZZLE 4",
+        "links": [
+            "cc1588d8.2732d8"
+        ],
+        "x": 963.7381362915039,
+        "y": 636.0000648498535,
+        "wires": []
+    },
+    {
+        "id": "8a0323f.8fe41e",
+        "type": "trigger",
+        "z": "89bb5440.869c68",
+        "op1": "",
+        "op2": "LOST HEARTBEAT",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "15",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "KEYS HEARTBEAT TIMER",
+        "x": 753.1666831970215,
+        "y": 691,
+        "wires": [
+            [
+                "8e6764b2.948a78"
+            ]
+        ]
+    },
+    {
+        "id": "8e6764b2.948a78",
+        "type": "link out",
+        "z": "89bb5440.869c68",
+        "name": "LOST HEARTBEAT - PUZZLE 5",
+        "links": [
+            "3c712bd6.7f8744"
+        ],
+        "x": 959.4523868560791,
+        "y": 690.9999952316284,
+        "wires": []
+    },
+    {
+        "id": "d15570af.53755",
+        "type": "mqtt in",
+        "z": "89bb5440.869c68",
+        "name": "CIPO/PING/#",
+        "topic": "CIPO/PING/#",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 190,
+        "y": 380,
+        "wires": [
+            [
+                "4e512423.77edfc"
+            ]
+        ]
+    },
+    {
+        "id": "4e512423.77edfc",
+        "type": "json",
+        "z": "89bb5440.869c68",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 343.5,
+        "y": 376.6666135787964,
+        "wires": [
+            [
+                "a4f10278.4541d"
+            ]
+        ]
+    },
+    {
+        "id": "a4f10278.4541d",
+        "type": "function",
+        "z": "89bb5440.869c68",
+        "name": "Collect/Process/Store Incoming Heartbeats",
+        "func": "var incomingHeartbeat = msg.payload;\n\n/////////////////////////////\n// CONVERT UPTIME FROM SECONDS TO HHh MMm SSs\nvar uptimeSeconds = incomingHeartbeat.uptime;\n\nvar date = new Date(null);\ndate.setSeconds(uptimeSeconds);\n// FIXME - this should support days as well\n\n// If we're over 3600 seconds than that we means want to show the \"hour\" portion as well.\nif ( uptimeSeconds > 3600 )\n{\n    incomingHeartbeat.uptime = date.toISOString().substr(11, 2) + \"h \" + date.toISOString().substr(14, 2) + \"m \" + date.toISOString().substr(17, 2) + \"s\";\n}\nelse\n{\n    // Only show MINUTES and SECONDS as our uptime number is not big enough for anything else.\n    incomingHeartbeat.uptime = date.toISOString().substr(14, 2) + \"m \" + date.toISOString().substr(17, 2) + \"s\";\n}\n//incomingHeartbeat.uptime = date.toISOString().substr(11, 8);\n\ndate = new Date(Date.now());\nincomingHeartbeat.lastCheckin = date.toISOString();\n/////////////////////////////\n\n\nvar heartbeatObjects = global.get('heartbeatObjects') || {};\n\nvar puzzleID = incomingHeartbeat.puzzleID;\n\nheartbeatObjects[puzzleID] = incomingHeartbeat;\n\nglobal.set('heartbeatObjects', heartbeatObjects);\n \nmsg.payload = heartbeatObjects;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 395.1666793823242,
+        "y": 443.3333053588867,
+        "wires": [
+            [
+                "a075be96.0b65b",
+                "c0a61f88.849be"
+            ]
+        ]
+    },
+    {
+        "id": "a075be96.0b65b",
+        "type": "function",
+        "z": "89bb5440.869c68",
+        "name": "Pre-Process Data for HTML Rendering",
+        "func": "var incomingData = msg.payload;\n\nconst entries = Object.entries(incomingData);\n\nvar newPayload = [];\n\nfor (const [puzzleID, objHeartbeat] of entries) {\n    newPayload.push( incomingData[puzzleID] );\n}\n\nmsg.payload = newPayload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 779.4999694824219,
+        "y": 428.9999713897705,
+        "wires": [
+            [
+                "2676fec6.de8f42"
+            ]
+        ]
+    },
+    {
+        "id": "c0a61f88.849be",
+        "type": "switch",
+        "z": "89bb5440.869c68",
+        "name": "WHICH PUZZLE?",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "fuel",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "pressure",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "power",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "patch",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "keys",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "reactor",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 6,
+        "x": 449.1666831970215,
+        "y": 581,
+        "wires": [
+            [
+                "e74dcf0f.556ec"
+            ],
+            [
+                "341634d9.75d62c"
+            ],
+            [
+                "17aec7a6.8e9938"
+            ],
+            [
+                "c83a3e15.8a0b4"
+            ],
+            [
+                "8a0323f.8fe41e"
+            ],
+            [
+                "fc35d54a.388db8"
+            ]
+        ]
+    },
+    {
+        "id": "e74dcf0f.556ec",
+        "type": "trigger",
+        "z": "89bb5440.869c68",
+        "op1": "",
+        "op2": "LOST HEARTBEAT",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "15",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "FUEL HEARTBEAT TIMER",
+        "x": 746.6666831970215,
+        "y": 482,
+        "wires": [
+            [
+                "be625733.54c698"
+            ]
+        ]
+    },
+    {
+        "id": "be625733.54c698",
+        "type": "link out",
+        "z": "89bb5440.869c68",
+        "name": "LOST HEARTBEAT - PUZZLE 1",
+        "links": [
+            "aa38d7fb.4aa588"
+        ],
+        "x": 961.3095564842224,
+        "y": 481.5714626312256,
+        "wires": []
+    },
+    {
+        "id": "fc35d54a.388db8",
+        "type": "trigger",
+        "z": "89bb5440.869c68",
+        "op1": "",
+        "op2": "LOST HEARTBEAT",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "15",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "REACTOR HEARTBEAT TIMER",
+        "x": 764.5714111328125,
+        "y": 744.8570899963379,
+        "wires": [
+            [
+                "c46cb70c.b1bc08"
+            ]
+        ]
+    },
+    {
+        "id": "c46cb70c.b1bc08",
+        "type": "link out",
+        "z": "89bb5440.869c68",
+        "name": "LOST HEARTBEAT - PUZZLE 6",
+        "links": [
+            "2e9b9a8b.6dd356"
+        ],
+        "x": 960.8571376800537,
+        "y": 744.8570327758789,
+        "wires": []
+    },
+    {
+        "id": "a55cde8.8a7082",
+        "type": "delay",
+        "z": "9c0dfef0.e3929",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "4",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 639.0476303100586,
+        "y": 151.8571252822876,
+        "wires": [
+            [
+                "d7070033.2fe24"
+            ]
+        ]
+    },
+    {
+        "id": "697260bf.90b88",
+        "type": "change",
+        "z": "9c0dfef0.e3929",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "kill",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 585.4287185668945,
+        "y": 267.142786026001,
+        "wires": [
+            [
+                "a5ec6346.e5833"
+            ]
+        ]
+    },
+    {
+        "id": "316e12a5.61aece",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local --loop /home/pi/Downloads/ms/ambience_old_school.mp3",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY AMBIENCE",
+        "x": 822.9285345077515,
+        "y": 92.33333206176758,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d7070033.2fe24",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local /home/pi/Downloads/ms/manifestus_intro.mp3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY \"INTRO\"",
+        "x": 812.2143125534058,
+        "y": 191.00002479553223,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b9089124.11ffa",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "GAME START",
+        "links": [
+            "af8f8caf.82f92"
+        ],
+        "x": 227.85714435577393,
+        "y": 91.42855453491211,
+        "wires": [
+            [
+                "ef72b874.2dd778"
+            ]
+        ]
+    },
+    {
+        "id": "ef72b874.2dd778",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "killall -9 omxplayer.bin",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 389.9999990463257,
+        "y": 91.42857551574707,
+        "wires": [
+            [
+                "316e12a5.61aece",
+                "a55cde8.8a7082"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "af8f8caf.82f92",
+        "type": "link out",
+        "z": "99c79979.bfcad8",
+        "name": "SOUND CUE - GAME START",
+        "links": [
+            "b9089124.11ffa",
+            "88542545.3a2d58"
+        ],
+        "x": 335.00003814697266,
+        "y": 157.1428565979004,
+        "wires": []
+    },
+    {
+        "id": "523e4158.02032",
+        "type": "comment",
+        "z": "99c79979.bfcad8",
+        "name": "Sound Cue - Game Start",
+        "info": "",
+        "x": 200.0000286102295,
+        "y": 157.1428632736206,
+        "wires": []
+    },
+    {
+        "id": "6e41d0ca.98ac6",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Game Start",
+        "info": "",
+        "x": 286.4285697937012,
+        "y": 47.14285659790039,
+        "wires": []
+    },
+    {
+        "id": "2f245a4b.2e0876",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Game Failed",
+        "info": "",
+        "x": 287.14286041259766,
+        "y": 279.999942779541,
+        "wires": []
+    },
+    {
+        "id": "2e0c9b72.905bd4",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local /home/pi/Downloads/ms/meltdown_failure.mp3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY \"FAIL\"",
+        "x": 398.57141876220703,
+        "y": 325.71423721313477,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "95fd5fd7.43cdc",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "GAME FAILED",
+        "links": [
+            "55eb32d6.92d60c"
+        ],
+        "x": 228.57144927978516,
+        "y": 325.71426010131836,
+        "wires": [
+            [
+                "2e0c9b72.905bd4",
+                "697260bf.90b88"
+            ]
+        ]
+    },
+    {
+        "id": "8726adb0.4ef29",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "GAME WON",
+        "links": [
+            "f5fd1390.4f5ab"
+        ],
+        "x": 228.57143783569336,
+        "y": 202.85713005065918,
+        "wires": [
+            [
+                "248ca498.50454c",
+                "697260bf.90b88"
+            ]
+        ]
+    },
+    {
+        "id": "248ca498.50454c",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local /home/pi/Downloads/ms/meltdown_success.mp3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY \"WON\"",
+        "x": 395.7142868041992,
+        "y": 202.8571481704712,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "2c15ca67.e3f186",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Game Won",
+        "info": "",
+        "x": 284.2857093811035,
+        "y": 159.99999237060547,
+        "wires": []
+    },
+    {
+        "id": "a5ec6346.e5833",
+        "type": "link out",
+        "z": "9c0dfef0.e3929",
+        "name": "TERMINATE SOUND PLAYBACK",
+        "links": [
+            "28cac359.baf4ec",
+            "4ec2075c.1ea918",
+            "62396d36.15f7f4",
+            "a533ab5c.873198",
+            "b592e23c.d4b88",
+            "ca2ff936.b9d338",
+            "96e7713d.b59e",
+            "5e0f21f1.ebf1",
+            "8f23e832.3a78a8"
+        ],
+        "x": 844.9999771118164,
+        "y": 265.71434211730957,
+        "wires": []
+    },
+    {
+        "id": "3cc5d2ad.887d7e",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Terminate All Sound",
+        "info": "",
+        "x": 603.5714721679688,
+        "y": 232.8571376800537,
+        "wires": []
+    },
+    {
+        "id": "55eb32d6.92d60c",
+        "type": "link out",
+        "z": "99c79979.bfcad8",
+        "name": "",
+        "links": [
+            "95fd5fd7.43cdc"
+        ],
+        "x": 492.14277839660645,
+        "y": 571.4285583496094,
+        "wires": []
+    },
+    {
+        "id": "eca818f7.977bb8",
+        "type": "comment",
+        "z": "99c79979.bfcad8",
+        "name": "Sound Cue - GAME FAILED",
+        "info": "",
+        "x": 599.2856216430664,
+        "y": 535.7142200469971,
+        "wires": []
+    },
+    {
+        "id": "45293a3e.b53f54",
+        "type": "comment",
+        "z": "99c79979.bfcad8",
+        "name": "Trigger Reactor FAILURE (smoke)",
+        "info": "",
+        "x": 720,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "1e2d2b11.a65645",
+        "type": "link in",
+        "z": "99c79979.bfcad8",
+        "name": "FINAL WIN CONDITION MET",
+        "links": [
+            "877d29a2.503cb8"
+        ],
+        "x": 174.99999117851257,
+        "y": 698.5715265274048,
+        "wires": [
+            [
+                "48b9e315.d8ecac"
+            ]
+        ]
+    },
+    {
+        "id": "ee172475.5541c8",
+        "type": "comment",
+        "z": "99c79979.bfcad8",
+        "name": "Game Solved (from Reactor)",
+        "info": "",
+        "x": 280,
+        "y": 655.7144031524658,
+        "wires": []
+    },
+    {
+        "id": "48b9e315.d8ecac",
+        "type": "change",
+        "z": "99c79979.bfcad8",
+        "name": "puzzleTimerRunning/FALSE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "puzzleTimerRunning",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 342.14283752441406,
+        "y": 698.5714387893677,
+        "wires": [
+            [
+                "f5fd1390.4f5ab"
+            ]
+        ]
+    },
+    {
+        "id": "f5fd1390.4f5ab",
+        "type": "link out",
+        "z": "99c79979.bfcad8",
+        "name": "",
+        "links": [
+            "8726adb0.4ef29"
+        ],
+        "x": 531.4285736083984,
+        "y": 698.5715246200562,
+        "wires": []
+    },
+    {
+        "id": "335a5dfb.0830f2",
+        "type": "comment",
+        "z": "99c79979.bfcad8",
+        "name": "Sound Cue - GAME WON",
+        "info": "",
+        "x": 627.142936706543,
+        "y": 655.7143411636353,
+        "wires": []
+    },
+    {
+        "id": "99d7cc4a.31501",
+        "type": "comment",
+        "z": "c227dc9a.9174e",
+        "name": "All Four Puzzles Must be Solved Before Keys will Activate!",
+        "info": "",
+        "x": 402.3810119628906,
+        "y": 83.80949592590332,
+        "wires": []
+    },
+    {
+        "id": "db307e3f.1e92",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local /home/pi/Downloads/ms/patch_success.mp3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY \"SWITCHES NOW ACTIVE\"",
+        "x": 1420,
+        "y": 700,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "1cf6a497.9b15eb",
+        "type": "comment",
+        "z": "c227dc9a.9174e",
+        "name": "ACTIVATE Keys Puzzle",
+        "info": "",
+        "x": 794.1666469573975,
+        "y": 211.6666841506958,
+        "wires": []
+    },
+    {
+        "id": "5ed35148.22436",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Key Activation Gate",
+        "info": "",
+        "x": 1259.1666870117188,
+        "y": 654.999997138977,
+        "wires": []
+    },
+    {
+        "id": "8216d5f3.8fafc8",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "KEY ACTIVATION GATE",
+        "links": [
+            "c06d967c.124c48"
+        ],
+        "x": 1175,
+        "y": 700,
+        "wires": [
+            [
+                "db307e3f.1e92"
+            ]
+        ]
+    },
+    {
+        "id": "9f288b4a.4367f8",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "Commands TO Puzzle Controller",
+        "info": "",
+        "x": 347,
+        "y": 448,
+        "wires": []
+    },
+    {
+        "id": "6c396efb.abb44",
+        "type": "function",
+        "z": "61f84baa.8c8894",
+        "name": "GLOBAL/reactor_solved=FALSE",
+        "func": "\nglobal.set('reactor_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1016.3334159851074,
+        "y": 241.66671752929688,
+        "wires": [
+            [
+                "d4536f50.a5adc",
+                "e55a9930.a1a928"
+            ]
+        ]
+    },
+    {
+        "id": "9789bcc7.45a14",
+        "type": "ui_text",
+        "z": "61f84baa.8c8894",
+        "group": "55f9d81b.fb91b8",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "name": "MAIN: STATE",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 960.7459106445312,
+        "y": 284.7619323730469,
+        "wires": []
+    },
+    {
+        "id": "77bc8b18.a08d24",
+        "type": "ui_text",
+        "z": "61f84baa.8c8894",
+        "group": "86a7952f.061a38",
+        "order": 4,
+        "width": "5",
+        "height": "1",
+        "name": "ADVANCED: REACTOR Current State",
+        "label": "REACTOR state:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 1033.420726776123,
+        "y": 450.79369020462036,
+        "wires": []
+    },
+    {
+        "id": "8ae1e89e.969b28",
+        "type": "switch",
+        "z": "61f84baa.8c8894",
+        "name": "STATUS",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "AUTO",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "RESET",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ACTIVE",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "SOLVED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "FAILED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "REBOOTING",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DISCONNECTED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "LOST HEARTBEAT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "UNKNOWN",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 9,
+        "x": 420.33334732055664,
+        "y": 179.666654586792,
+        "wires": [
+            [
+                "cfebc104.5901"
+            ],
+            [
+                "cfebc104.5901"
+            ],
+            [
+                "2a57b0df.91203"
+            ],
+            [
+                "66a17b06.d44e94"
+            ],
+            [
+                "97622fb7.9221e"
+            ],
+            [
+                "99020ed1.e9433"
+            ],
+            [
+                "19ec3c21.49edc4"
+            ],
+            [
+                "f95054e0.ce9e68"
+            ],
+            [
+                "90dfdb3d.ef1ab8"
+            ]
+        ]
+    },
+    {
+        "id": "cfebc104.5901",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "AUTO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AUTO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 671.1666870117188,
+        "y": 118.88893508911133,
+        "wires": [
+            [
+                "5a328683.f2ca18",
+                "9789bcc7.45a14",
+                "77bc8b18.a08d24"
+            ]
+        ]
+    },
+    {
+        "id": "2a57b0df.91203",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "ACTIVE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 681.1667098999023,
+        "y": 158.1110610961914,
+        "wires": [
+            [
+                "6b3d950b.63d1dc",
+                "9789bcc7.45a14",
+                "77bc8b18.a08d24"
+            ]
+        ]
+    },
+    {
+        "id": "66a17b06.d44e94",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "SOLVED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "SOLVED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 682.8889198303223,
+        "y": 199.66660022735596,
+        "wires": [
+            [
+                "1aca420f.13642e",
+                "9789bcc7.45a14",
+                "77bc8b18.a08d24"
+            ]
+        ]
+    },
+    {
+        "id": "97622fb7.9221e",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "FAILED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "FAILED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 684.3889198303223,
+        "y": 243.88886833190918,
+        "wires": [
+            [
+                "6c396efb.abb44",
+                "9789bcc7.45a14",
+                "77bc8b18.a08d24"
+            ]
+        ]
+    },
+    {
+        "id": "99020ed1.e9433",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "REBOOTING",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "REBOOTING",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 705.166690826416,
+        "y": 380.99995040893555,
+        "wires": [
+            [
+                "77bc8b18.a08d24"
+            ]
+        ]
+    },
+    {
+        "id": "90dfdb3d.ef1ab8",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "UNKNOWN",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "UNKNOWN",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 694.8333320617676,
+        "y": 513.5555267333984,
+        "wires": [
+            [
+                "77bc8b18.a08d24"
+            ]
+        ]
+    },
+    {
+        "id": "19ec3c21.49edc4",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "DISCONNECTED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DISCONNECTED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 715.8888549804688,
+        "y": 424.6665954589844,
+        "wires": [
+            [
+                "77bc8b18.a08d24"
+            ]
+        ]
+    },
+    {
+        "id": "f95054e0.ce9e68",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "LOST HEARTBEAT",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "LOST HEARTBEAT",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 715.4603157043457,
+        "y": 469.11107635498047,
+        "wires": [
+            [
+                "77bc8b18.a08d24"
+            ]
+        ]
+    },
+    {
+        "id": "d3586067.f5992",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "Main Puzzle States (Game)",
+        "info": "",
+        "x": 738.7936897277832,
+        "y": 78.92064476013184,
+        "wires": []
+    },
+    {
+        "id": "3a4c1a6b.0098d6",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "Puzzle Controller (Trouble) States",
+        "info": "",
+        "x": 755.0000267028809,
+        "y": 339.99998664855957,
+        "wires": []
+    },
+    {
+        "id": "6b3d950b.63d1dc",
+        "type": "function",
+        "z": "61f84baa.8c8894",
+        "name": "GLOBAL/reactor_solved=FALSE",
+        "func": "\nglobal.set('reactor_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1016.9999656677246,
+        "y": 157.33332633972168,
+        "wires": [
+            [
+                "cc68857e.9cf818",
+                "6ad303c1.7eaf2c"
+            ]
+        ]
+    },
+    {
+        "id": "5a328683.f2ca18",
+        "type": "function",
+        "z": "61f84baa.8c8894",
+        "name": "GLOBAL/reactor_solved=FALSE",
+        "func": "\nglobal.set('reactor_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1016.9999656677246,
+        "y": 118.33332633972168,
+        "wires": [
+            [
+                "af3f2898.187138",
+                "5c52491.013a0b8"
+            ]
+        ]
+    },
+    {
+        "id": "cc68857e.9cf818",
+        "type": "link out",
+        "z": "61f84baa.8c8894",
+        "name": "ACTIVE CUE",
+        "links": [
+            "33d94287.2bfefe"
+        ],
+        "x": 1324.0000038146973,
+        "y": 156.66664695739746,
+        "wires": []
+    },
+    {
+        "id": "af3f2898.187138",
+        "type": "link out",
+        "z": "61f84baa.8c8894",
+        "name": "AUTO CUE",
+        "links": [],
+        "x": 1324.6666297912598,
+        "y": 117.9999885559082,
+        "wires": []
+    },
+    {
+        "id": "1f70ad3a.109dc3",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "ACTIVE OUT",
+        "info": "",
+        "x": 1426.333293914795,
+        "y": 155.66666221618652,
+        "wires": []
+    },
+    {
+        "id": "c6c0cd87.b6062",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "AUTO OUT",
+        "info": "",
+        "x": 1426.0000038146973,
+        "y": 117.00000286102295,
+        "wires": []
+    },
+    {
+        "id": "b8d50a1d.d77078",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local /home/pi/Downloads/ms/reactor_reengaging.mp3",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY \"REACTOR RE-ENGAGING\"",
+        "x": 620,
+        "y": 900,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "cf66e317.4fdba",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local /home/pi/Downloads/ms/reactor_active.mp3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY \"REACTOR ACTIVE\"",
+        "x": 600,
+        "y": 600,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "df239dc0.44d16",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Reactor ACTIVE",
+        "info": "",
+        "x": 280,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "63196298.6ca1cc",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Reactor FAILED",
+        "info": "",
+        "x": 276.8570137023926,
+        "y": 791.9999957084656,
+        "wires": []
+    },
+    {
+        "id": "33d94287.2bfefe",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "REACTOR ACTIVE",
+        "links": [
+            "cc68857e.9cf818"
+        ],
+        "x": 175.7142219543457,
+        "y": 535.3572293917337,
+        "wires": [
+            [
+                "993d680b.af7618",
+                "6a2dff54.69ac4"
+            ]
+        ]
+    },
+    {
+        "id": "a035421f.36f45",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "REACTOR FAILED",
+        "links": [
+            "d4536f50.a5adc"
+        ],
+        "x": 218.5236177444458,
+        "y": 861.9999866485596,
+        "wires": [
+            [
+                "8ac2ff79.8c5b5",
+                "d4facb3a.78c518"
+            ]
+        ]
+    },
+    {
+        "id": "993d680b.af7618",
+        "type": "change",
+        "z": "9c0dfef0.e3929",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "kill",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 298.21420669555664,
+        "y": 535.3572163581848,
+        "wires": [
+            [
+                "cf66e317.4fdba",
+                "b8d50a1d.d77078"
+            ]
+        ]
+    },
+    {
+        "id": "6a2dff54.69ac4",
+        "type": "delay",
+        "z": "9c0dfef0.e3929",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 257.38088607788086,
+        "y": 600.0239672660828,
+        "wires": [
+            [
+                "cf66e317.4fdba"
+            ]
+        ]
+    },
+    {
+        "id": "8ac2ff79.8c5b5",
+        "type": "change",
+        "z": "9c0dfef0.e3929",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "kill",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 338.52365493774414,
+        "y": 862.0000324249268,
+        "wires": [
+            [
+                "b8d50a1d.d77078",
+                "cf66e317.4fdba"
+            ]
+        ]
+    },
+    {
+        "id": "d4facb3a.78c518",
+        "type": "delay",
+        "z": "9c0dfef0.e3929",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 311.8569679260254,
+        "y": 922.0000324249268,
+        "wires": [
+            [
+                "b8d50a1d.d77078"
+            ]
+        ]
+    },
+    {
+        "id": "e17832c5.dd7ef",
+        "type": "mqtt in",
+        "z": "24f803df.6be70c",
+        "name": "",
+        "topic": "CIPO/keys/STATE",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 167.5,
+        "y": 151.07935333251953,
+        "wires": [
+            [
+                "1e1b5e6b.cd5b52"
+            ]
+        ]
+    },
+    {
+        "id": "2520d104.7ca20e",
+        "type": "ui_button",
+        "z": "24f803df.6be70c",
+        "name": "BTN-ACTIVATE",
+        "group": "d99cebb4.4adc38",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "ACTIVATE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "ACTIVATE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 173.9285545349121,
+        "y": 521.0794086456299,
+        "wires": [
+            [
+                "1e158420.93329c"
+            ]
+        ]
+    },
+    {
+        "id": "34edf9e2.360206",
+        "type": "ui_button",
+        "z": "24f803df.6be70c",
+        "name": "BTN-SOLVE",
+        "group": "d99cebb4.4adc38",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "SOLVE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "SOLVE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 184.99998092651367,
+        "y": 564.0793552398682,
+        "wires": [
+            [
+                "1e158420.93329c"
+            ]
+        ]
+    },
+    {
+        "id": "1e158420.93329c",
+        "type": "mqtt out",
+        "z": "24f803df.6be70c",
+        "name": "",
+        "topic": "COPI/keys/COMMANDS",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 484.02377700805664,
+        "y": 553.7143039703369,
+        "wires": []
+    },
+    {
+        "id": "8eb36549.076828",
+        "type": "link in",
+        "z": "24f803df.6be70c",
+        "name": "FROM GAME RESET",
+        "links": [
+            "bdd667e4.85fb58"
+        ],
+        "x": 241.1428565979004,
+        "y": 604.2222385406494,
+        "wires": [
+            [
+                "1e158420.93329c"
+            ]
+        ]
+    },
+    {
+        "id": "41b5a5a2.e4635c",
+        "type": "link in",
+        "z": "24f803df.6be70c",
+        "name": "ACTIVATE PUZZLE",
+        "links": [
+            "a475891f.48ea18",
+            "d4536f50.a5adc"
+        ],
+        "x": 234.0714192390442,
+        "y": 472.650785446167,
+        "wires": [
+            [
+                "942c707e.9fe58"
+            ]
+        ]
+    },
+    {
+        "id": "bc3b8ce6.be1ba",
+        "type": "function",
+        "z": "24f803df.6be70c",
+        "name": "GLOBAL/keys_solved=TRUE",
+        "func": "\nglobal.set('keys_solved', 1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 961.9999847412109,
+        "y": 168.74600982666016,
+        "wires": [
+            [
+                "c29e7773.933a18"
+            ]
+        ]
+    },
+    {
+        "id": "45fe57b.d79c8a8",
+        "type": "ui_button",
+        "z": "24f803df.6be70c",
+        "name": "BTN-REBOOT",
+        "group": "86a7952f.061a38",
+        "order": 1,
+        "width": "4",
+        "height": "1",
+        "passthru": true,
+        "label": "KEYS",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "REBOOT",
+        "payloadType": "str",
+        "topic": "",
+        "x": 178.35712051391602,
+        "y": 700.3650608062744,
+        "wires": [
+            [
+                "1e158420.93329c"
+            ]
+        ]
+    },
+    {
+        "id": "3c712bd6.7f8744",
+        "type": "link in",
+        "z": "24f803df.6be70c",
+        "name": "LOST HEARTBEAT",
+        "links": [
+            "8e6764b2.948a78"
+        ],
+        "x": 244.2857322692871,
+        "y": 212.07933807373047,
+        "wires": [
+            [
+                "1e1b5e6b.cd5b52"
+            ]
+        ]
+    },
+    {
+        "id": "3d75d80b.789f98",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "LOST HEARTBEAT",
+        "info": "",
+        "x": 132.5,
+        "y": 213.3650722503662,
+        "wires": []
+    },
+    {
+        "id": "2f236a5d.200ea6",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "PUZZLE RESET",
+        "info": "",
+        "x": 131.2142219543457,
+        "y": 605.0794162750244,
+        "wires": []
+    },
+    {
+        "id": "18ce1816.1878a8",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "SOLVED OUT",
+        "info": "",
+        "x": 1392.5002212524414,
+        "y": 167.5555305480957,
+        "wires": []
+    },
+    {
+        "id": "63fabea8.cbb36",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "PUZZLE ACTIVATE",
+        "info": "",
+        "x": 113.64284133911133,
+        "y": 474.5080051422119,
+        "wires": []
+    },
+    {
+        "id": "c29e7773.933a18",
+        "type": "link out",
+        "z": "24f803df.6be70c",
+        "name": "SOLVED CUE",
+        "links": [
+            "5de27108.d344e"
+        ],
+        "x": 1288.6906414031982,
+        "y": 168.69839763641357,
+        "wires": []
+    },
+    {
+        "id": "e626fa8e.9ea0a8",
+        "type": "link out",
+        "z": "24f803df.6be70c",
+        "name": "FAILED CUE",
+        "links": [],
+        "x": 1289.6905574798584,
+        "y": 212.26981449127197,
+        "wires": []
+    },
+    {
+        "id": "8f402958.622d68",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "FAILED OUT",
+        "info": "",
+        "x": 1394.4046325683594,
+        "y": 211.60314178466797,
+        "wires": []
+    },
+    {
+        "id": "ee4ba50e.6c38d8",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "Commands TO Puzzle Controller",
+        "info": "",
+        "x": 312.49997329711914,
+        "y": 419.07935523986816,
+        "wires": []
+    },
+    {
+        "id": "fac68537.9fad18",
+        "type": "function",
+        "z": "24f803df.6be70c",
+        "name": "GLOBAL/keys_solved=FALSE",
+        "func": "\nglobal.set('keys_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 971.8333892822266,
+        "y": 212.74607276916504,
+        "wires": [
+            [
+                "e626fa8e.9ea0a8"
+            ]
+        ]
+    },
+    {
+        "id": "9070910a.6b06",
+        "type": "ui_text",
+        "z": "24f803df.6be70c",
+        "group": "d99cebb4.4adc38",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "name": "MAIN: STATE",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 926.2458839416504,
+        "y": 255.84128761291504,
+        "wires": []
+    },
+    {
+        "id": "bb1e61a3.95636",
+        "type": "ui_text",
+        "z": "24f803df.6be70c",
+        "group": "86a7952f.061a38",
+        "order": 2,
+        "width": "5",
+        "height": "1",
+        "name": "ADVANCED: KEYS Current State",
+        "label": "KEYS state:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 988.9207000732422,
+        "y": 421.8730454444885,
+        "wires": []
+    },
+    {
+        "id": "1e1b5e6b.cd5b52",
+        "type": "switch",
+        "z": "24f803df.6be70c",
+        "name": "STATUS",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "AUTO",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "RESET",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ACTIVE",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "SOLVED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "FAILED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "REBOOTING",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DISCONNECTED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "LOST HEARTBEAT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "UNKNOWN",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 9,
+        "x": 385.8333206176758,
+        "y": 150.74600982666016,
+        "wires": [
+            [
+                "a97aae19.560bf"
+            ],
+            [
+                "a97aae19.560bf"
+            ],
+            [
+                "b794bc02.329b1"
+            ],
+            [
+                "5e4b8e81.ecdbf"
+            ],
+            [
+                "3a792da8.125e82"
+            ],
+            [
+                "123e00ed.06e5af"
+            ],
+            [
+                "ef8fd5c9.9d01e8"
+            ],
+            [
+                "ab605ebb.85704"
+            ],
+            [
+                "19779863.47ca78"
+            ]
+        ]
+    },
+    {
+        "id": "a97aae19.560bf",
+        "type": "change",
+        "z": "24f803df.6be70c",
+        "name": "AUTO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AUTO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 636.6666603088379,
+        "y": 89.96829032897949,
+        "wires": [
+            [
+                "8791b019.d6b79",
+                "9070910a.6b06",
+                "bb1e61a3.95636"
+            ]
+        ]
+    },
+    {
+        "id": "b794bc02.329b1",
+        "type": "change",
+        "z": "24f803df.6be70c",
+        "name": "ACTIVE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 646.6666831970215,
+        "y": 129.19041633605957,
+        "wires": [
+            [
+                "3e373c39.c7dcb4",
+                "9070910a.6b06",
+                "bb1e61a3.95636"
+            ]
+        ]
+    },
+    {
+        "id": "5e4b8e81.ecdbf",
+        "type": "change",
+        "z": "24f803df.6be70c",
+        "name": "SOLVED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "SOLVED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 648.3888931274414,
+        "y": 170.74595546722412,
+        "wires": [
+            [
+                "bc3b8ce6.be1ba",
+                "9070910a.6b06",
+                "bb1e61a3.95636"
+            ]
+        ]
+    },
+    {
+        "id": "3a792da8.125e82",
+        "type": "change",
+        "z": "24f803df.6be70c",
+        "name": "FAILED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "FAILED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 649.8888931274414,
+        "y": 214.96822357177734,
+        "wires": [
+            [
+                "fac68537.9fad18",
+                "9070910a.6b06",
+                "bb1e61a3.95636"
+            ]
+        ]
+    },
+    {
+        "id": "123e00ed.06e5af",
+        "type": "change",
+        "z": "24f803df.6be70c",
+        "name": "REBOOTING",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "REBOOTING",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670.6666641235352,
+        "y": 352.0793056488037,
+        "wires": [
+            [
+                "bb1e61a3.95636"
+            ]
+        ]
+    },
+    {
+        "id": "19779863.47ca78",
+        "type": "change",
+        "z": "24f803df.6be70c",
+        "name": "UNKNOWN",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "UNKNOWN",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660.3333053588867,
+        "y": 484.6348819732666,
+        "wires": [
+            [
+                "bb1e61a3.95636"
+            ]
+        ]
+    },
+    {
+        "id": "ef8fd5c9.9d01e8",
+        "type": "change",
+        "z": "24f803df.6be70c",
+        "name": "DISCONNECTED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DISCONNECTED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 681.3888282775879,
+        "y": 395.74595069885254,
+        "wires": [
+            [
+                "bb1e61a3.95636"
+            ]
+        ]
+    },
+    {
+        "id": "ab605ebb.85704",
+        "type": "change",
+        "z": "24f803df.6be70c",
+        "name": "LOST HEARTBEAT",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "LOST HEARTBEAT",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680.9602890014648,
+        "y": 440.19043159484863,
+        "wires": [
+            [
+                "bb1e61a3.95636"
+            ]
+        ]
+    },
+    {
+        "id": "97bdc9a7.0d0348",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "Main Puzzle States (Game)",
+        "info": "",
+        "x": 704.2936630249023,
+        "y": 50,
+        "wires": []
+    },
+    {
+        "id": "b509ed13.f3be9",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "Puzzle Controller (Trouble) States",
+        "info": "",
+        "x": 720.5,
+        "y": 311.07934188842773,
+        "wires": []
+    },
+    {
+        "id": "3e373c39.c7dcb4",
+        "type": "function",
+        "z": "24f803df.6be70c",
+        "name": "GLOBAL/keys_solved=FALSE",
+        "func": "\nglobal.set('keys_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 972.4999389648438,
+        "y": 128.41268157958984,
+        "wires": [
+            [
+                "27e03f3d.65ff9"
+            ]
+        ]
+    },
+    {
+        "id": "8791b019.d6b79",
+        "type": "function",
+        "z": "24f803df.6be70c",
+        "name": "GLOBAL/keys_solved=FALSE",
+        "func": "\nglobal.set('keys_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 972.4999389648438,
+        "y": 89.41268157958984,
+        "wires": [
+            [
+                "e7ee168f.57a518"
+            ]
+        ]
+    },
+    {
+        "id": "27e03f3d.65ff9",
+        "type": "link out",
+        "z": "24f803df.6be70c",
+        "name": "ACTIVE CUE",
+        "links": [],
+        "x": 1289.4999771118164,
+        "y": 127.74600219726562,
+        "wires": []
+    },
+    {
+        "id": "e7ee168f.57a518",
+        "type": "link out",
+        "z": "24f803df.6be70c",
+        "name": "AUTO CUE",
+        "links": [],
+        "x": 1290.166603088379,
+        "y": 89.07934379577637,
+        "wires": []
+    },
+    {
+        "id": "f93bce72.71d42",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "ACTIVE OUT",
+        "info": "",
+        "x": 1391.833267211914,
+        "y": 126.74601745605469,
+        "wires": []
+    },
+    {
+        "id": "21420a80.0e7996",
+        "type": "comment",
+        "z": "24f803df.6be70c",
+        "name": "AUTO OUT",
+        "info": "",
+        "x": 1391.4999771118164,
+        "y": 88.07935810089111,
+        "wires": []
+    },
+    {
+        "id": "730fed4b.ac0714",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "ACTIVATE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVATE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 377.50001525878906,
+        "y": 502.333309173584,
+        "wires": [
+            [
+                "34c9990f.620376"
+            ]
+        ]
+    },
+    {
+        "id": "942c707e.9fe58",
+        "type": "change",
+        "z": "24f803df.6be70c",
+        "name": "ACTIVATE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVATE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 351.6666564941406,
+        "y": 473.33331298828125,
+        "wires": [
+            [
+                "1e158420.93329c"
+            ]
+        ]
+    },
+    {
+        "id": "c06d967c.124c48",
+        "type": "link out",
+        "z": "c227dc9a.9174e",
+        "name": "SOUND CUE",
+        "links": [
+            "8216d5f3.8fafc8"
+        ],
+        "x": 714.1666355133057,
+        "y": 345.0000057220459,
+        "wires": []
+    },
+    {
+        "id": "90dccebe.e4c7b",
+        "type": "comment",
+        "z": "c227dc9a.9174e",
+        "name": "Sound Cute - Switch Activated",
+        "info": "",
+        "x": 818.3333053588867,
+        "y": 386.6666431427002,
+        "wires": []
+    },
+    {
+        "id": "5c7ea237.22bcec",
+        "type": "mqtt in",
+        "z": "5f25f351.1372ac",
+        "name": "",
+        "topic": "CIPO/patch/STATE",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 180,
+        "y": 172.5,
+        "wires": [
+            [
+                "9977fe8f.e9cf7"
+            ]
+        ]
+    },
+    {
+        "id": "230bcde0.5ce4c2",
+        "type": "ui_button",
+        "z": "5f25f351.1372ac",
+        "d": true,
+        "name": "BTN-ACTIVATE",
+        "group": "32dabca5.537cb4",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "ACTIVATE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "ACTIVATE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 186.4285545349121,
+        "y": 542.5000553131104,
+        "wires": [
+            [
+                "1cfe123b.6d0cfe"
+            ]
+        ]
+    },
+    {
+        "id": "22b0dabc.6864e6",
+        "type": "ui_button",
+        "z": "5f25f351.1372ac",
+        "name": "BTN-SOLVE",
+        "group": "32dabca5.537cb4",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "SOLVE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "SOLVE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 197.49998092651367,
+        "y": 585.5000019073486,
+        "wires": [
+            [
+                "1cfe123b.6d0cfe"
+            ]
+        ]
+    },
+    {
+        "id": "1cfe123b.6d0cfe",
+        "type": "mqtt out",
+        "z": "5f25f351.1372ac",
+        "name": "",
+        "topic": "COPI/patch/COMMANDS",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 496.52377700805664,
+        "y": 575.1349506378174,
+        "wires": []
+    },
+    {
+        "id": "5239b2d9.9c913c",
+        "type": "link in",
+        "z": "5f25f351.1372ac",
+        "name": "FROM GAME RESET",
+        "links": [
+            "bdd667e4.85fb58"
+        ],
+        "x": 253.6428565979004,
+        "y": 625.6428852081299,
+        "wires": [
+            [
+                "1cfe123b.6d0cfe"
+            ]
+        ]
+    },
+    {
+        "id": "75807477.1a674c",
+        "type": "link in",
+        "z": "5f25f351.1372ac",
+        "name": "ACTIVATE PUZZLE",
+        "links": [],
+        "x": 246.5714192390442,
+        "y": 494.07143211364746,
+        "wires": [
+            [
+                "f319eea9.ced48"
+            ]
+        ]
+    },
+    {
+        "id": "675a9682.5f2d38",
+        "type": "function",
+        "z": "5f25f351.1372ac",
+        "name": "GLOBAL/patch_solved=TRUE",
+        "func": "\nglobal.set('patch_solved', 1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 984.4999847412109,
+        "y": 190.16665649414062,
+        "wires": [
+            [
+                "a93efe2a.bb20d"
+            ]
+        ]
+    },
+    {
+        "id": "c0b6e9a5.174d58",
+        "type": "ui_button",
+        "z": "5f25f351.1372ac",
+        "name": "BTN-REBOOT",
+        "group": "86a7952f.061a38",
+        "order": 1,
+        "width": "4",
+        "height": "1",
+        "passthru": true,
+        "label": "PATCH",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "REBOOT",
+        "payloadType": "str",
+        "topic": "",
+        "x": 190.85712051391602,
+        "y": 721.7857074737549,
+        "wires": [
+            [
+                "1cfe123b.6d0cfe"
+            ]
+        ]
+    },
+    {
+        "id": "cc1588d8.2732d8",
+        "type": "link in",
+        "z": "5f25f351.1372ac",
+        "name": "LOST HEARTBEAT",
+        "links": [
+            "dfd645c2.f28538"
+        ],
+        "x": 256.7857322692871,
+        "y": 233.49998474121094,
+        "wires": [
+            [
+                "9977fe8f.e9cf7"
+            ]
+        ]
+    },
+    {
+        "id": "b597da66.2a3878",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "LOST HEARTBEAT",
+        "info": "",
+        "x": 145,
+        "y": 234.78571891784668,
+        "wires": []
+    },
+    {
+        "id": "e96a13b0.9eaf8",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "PUZZLE RESET",
+        "info": "",
+        "x": 143.7142219543457,
+        "y": 626.5000629425049,
+        "wires": []
+    },
+    {
+        "id": "e29aa57c.ebeb28",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "SOLVED OUT",
+        "info": "",
+        "x": 1405.0002212524414,
+        "y": 188.97617721557617,
+        "wires": []
+    },
+    {
+        "id": "5e962aab.6e9d14",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "PUZZLE ACTIVATE",
+        "info": "",
+        "x": 126.14284133911133,
+        "y": 495.9286518096924,
+        "wires": []
+    },
+    {
+        "id": "a93efe2a.bb20d",
+        "type": "link out",
+        "z": "5f25f351.1372ac",
+        "name": "SOLVED CUE",
+        "links": [
+            "c4fed6e4.d37c68"
+        ],
+        "x": 1301.1906414031982,
+        "y": 190.11904430389404,
+        "wires": []
+    },
+    {
+        "id": "5994d95d.1f5768",
+        "type": "link out",
+        "z": "5f25f351.1372ac",
+        "name": "FAILED CUE",
+        "links": [],
+        "x": 1302.1905574798584,
+        "y": 233.69046115875244,
+        "wires": []
+    },
+    {
+        "id": "b2b49084.8aead",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "FAILED OUT",
+        "info": "",
+        "x": 1406.9046325683594,
+        "y": 233.02378845214844,
+        "wires": []
+    },
+    {
+        "id": "86054eda.c4e02",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "Commands TO Puzzle Controller",
+        "info": "",
+        "x": 324.99997329711914,
+        "y": 440.50000190734863,
+        "wires": []
+    },
+    {
+        "id": "aff39936.d4c688",
+        "type": "function",
+        "z": "5f25f351.1372ac",
+        "name": "GLOBAL/patch_solved=FALSE",
+        "func": "\nglobal.set('patch_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 984.3333892822266,
+        "y": 234.1667194366455,
+        "wires": [
+            [
+                "5994d95d.1f5768"
+            ]
+        ]
+    },
+    {
+        "id": "7945d0a1.ece16",
+        "type": "ui_text",
+        "z": "5f25f351.1372ac",
+        "group": "32dabca5.537cb4",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "name": "MAIN: STATE",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 938.7458839416504,
+        "y": 277.2619342803955,
+        "wires": []
+    },
+    {
+        "id": "a7f3e2e2.e38c8",
+        "type": "ui_text",
+        "z": "5f25f351.1372ac",
+        "group": "86a7952f.061a38",
+        "order": 2,
+        "width": "5",
+        "height": "1",
+        "name": "ADVANCED: PATCH Current State",
+        "label": "PATCH state:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 1001.4207000732422,
+        "y": 443.293692111969,
+        "wires": []
+    },
+    {
+        "id": "9977fe8f.e9cf7",
+        "type": "switch",
+        "z": "5f25f351.1372ac",
+        "name": "STATUS",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "AUTO",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "RESET",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ACTIVE",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "SOLVED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "FAILED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "REBOOTING",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DISCONNECTED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "LOST HEARTBEAT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "UNKNOWN",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 9,
+        "x": 398.3333206176758,
+        "y": 172.16665649414062,
+        "wires": [
+            [
+                "bf0b1d03.5f30f"
+            ],
+            [
+                "bf0b1d03.5f30f"
+            ],
+            [
+                "c65b89c0.889728"
+            ],
+            [
+                "31cca892.0634e8"
+            ],
+            [
+                "2ba353b9.3c6efc"
+            ],
+            [
+                "51045097.8648b"
+            ],
+            [
+                "b6199cb5.0f5dd"
+            ],
+            [
+                "9cd4606.4deffa"
+            ],
+            [
+                "bd7f018f.f300c"
+            ]
+        ]
+    },
+    {
+        "id": "bf0b1d03.5f30f",
+        "type": "change",
+        "z": "5f25f351.1372ac",
+        "name": "AUTO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AUTO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 649.1666603088379,
+        "y": 111.38893699645996,
+        "wires": [
+            [
+                "b9126739.cdf138",
+                "7945d0a1.ece16",
+                "a7f3e2e2.e38c8"
+            ]
+        ]
+    },
+    {
+        "id": "c65b89c0.889728",
+        "type": "change",
+        "z": "5f25f351.1372ac",
+        "name": "ACTIVE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 659.1666831970215,
+        "y": 150.61106300354004,
+        "wires": [
+            [
+                "9a863db.3f08dc",
+                "7945d0a1.ece16",
+                "a7f3e2e2.e38c8"
+            ]
+        ]
+    },
+    {
+        "id": "31cca892.0634e8",
+        "type": "change",
+        "z": "5f25f351.1372ac",
+        "name": "SOLVED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "SOLVED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660.8888931274414,
+        "y": 192.1666021347046,
+        "wires": [
+            [
+                "675a9682.5f2d38",
+                "7945d0a1.ece16",
+                "a7f3e2e2.e38c8"
+            ]
+        ]
+    },
+    {
+        "id": "2ba353b9.3c6efc",
+        "type": "change",
+        "z": "5f25f351.1372ac",
+        "name": "FAILED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "FAILED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 662.3888931274414,
+        "y": 236.3888702392578,
+        "wires": [
+            [
+                "aff39936.d4c688",
+                "7945d0a1.ece16",
+                "a7f3e2e2.e38c8"
+            ]
+        ]
+    },
+    {
+        "id": "51045097.8648b",
+        "type": "change",
+        "z": "5f25f351.1372ac",
+        "name": "REBOOTING",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "REBOOTING",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 683.1666641235352,
+        "y": 373.4999523162842,
+        "wires": [
+            [
+                "a7f3e2e2.e38c8"
+            ]
+        ]
+    },
+    {
+        "id": "bd7f018f.f300c",
+        "type": "change",
+        "z": "5f25f351.1372ac",
+        "name": "UNKNOWN",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "UNKNOWN",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 672.8333053588867,
+        "y": 506.05552864074707,
+        "wires": [
+            [
+                "a7f3e2e2.e38c8"
+            ]
+        ]
+    },
+    {
+        "id": "b6199cb5.0f5dd",
+        "type": "change",
+        "z": "5f25f351.1372ac",
+        "name": "DISCONNECTED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DISCONNECTED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 693.8888282775879,
+        "y": 417.166597366333,
+        "wires": [
+            [
+                "a7f3e2e2.e38c8"
+            ]
+        ]
+    },
+    {
+        "id": "9cd4606.4deffa",
+        "type": "change",
+        "z": "5f25f351.1372ac",
+        "name": "LOST HEARTBEAT",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "LOST HEARTBEAT",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 693.4602890014648,
+        "y": 461.6110782623291,
+        "wires": [
+            [
+                "a7f3e2e2.e38c8"
+            ]
+        ]
+    },
+    {
+        "id": "c8f5deee.79c18",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "Main Puzzle States (Game)",
+        "info": "",
+        "x": 716.7936630249023,
+        "y": 71.42064666748047,
+        "wires": []
+    },
+    {
+        "id": "2c7997db.566598",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "Puzzle Controller (Trouble) States",
+        "info": "",
+        "x": 733,
+        "y": 332.4999885559082,
+        "wires": []
+    },
+    {
+        "id": "9a863db.3f08dc",
+        "type": "function",
+        "z": "5f25f351.1372ac",
+        "name": "GLOBAL/patch_solved=FALSE",
+        "func": "\nglobal.set('patch_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 984.9999389648438,
+        "y": 149.8333282470703,
+        "wires": [
+            [
+                "27f36d2f.6a7002"
+            ]
+        ]
+    },
+    {
+        "id": "b9126739.cdf138",
+        "type": "function",
+        "z": "5f25f351.1372ac",
+        "name": "GLOBAL/patch_solved=FALSE",
+        "func": "\nglobal.set('patch_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 984.9999389648438,
+        "y": 110.83332824707031,
+        "wires": [
+            [
+                "4bdc335.b44eecc"
+            ]
+        ]
+    },
+    {
+        "id": "27f36d2f.6a7002",
+        "type": "link out",
+        "z": "5f25f351.1372ac",
+        "name": "ACTIVE CUE",
+        "links": [],
+        "x": 1301.9999771118164,
+        "y": 149.1666488647461,
+        "wires": []
+    },
+    {
+        "id": "4bdc335.b44eecc",
+        "type": "link out",
+        "z": "5f25f351.1372ac",
+        "name": "AUTO CUE",
+        "links": [],
+        "x": 1302.666603088379,
+        "y": 110.49999046325684,
+        "wires": []
+    },
+    {
+        "id": "b7325f29.428ec",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "ACTIVE OUT",
+        "info": "",
+        "x": 1404.333267211914,
+        "y": 148.16666412353516,
+        "wires": []
+    },
+    {
+        "id": "10cb1547.78d64b",
+        "type": "comment",
+        "z": "5f25f351.1372ac",
+        "name": "AUTO OUT",
+        "info": "",
+        "x": 1403.9999771118164,
+        "y": 109.50000476837158,
+        "wires": []
+    },
+    {
+        "id": "f319eea9.ced48",
+        "type": "change",
+        "z": "5f25f351.1372ac",
+        "name": "ACTIVATE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVATE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 364.1666564941406,
+        "y": 494.7539596557617,
+        "wires": [
+            [
+                "1cfe123b.6d0cfe"
+            ]
+        ]
+    },
+    {
+        "id": "afae3721.62b9f8",
+        "type": "mqtt in",
+        "z": "62fad8ec.96f7a8",
+        "name": "",
+        "topic": "CIPO/power/STATE",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 172,
+        "y": 161.07935333251953,
+        "wires": [
+            [
+                "daa3ade4.eb68c"
+            ]
+        ]
+    },
+    {
+        "id": "93a6280.e4983d8",
+        "type": "ui_button",
+        "z": "62fad8ec.96f7a8",
+        "d": true,
+        "name": "BTN-ACTIVATE",
+        "group": "4a716f9d.87e68",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "ACTIVATE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "ACTIVATE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 178.4285545349121,
+        "y": 531.0794086456299,
+        "wires": [
+            [
+                "15b13154.8bad8f"
+            ]
+        ]
+    },
+    {
+        "id": "b55ba251.87a1b",
+        "type": "ui_button",
+        "z": "62fad8ec.96f7a8",
+        "name": "BTN-SOLVE",
+        "group": "4a716f9d.87e68",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "SOLVE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "SOLVE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 189.49998092651367,
+        "y": 574.0793552398682,
+        "wires": [
+            [
+                "15b13154.8bad8f"
+            ]
+        ]
+    },
+    {
+        "id": "15b13154.8bad8f",
+        "type": "mqtt out",
+        "z": "62fad8ec.96f7a8",
+        "name": "",
+        "topic": "COPI/power/COMMANDS",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 488.52377700805664,
+        "y": 563.7143039703369,
+        "wires": []
+    },
+    {
+        "id": "bbed6836.536918",
+        "type": "link in",
+        "z": "62fad8ec.96f7a8",
+        "name": "FROM GAME RESET",
+        "links": [
+            "bdd667e4.85fb58"
+        ],
+        "x": 245.6428565979004,
+        "y": 614.2222385406494,
+        "wires": [
+            [
+                "15b13154.8bad8f"
+            ]
+        ]
+    },
+    {
+        "id": "a7e2be13.d57e2",
+        "type": "link in",
+        "z": "62fad8ec.96f7a8",
+        "name": "ACTIVATE PUZZLE",
+        "links": [],
+        "x": 238.5714192390442,
+        "y": 482.650785446167,
+        "wires": [
+            [
+                "f6c8d59a.0c0c18"
+            ]
+        ]
+    },
+    {
+        "id": "d00d623.111b7a",
+        "type": "function",
+        "z": "62fad8ec.96f7a8",
+        "name": "GLOBAL/power_solved=TRUE",
+        "func": "\nglobal.set('power_solved', 1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 976.4999847412109,
+        "y": 178.74600982666016,
+        "wires": [
+            [
+                "b6f3b40f.ce9d98"
+            ]
+        ]
+    },
+    {
+        "id": "214bc918.329cd6",
+        "type": "ui_button",
+        "z": "62fad8ec.96f7a8",
+        "name": "BTN-REBOOT",
+        "group": "86a7952f.061a38",
+        "order": 1,
+        "width": "4",
+        "height": "1",
+        "passthru": true,
+        "label": "POWER",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "REBOOT",
+        "payloadType": "str",
+        "topic": "",
+        "x": 182.85712051391602,
+        "y": 710.3650608062744,
+        "wires": [
+            [
+                "15b13154.8bad8f"
+            ]
+        ]
+    },
+    {
+        "id": "1c89cc62.690124",
+        "type": "link in",
+        "z": "62fad8ec.96f7a8",
+        "name": "LOST HEARTBEAT",
+        "links": [
+            "52da98ed.e2c0d8"
+        ],
+        "x": 248.7857322692871,
+        "y": 222.07933807373047,
+        "wires": [
+            [
+                "daa3ade4.eb68c"
+            ]
+        ]
+    },
+    {
+        "id": "ba25b710.153378",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "LOST HEARTBEAT",
+        "info": "",
+        "x": 137,
+        "y": 223.3650722503662,
+        "wires": []
+    },
+    {
+        "id": "f4d9f2a4.f6db7",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "PUZZLE RESET",
+        "info": "",
+        "x": 135.7142219543457,
+        "y": 615.0794162750244,
+        "wires": []
+    },
+    {
+        "id": "25ad09a.4b0a0f6",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "SOLVED OUT",
+        "info": "",
+        "x": 1397.0002212524414,
+        "y": 177.5555305480957,
+        "wires": []
+    },
+    {
+        "id": "b36bf48c.1defe8",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "PUZZLE ACTIVATE",
+        "info": "",
+        "x": 118.14284133911133,
+        "y": 484.5080051422119,
+        "wires": []
+    },
+    {
+        "id": "b6f3b40f.ce9d98",
+        "type": "link out",
+        "z": "62fad8ec.96f7a8",
+        "name": "SOLVED CUE",
+        "links": [
+            "76f8cf14.e9664",
+            "c699384f.513648"
+        ],
+        "x": 1293.1906414031982,
+        "y": 178.69839763641357,
+        "wires": []
+    },
+    {
+        "id": "61be48c8.ea5708",
+        "type": "link out",
+        "z": "62fad8ec.96f7a8",
+        "name": "FAILED CUE",
+        "links": [],
+        "x": 1294.1905574798584,
+        "y": 222.26981449127197,
+        "wires": []
+    },
+    {
+        "id": "c8b6c240.2df3c",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "FAILED OUT",
+        "info": "",
+        "x": 1398.9046325683594,
+        "y": 221.60314178466797,
+        "wires": []
+    },
+    {
+        "id": "60814993.b2ae58",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "Commands TO Puzzle Controller",
+        "info": "",
+        "x": 316.99997329711914,
+        "y": 429.07935523986816,
+        "wires": []
+    },
+    {
+        "id": "49ebdfc4.6e14f",
+        "type": "function",
+        "z": "62fad8ec.96f7a8",
+        "name": "GLOBAL/power_solved=FALSE",
+        "func": "\nglobal.set('power_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 976.3333892822266,
+        "y": 222.74607276916504,
+        "wires": [
+            [
+                "61be48c8.ea5708"
+            ]
+        ]
+    },
+    {
+        "id": "83b19356.3271b",
+        "type": "ui_text",
+        "z": "62fad8ec.96f7a8",
+        "group": "4a716f9d.87e68",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "name": "MAIN: STATE",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 930.7458839416504,
+        "y": 265.84128761291504,
+        "wires": []
+    },
+    {
+        "id": "ab712cc2.aa998",
+        "type": "ui_text",
+        "z": "62fad8ec.96f7a8",
+        "group": "86a7952f.061a38",
+        "order": 2,
+        "width": "5",
+        "height": "1",
+        "name": "ADVANCED: PATCH Current State",
+        "label": "POWER state:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 993.4207000732422,
+        "y": 431.8730454444885,
+        "wires": []
+    },
+    {
+        "id": "daa3ade4.eb68c",
+        "type": "switch",
+        "z": "62fad8ec.96f7a8",
+        "name": "STATUS",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "AUTO",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "RESET",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ACTIVE",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "SOLVED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "FAILED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "REBOOTING",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DISCONNECTED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "LOST HEARTBEAT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "UNKNOWN",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 9,
+        "x": 390.3333206176758,
+        "y": 160.74600982666016,
+        "wires": [
+            [
+                "cfa9717d.27e79"
+            ],
+            [
+                "cfa9717d.27e79"
+            ],
+            [
+                "9d993d11.8a3d3"
+            ],
+            [
+                "a7f635eb.e4ab38"
+            ],
+            [
+                "ce7751e8.6210c"
+            ],
+            [
+                "4484525a.c580fc"
+            ],
+            [
+                "81be6806.b7d0d8"
+            ],
+            [
+                "fdd9db74.847e28"
+            ],
+            [
+                "c626bc99.e5cdc"
+            ]
+        ]
+    },
+    {
+        "id": "cfa9717d.27e79",
+        "type": "change",
+        "z": "62fad8ec.96f7a8",
+        "name": "AUTO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AUTO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 641.1666603088379,
+        "y": 99.96829032897949,
+        "wires": [
+            [
+                "12464489.8631fb",
+                "83b19356.3271b",
+                "ab712cc2.aa998"
+            ]
+        ]
+    },
+    {
+        "id": "9d993d11.8a3d3",
+        "type": "change",
+        "z": "62fad8ec.96f7a8",
+        "name": "ACTIVE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 651.1666831970215,
+        "y": 139.19041633605957,
+        "wires": [
+            [
+                "2f229c65.961bb4",
+                "83b19356.3271b",
+                "ab712cc2.aa998"
+            ]
+        ]
+    },
+    {
+        "id": "a7f635eb.e4ab38",
+        "type": "change",
+        "z": "62fad8ec.96f7a8",
+        "name": "SOLVED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "SOLVED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 652.8888931274414,
+        "y": 180.74595546722412,
+        "wires": [
+            [
+                "d00d623.111b7a",
+                "83b19356.3271b",
+                "ab712cc2.aa998"
+            ]
+        ]
+    },
+    {
+        "id": "ce7751e8.6210c",
+        "type": "change",
+        "z": "62fad8ec.96f7a8",
+        "name": "FAILED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "FAILED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 654.3888931274414,
+        "y": 224.96822357177734,
+        "wires": [
+            [
+                "49ebdfc4.6e14f",
+                "83b19356.3271b",
+                "ab712cc2.aa998"
+            ]
+        ]
+    },
+    {
+        "id": "4484525a.c580fc",
+        "type": "change",
+        "z": "62fad8ec.96f7a8",
+        "name": "REBOOTING",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "REBOOTING",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 675.1666641235352,
+        "y": 362.0793056488037,
+        "wires": [
+            [
+                "ab712cc2.aa998",
+                "83b19356.3271b"
+            ]
+        ]
+    },
+    {
+        "id": "c626bc99.e5cdc",
+        "type": "change",
+        "z": "62fad8ec.96f7a8",
+        "name": "UNKNOWN",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "UNKNOWN",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 664.8333053588867,
+        "y": 494.6348819732666,
+        "wires": [
+            [
+                "ab712cc2.aa998",
+                "83b19356.3271b"
+            ]
+        ]
+    },
+    {
+        "id": "81be6806.b7d0d8",
+        "type": "change",
+        "z": "62fad8ec.96f7a8",
+        "name": "DISCONNECTED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DISCONNECTED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 685.8888282775879,
+        "y": 405.74595069885254,
+        "wires": [
+            [
+                "ab712cc2.aa998",
+                "83b19356.3271b"
+            ]
+        ]
+    },
+    {
+        "id": "fdd9db74.847e28",
+        "type": "change",
+        "z": "62fad8ec.96f7a8",
+        "name": "LOST HEARTBEAT",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "LOST HEARTBEAT",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 685.4602890014648,
+        "y": 450.19043159484863,
+        "wires": [
+            [
+                "ab712cc2.aa998",
+                "83b19356.3271b"
+            ]
+        ]
+    },
+    {
+        "id": "6468c230.ba35cc",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "Main Puzzle States (Game)",
+        "info": "",
+        "x": 708.7936630249023,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "7928cfc1.ba0bb",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "Puzzle Controller (Trouble) States",
+        "info": "",
+        "x": 725,
+        "y": 321.07934188842773,
+        "wires": []
+    },
+    {
+        "id": "2f229c65.961bb4",
+        "type": "function",
+        "z": "62fad8ec.96f7a8",
+        "name": "GLOBAL/power_solved=FALSE",
+        "func": "\nglobal.set('power_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 976.9999389648438,
+        "y": 138.41268157958984,
+        "wires": [
+            [
+                "89593b68.f2a128"
+            ]
+        ]
+    },
+    {
+        "id": "12464489.8631fb",
+        "type": "function",
+        "z": "62fad8ec.96f7a8",
+        "name": "GLOBAL/power_solved=FALSE",
+        "func": "\nglobal.set('power_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 976.9999389648438,
+        "y": 99.41268157958984,
+        "wires": [
+            [
+                "2634c77b.31b598"
+            ]
+        ]
+    },
+    {
+        "id": "89593b68.f2a128",
+        "type": "link out",
+        "z": "62fad8ec.96f7a8",
+        "name": "ACTIVE CUE",
+        "links": [],
+        "x": 1293.9999771118164,
+        "y": 137.74600219726562,
+        "wires": []
+    },
+    {
+        "id": "2634c77b.31b598",
+        "type": "link out",
+        "z": "62fad8ec.96f7a8",
+        "name": "AUTO CUE",
+        "links": [],
+        "x": 1294.666603088379,
+        "y": 99.07934379577637,
+        "wires": []
+    },
+    {
+        "id": "a23bd01b.0abb9",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "ACTIVE OUT",
+        "info": "",
+        "x": 1396.333267211914,
+        "y": 136.7460174560547,
+        "wires": []
+    },
+    {
+        "id": "99f2723c.605c7",
+        "type": "comment",
+        "z": "62fad8ec.96f7a8",
+        "name": "AUTO OUT",
+        "info": "",
+        "x": 1395.9999771118164,
+        "y": 98.07935810089111,
+        "wires": []
+    },
+    {
+        "id": "f6c8d59a.0c0c18",
+        "type": "change",
+        "z": "62fad8ec.96f7a8",
+        "name": "ACTIVATE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVATE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 356.1666564941406,
+        "y": 483.33331298828125,
+        "wires": [
+            [
+                "15b13154.8bad8f"
+            ]
+        ]
+    },
+    {
+        "id": "2ad0406b.601d",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local /home/pi/Downloads/ms/power_success.mp3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY \"POWER REBALANCED\"",
+        "x": 1370,
+        "y": 520,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "cadd3afe.05f018",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Power Solved",
+        "info": "",
+        "x": 1230,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "76f8cf14.e9664",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "POWER SOLVED",
+        "links": [
+            "b6f3b40f.ce9d98"
+        ],
+        "x": 1175,
+        "y": 520,
+        "wires": [
+            [
+                "2ad0406b.601d"
+            ]
+        ]
+    },
+    {
+        "id": "a533ab5c.873198",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "TERMINATE SOUND PLAYBACK",
+        "links": [
+            "e0563d75.4c263",
+            "a5ec6346.e5833",
+            "8dd3efe9.6c197"
+        ],
+        "x": 1198,
+        "y": 566,
+        "wires": [
+            [
+                "2ad0406b.601d"
+            ]
+        ]
+    },
+    {
+        "id": "62396d36.15f7f4",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "TERMINATE SOUND PLAYBACK",
+        "links": [
+            "e0563d75.4c263",
+            "a5ec6346.e5833",
+            "8dd3efe9.6c197"
+        ],
+        "x": 1239.3333587646484,
+        "y": 747.6666660308838,
+        "wires": [
+            [
+                "db307e3f.1e92"
+            ]
+        ]
+    },
+    {
+        "id": "8d33b9cb.d58348",
+        "type": "inject",
+        "z": "89bb5440.869c68",
+        "name": "TRIGGER",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1040,
+        "y": 840,
+        "wires": [
+            [
+                "1f11fad0.3fba35"
+            ]
+        ]
+    },
+    {
+        "id": "1f11fad0.3fba35",
+        "type": "change",
+        "z": "89bb5440.869c68",
+        "name": "CLEAR STALE HEARTBEAT DATA",
+        "rules": [
+            {
+                "t": "set",
+                "p": "heartbeatObjects",
+                "pt": "global",
+                "to": "{}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1280,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9e70637e.a3b9d",
+        "type": "switch",
+        "z": "89bb5440.869c68",
+        "name": "",
+        "property": "flashled",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 940,
+        "wires": [
+            [
+                "5c5975bb.a0951c"
+            ],
+            [
+                "b2068ae0.adf3b8"
+            ]
+        ]
+    },
+    {
+        "id": "5c5975bb.a0951c",
+        "type": "change",
+        "z": "89bb5440.869c68",
+        "name": "0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "flashled",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b2068ae0.adf3b8",
+        "type": "change",
+        "z": "89bb5440.869c68",
+        "name": "1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "flashled",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "64188515.2a020c",
+        "type": "inject",
+        "z": "89bb5440.869c68",
+        "name": "",
+        "topic": "",
+        "payload": "flashled",
+        "payloadType": "flow",
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 200,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f807c93.9cb06",
+        "type": "rpi-gpio out",
+        "z": "89bb5440.869c68",
+        "name": "",
+        "pin": "40",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "x": 520,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "85e26209.66d47",
+        "type": "mqtt in",
+        "z": "be750b2a.827588",
+        "name": "",
+        "topic": "CIPO/pressure/STATE",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 163,
+        "y": 140,
+        "wires": [
+            [
+                "8c190cb6.8b27c"
+            ]
+        ]
+    },
+    {
+        "id": "fe64221.ee556e",
+        "type": "ui_button",
+        "z": "be750b2a.827588",
+        "d": true,
+        "name": "BTN-ACTIVATE",
+        "group": "94ccaae3.cad168",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "ACTIVATE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "ACTIVATE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 176.4285545349121,
+        "y": 510.00005531311035,
+        "wires": [
+            [
+                "a3e8a5.d2a0c758"
+            ]
+        ]
+    },
+    {
+        "id": "5d2c21ae.f35ce",
+        "type": "ui_button",
+        "z": "be750b2a.827588",
+        "name": "BTN-SOLVE",
+        "group": "94ccaae3.cad168",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "SOLVE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "SOLVE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 187.49998092651367,
+        "y": 553.0000019073486,
+        "wires": [
+            [
+                "a3e8a5.d2a0c758"
+            ]
+        ]
+    },
+    {
+        "id": "a3e8a5.d2a0c758",
+        "type": "mqtt out",
+        "z": "be750b2a.827588",
+        "name": "",
+        "topic": "COPI/pressure/COMMANDS",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 496.52377700805664,
+        "y": 542.6349506378174,
+        "wires": []
+    },
+    {
+        "id": "f5b9cf50.76976",
+        "type": "link in",
+        "z": "be750b2a.827588",
+        "name": "FROM GAME RESET",
+        "links": [
+            "bdd667e4.85fb58"
+        ],
+        "x": 243.6428565979004,
+        "y": 593.1428852081299,
+        "wires": [
+            [
+                "a3e8a5.d2a0c758"
+            ]
+        ]
+    },
+    {
+        "id": "5f087f54.c53ba",
+        "type": "link in",
+        "z": "be750b2a.827588",
+        "name": "ACTIVATE PUZZLE",
+        "links": [],
+        "x": 236.5714192390442,
+        "y": 461.57143211364746,
+        "wires": [
+            [
+                "a44d884c.b7da88"
+            ]
+        ]
+    },
+    {
+        "id": "d3adb2f2.6501c",
+        "type": "function",
+        "z": "be750b2a.827588",
+        "name": "GLOBAL/pressure_solved=TRUE",
+        "func": "\nglobal.set('pressure_solved', 1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 984.4999847412109,
+        "y": 157.66665649414062,
+        "wires": [
+            [
+                "8388d297.d0ce9"
+            ]
+        ]
+    },
+    {
+        "id": "911e383b.e649b8",
+        "type": "ui_button",
+        "z": "be750b2a.827588",
+        "name": "BTN-REBOOT",
+        "group": "86a7952f.061a38",
+        "order": 1,
+        "width": "4",
+        "height": "1",
+        "passthru": true,
+        "label": "PRESSURE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "REBOOT",
+        "payloadType": "str",
+        "topic": "",
+        "x": 180.85712051391602,
+        "y": 689.2857074737549,
+        "wires": [
+            [
+                "a3e8a5.d2a0c758"
+            ]
+        ]
+    },
+    {
+        "id": "a1db25c7.2f41b8",
+        "type": "link in",
+        "z": "be750b2a.827588",
+        "name": "LOST HEARTBEAT",
+        "links": [
+            "52da98ed.e2c0d8"
+        ],
+        "x": 246.7857322692871,
+        "y": 200.99998474121094,
+        "wires": [
+            [
+                "8c190cb6.8b27c"
+            ]
+        ]
+    },
+    {
+        "id": "99e8f152.c200d",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "LOST HEARTBEAT",
+        "info": "",
+        "x": 135,
+        "y": 202.28571891784668,
+        "wires": []
+    },
+    {
+        "id": "518d06d4.2c0fe8",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "PUZZLE RESET",
+        "info": "",
+        "x": 133.7142219543457,
+        "y": 594.0000629425049,
+        "wires": []
+    },
+    {
+        "id": "c9b8a003.f0aea",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "SOLVED OUT",
+        "info": "",
+        "x": 1395.0002212524414,
+        "y": 156.47617721557617,
+        "wires": []
+    },
+    {
+        "id": "19a3d34.5e1552d",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "PUZZLE ACTIVATE",
+        "info": "",
+        "x": 116.14284133911133,
+        "y": 463.4286518096924,
+        "wires": []
+    },
+    {
+        "id": "8388d297.d0ce9",
+        "type": "link out",
+        "z": "be750b2a.827588",
+        "name": "SOLVED CUE",
+        "links": [
+            "a4aa1017.312fa",
+            "c699384f.513648"
+        ],
+        "x": 1291.1906414031982,
+        "y": 157.61904430389404,
+        "wires": []
+    },
+    {
+        "id": "64bdabcd.f94cd4",
+        "type": "link out",
+        "z": "be750b2a.827588",
+        "name": "FAILED CUE",
+        "links": [],
+        "x": 1292.1905574798584,
+        "y": 201.19046115875244,
+        "wires": []
+    },
+    {
+        "id": "781e273e.de3d98",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "FAILED OUT",
+        "info": "",
+        "x": 1396.9046325683594,
+        "y": 200.52378845214844,
+        "wires": []
+    },
+    {
+        "id": "fb7a01cf.b78ce",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "Commands TO Puzzle Controller",
+        "info": "",
+        "x": 314.99997329711914,
+        "y": 408.00000190734863,
+        "wires": []
+    },
+    {
+        "id": "ca52d692.a310f8",
+        "type": "function",
+        "z": "be750b2a.827588",
+        "name": "GLOBAL/pressure_solved=FALSE",
+        "func": "\nglobal.set('pressure_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 984.3333892822266,
+        "y": 201.6667194366455,
+        "wires": [
+            [
+                "64bdabcd.f94cd4"
+            ]
+        ]
+    },
+    {
+        "id": "8e31597e.a4fba8",
+        "type": "ui_text",
+        "z": "be750b2a.827588",
+        "group": "94ccaae3.cad168",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "name": "MAIN: STATE",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 928.7458839416504,
+        "y": 244.7619342803955,
+        "wires": []
+    },
+    {
+        "id": "59239e3b.2743e",
+        "type": "ui_text",
+        "z": "be750b2a.827588",
+        "group": "86a7952f.061a38",
+        "order": 2,
+        "width": "5",
+        "height": "1",
+        "name": "ADVANCED: PATCH Current State",
+        "label": "PRESSURE state:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 991.4207000732422,
+        "y": 410.793692111969,
+        "wires": []
+    },
+    {
+        "id": "8c190cb6.8b27c",
+        "type": "switch",
+        "z": "be750b2a.827588",
+        "name": "STATUS",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "AUTO",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "RESET",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ACTIVE",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "SOLVED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "FAILED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "REBOOTING",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DISCONNECTED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "LOST HEARTBEAT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "UNKNOWN",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 9,
+        "x": 388.3333206176758,
+        "y": 139.66665649414062,
+        "wires": [
+            [
+                "8e1d86b6.c0df78"
+            ],
+            [
+                "8e1d86b6.c0df78"
+            ],
+            [
+                "be48ed78.da83c"
+            ],
+            [
+                "134fc447.221f4c"
+            ],
+            [
+                "e7d0b895.c7bd98"
+            ],
+            [
+                "c253c86d.d749c8"
+            ],
+            [
+                "d07a772.e043088"
+            ],
+            [
+                "3ac90881.9d3af8"
+            ],
+            [
+                "77a290a4.cc42c"
+            ]
+        ]
+    },
+    {
+        "id": "8e1d86b6.c0df78",
+        "type": "change",
+        "z": "be750b2a.827588",
+        "name": "AUTO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AUTO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 639.1666603088379,
+        "y": 78.88893699645996,
+        "wires": [
+            [
+                "a364546e.01c1d8",
+                "8e31597e.a4fba8",
+                "59239e3b.2743e"
+            ]
+        ]
+    },
+    {
+        "id": "be48ed78.da83c",
+        "type": "change",
+        "z": "be750b2a.827588",
+        "name": "ACTIVE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 649.1666831970215,
+        "y": 118.11106300354004,
+        "wires": [
+            [
+                "f02e2d22.aa648",
+                "8e31597e.a4fba8",
+                "59239e3b.2743e"
+            ]
+        ]
+    },
+    {
+        "id": "134fc447.221f4c",
+        "type": "change",
+        "z": "be750b2a.827588",
+        "name": "SOLVED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "SOLVED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650.8888931274414,
+        "y": 159.6666021347046,
+        "wires": [
+            [
+                "d3adb2f2.6501c",
+                "8e31597e.a4fba8",
+                "59239e3b.2743e"
+            ]
+        ]
+    },
+    {
+        "id": "e7d0b895.c7bd98",
+        "type": "change",
+        "z": "be750b2a.827588",
+        "name": "FAILED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "FAILED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 652.3888931274414,
+        "y": 203.8888702392578,
+        "wires": [
+            [
+                "ca52d692.a310f8",
+                "8e31597e.a4fba8",
+                "59239e3b.2743e"
+            ]
+        ]
+    },
+    {
+        "id": "c253c86d.d749c8",
+        "type": "change",
+        "z": "be750b2a.827588",
+        "name": "REBOOTING",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "REBOOTING",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 673.1666641235352,
+        "y": 340.9999523162842,
+        "wires": [
+            [
+                "59239e3b.2743e",
+                "8e31597e.a4fba8"
+            ]
+        ]
+    },
+    {
+        "id": "77a290a4.cc42c",
+        "type": "change",
+        "z": "be750b2a.827588",
+        "name": "UNKNOWN",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "UNKNOWN",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 662.8333053588867,
+        "y": 473.55552864074707,
+        "wires": [
+            [
+                "59239e3b.2743e",
+                "8e31597e.a4fba8"
+            ]
+        ]
+    },
+    {
+        "id": "d07a772.e043088",
+        "type": "change",
+        "z": "be750b2a.827588",
+        "name": "DISCONNECTED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DISCONNECTED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 683.8888282775879,
+        "y": 384.666597366333,
+        "wires": [
+            [
+                "59239e3b.2743e",
+                "8e31597e.a4fba8"
+            ]
+        ]
+    },
+    {
+        "id": "3ac90881.9d3af8",
+        "type": "change",
+        "z": "be750b2a.827588",
+        "name": "LOST HEARTBEAT",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "LOST HEARTBEAT",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 683.4602890014648,
+        "y": 429.1110782623291,
+        "wires": [
+            [
+                "59239e3b.2743e",
+                "8e31597e.a4fba8"
+            ]
+        ]
+    },
+    {
+        "id": "4fbf467.6584fb8",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "Main Puzzle States (Game)",
+        "info": "",
+        "x": 706.7936630249023,
+        "y": 38.92064666748047,
+        "wires": []
+    },
+    {
+        "id": "6598a0b7.eeedf",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "Puzzle Controller (Trouble) States",
+        "info": "",
+        "x": 723,
+        "y": 299.9999885559082,
+        "wires": []
+    },
+    {
+        "id": "f02e2d22.aa648",
+        "type": "function",
+        "z": "be750b2a.827588",
+        "name": "GLOBAL/pressure_solved=FALSE",
+        "func": "\nglobal.set('pressure_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 984.9999389648438,
+        "y": 117.33332824707031,
+        "wires": [
+            [
+                "f16b0b9.aaaa3f8"
+            ]
+        ]
+    },
+    {
+        "id": "a364546e.01c1d8",
+        "type": "function",
+        "z": "be750b2a.827588",
+        "name": "GLOBAL/pressure_solved=FALSE",
+        "func": "\nglobal.set('pressure_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 984.9999389648438,
+        "y": 78.33332824707031,
+        "wires": [
+            [
+                "9284ac7e.59b87"
+            ]
+        ]
+    },
+    {
+        "id": "f16b0b9.aaaa3f8",
+        "type": "link out",
+        "z": "be750b2a.827588",
+        "name": "ACTIVE CUE",
+        "links": [],
+        "x": 1291.9999771118164,
+        "y": 116.6666488647461,
+        "wires": []
+    },
+    {
+        "id": "9284ac7e.59b87",
+        "type": "link out",
+        "z": "be750b2a.827588",
+        "name": "AUTO CUE",
+        "links": [],
+        "x": 1292.666603088379,
+        "y": 77.99999046325684,
+        "wires": []
+    },
+    {
+        "id": "2197b378.ea2aec",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "ACTIVE OUT",
+        "info": "",
+        "x": 1394.333267211914,
+        "y": 115.66666412353516,
+        "wires": []
+    },
+    {
+        "id": "a3f46e22.2a5cd",
+        "type": "comment",
+        "z": "be750b2a.827588",
+        "name": "AUTO OUT",
+        "info": "",
+        "x": 1393.9999771118164,
+        "y": 77.00000476837158,
+        "wires": []
+    },
+    {
+        "id": "a44d884c.b7da88",
+        "type": "change",
+        "z": "be750b2a.827588",
+        "name": "ACTIVATE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVATE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 354.1666564941406,
+        "y": 462.2539596557617,
+        "wires": [
+            [
+                "a3e8a5.d2a0c758"
+            ]
+        ]
+    },
+    {
+        "id": "4d040120.9aa49",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local /home/pi/Downloads/ms/pressure_success.mp3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY \"PRESSURE EQUALIZED\"",
+        "x": 1380,
+        "y": 320,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6a502563.7b91ac",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Pressure Solved",
+        "info": "",
+        "x": 1240,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ca2ff936.b9d338",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "TERMINATE SOUND PLAYBACK",
+        "links": [
+            "a5ec6346.e5833"
+        ],
+        "x": 1215,
+        "y": 380,
+        "wires": [
+            [
+                "4d040120.9aa49"
+            ]
+        ]
+    },
+    {
+        "id": "a4aa1017.312fa",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "PRESSURE SOLVED",
+        "links": [
+            "8388d297.d0ce9"
+        ],
+        "x": 1175,
+        "y": 320,
+        "wires": [
+            [
+                "4d040120.9aa49"
+            ]
+        ]
+    },
+    {
+        "id": "6eeea627.221658",
+        "type": "exec",
+        "z": "9c0dfef0.e3929",
+        "command": "omxplayer.bin -o local /home/pi/Downloads/ms/fuel_success.mp3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "PLAY FUEL SUCCESS",
+        "x": 1350,
+        "y": 120,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "3578b2c2.ffcdae",
+        "type": "comment",
+        "z": "9c0dfef0.e3929",
+        "name": "Fuel Solved",
+        "info": "",
+        "x": 1230,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "96e7713d.b59e",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "TERMINATE SOUND PLAYBACK",
+        "links": [
+            "e0563d75.4c263",
+            "a5ec6346.e5833",
+            "8dd3efe9.6c197"
+        ],
+        "x": 1215,
+        "y": 180,
+        "wires": [
+            [
+                "6eeea627.221658"
+            ]
+        ]
+    },
+    {
+        "id": "266de2af.d7356e",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "FUEL SOLVED",
+        "links": [
+            "a4002d2e.fce43"
+        ],
+        "x": 1175,
+        "y": 120,
+        "wires": [
+            [
+                "6eeea627.221658"
+            ]
+        ]
+    },
+    {
+        "id": "2404b610.89de0a",
+        "type": "mqtt in",
+        "z": "512d279b.4ca158",
+        "name": "",
+        "topic": "CIPO/fuel/STATE",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "5bd1a3aa.1c9b1c"
+            ]
+        ]
+    },
+    {
+        "id": "548a0ee7.d0a93",
+        "type": "ui_button",
+        "z": "512d279b.4ca158",
+        "d": true,
+        "name": "BTN-ACTIVATE",
+        "group": "5943de0.d3ff024",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "ACTIVATE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "ACTIVATE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 193.4285545349121,
+        "y": 530.0000553131104,
+        "wires": [
+            [
+                "940dc67c.b82788"
+            ]
+        ]
+    },
+    {
+        "id": "fea1871c.5f6db8",
+        "type": "ui_button",
+        "z": "512d279b.4ca158",
+        "name": "BTN-SOLVE",
+        "group": "5943de0.d3ff024",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "SOLVE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "SOLVE",
+        "payloadType": "str",
+        "topic": "",
+        "x": 204.49998092651367,
+        "y": 573.0000019073486,
+        "wires": [
+            [
+                "940dc67c.b82788"
+            ]
+        ]
+    },
+    {
+        "id": "940dc67c.b82788",
+        "type": "mqtt out",
+        "z": "512d279b.4ca158",
+        "name": "",
+        "topic": "COPI/fuel/COMMANDS",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 503.52377700805664,
+        "y": 562.6349506378174,
+        "wires": []
+    },
+    {
+        "id": "e477d51d.d2ca38",
+        "type": "link in",
+        "z": "512d279b.4ca158",
+        "name": "FROM GAME RESET",
+        "links": [
+            "bdd667e4.85fb58"
+        ],
+        "x": 260.6428565979004,
+        "y": 613.1428852081299,
+        "wires": [
+            [
+                "940dc67c.b82788"
+            ]
+        ]
+    },
+    {
+        "id": "fcc87319.67e88",
+        "type": "link in",
+        "z": "512d279b.4ca158",
+        "name": "ACTIVATE PUZZLE",
+        "links": [],
+        "x": 253.5714192390442,
+        "y": 481.57143211364746,
+        "wires": [
+            [
+                "ad313914.abe9e8"
+            ]
+        ]
+    },
+    {
+        "id": "24adc479.002e6c",
+        "type": "function",
+        "z": "512d279b.4ca158",
+        "name": "GLOBAL/fuel_solved=TRUE",
+        "func": "\nglobal.set('fuel_solved', 1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 981.4999847412109,
+        "y": 177.66665649414062,
+        "wires": [
+            [
+                "a4002d2e.fce43"
+            ]
+        ]
+    },
+    {
+        "id": "52310315.577f8c",
+        "type": "ui_button",
+        "z": "512d279b.4ca158",
+        "name": "BTN-REBOOT",
+        "group": "86a7952f.061a38",
+        "order": 1,
+        "width": "4",
+        "height": "1",
+        "passthru": true,
+        "label": "FUEL",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "00ff00",
+        "icon": "",
+        "payload": "REBOOT",
+        "payloadType": "str",
+        "topic": "",
+        "x": 197.85712051391602,
+        "y": 709.2857074737549,
+        "wires": [
+            [
+                "940dc67c.b82788"
+            ]
+        ]
+    },
+    {
+        "id": "ba10a799.5ea6a8",
+        "type": "link in",
+        "z": "512d279b.4ca158",
+        "name": "LOST HEARTBEAT",
+        "links": [
+            "52da98ed.e2c0d8"
+        ],
+        "x": 263.7857322692871,
+        "y": 220.99998474121094,
+        "wires": [
+            [
+                "5bd1a3aa.1c9b1c"
+            ]
+        ]
+    },
+    {
+        "id": "43546b57.a82354",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "LOST HEARTBEAT",
+        "info": "",
+        "x": 152,
+        "y": 222.28571891784668,
+        "wires": []
+    },
+    {
+        "id": "f8610202.5303f",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "PUZZLE RESET",
+        "info": "",
+        "x": 150.7142219543457,
+        "y": 614.0000629425049,
+        "wires": []
+    },
+    {
+        "id": "2a442123.b7e77e",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "SOLVED OUT",
+        "info": "",
+        "x": 1412.0002212524414,
+        "y": 176.47617721557617,
+        "wires": []
+    },
+    {
+        "id": "19146797.4946e8",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "PUZZLE ACTIVATE",
+        "info": "",
+        "x": 133.14284133911133,
+        "y": 483.4286518096924,
+        "wires": []
+    },
+    {
+        "id": "a4002d2e.fce43",
+        "type": "link out",
+        "z": "512d279b.4ca158",
+        "name": "SOLVED CUE",
+        "links": [
+            "266de2af.d7356e",
+            "c699384f.513648"
+        ],
+        "x": 1308.1906414031982,
+        "y": 177.61904430389404,
+        "wires": []
+    },
+    {
+        "id": "d657c8d6.b161c8",
+        "type": "link out",
+        "z": "512d279b.4ca158",
+        "name": "FAILED CUE",
+        "links": [],
+        "x": 1309.1905574798584,
+        "y": 221.19046115875244,
+        "wires": []
+    },
+    {
+        "id": "3b08f293.8353ee",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "FAILED OUT",
+        "info": "",
+        "x": 1413.9046325683594,
+        "y": 220.52378845214844,
+        "wires": []
+    },
+    {
+        "id": "41b9d95a.8b7198",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "Commands TO Puzzle Controller",
+        "info": "",
+        "x": 331.99997329711914,
+        "y": 428.00000190734863,
+        "wires": []
+    },
+    {
+        "id": "3817f686.15a80a",
+        "type": "function",
+        "z": "512d279b.4ca158",
+        "name": "GLOBAL/fuel_solved=FALSE",
+        "func": "\nglobal.set('fuel_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 981.3333892822266,
+        "y": 221.6667194366455,
+        "wires": [
+            [
+                "d657c8d6.b161c8"
+            ]
+        ]
+    },
+    {
+        "id": "ff8b990c.4b8878",
+        "type": "ui_text",
+        "z": "512d279b.4ca158",
+        "group": "5943de0.d3ff024",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "name": "MAIN: STATE",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 945.7458839416504,
+        "y": 264.7619342803955,
+        "wires": []
+    },
+    {
+        "id": "70e64b6f.83a7d4",
+        "type": "ui_text",
+        "z": "512d279b.4ca158",
+        "group": "86a7952f.061a38",
+        "order": 2,
+        "width": "5",
+        "height": "1",
+        "name": "ADVANCED: PATCH Current State",
+        "label": "FUEL state:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 1008.4207000732422,
+        "y": 430.793692111969,
+        "wires": []
+    },
+    {
+        "id": "5bd1a3aa.1c9b1c",
+        "type": "switch",
+        "z": "512d279b.4ca158",
+        "name": "STATUS",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "AUTO",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "RESET",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ACTIVE",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "SOLVED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "FAILED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "REBOOTING",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DISCONNECTED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "LOST HEARTBEAT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "UNKNOWN",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 9,
+        "x": 405.3333206176758,
+        "y": 159.66665649414062,
+        "wires": [
+            [
+                "5fb7aae9.a0f794"
+            ],
+            [
+                "5fb7aae9.a0f794"
+            ],
+            [
+                "7e84205b.fef78"
+            ],
+            [
+                "1eb45a53.4243f6"
+            ],
+            [
+                "e2778504.ad2698"
+            ],
+            [
+                "4107217c.47f9c"
+            ],
+            [
+                "cb3b1103.c0419"
+            ],
+            [
+                "9e6cd8bd.bd9898"
+            ],
+            [
+                "bf9ab52.06c3548"
+            ]
+        ]
+    },
+    {
+        "id": "5fb7aae9.a0f794",
+        "type": "change",
+        "z": "512d279b.4ca158",
+        "name": "AUTO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AUTO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 656.1666603088379,
+        "y": 98.88893699645996,
+        "wires": [
+            [
+                "41d8df40.b415d",
+                "ff8b990c.4b8878",
+                "70e64b6f.83a7d4"
+            ]
+        ]
+    },
+    {
+        "id": "7e84205b.fef78",
+        "type": "change",
+        "z": "512d279b.4ca158",
+        "name": "ACTIVE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 666.1666831970215,
+        "y": 138.11106300354004,
+        "wires": [
+            [
+                "20ec4f75.36183",
+                "ff8b990c.4b8878",
+                "70e64b6f.83a7d4"
+            ]
+        ]
+    },
+    {
+        "id": "1eb45a53.4243f6",
+        "type": "change",
+        "z": "512d279b.4ca158",
+        "name": "SOLVED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "SOLVED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 667.8888931274414,
+        "y": 179.6666021347046,
+        "wires": [
+            [
+                "24adc479.002e6c",
+                "ff8b990c.4b8878",
+                "70e64b6f.83a7d4"
+            ]
+        ]
+    },
+    {
+        "id": "e2778504.ad2698",
+        "type": "change",
+        "z": "512d279b.4ca158",
+        "name": "FAILED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "FAILED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 669.3888931274414,
+        "y": 223.8888702392578,
+        "wires": [
+            [
+                "3817f686.15a80a",
+                "ff8b990c.4b8878",
+                "70e64b6f.83a7d4"
+            ]
+        ]
+    },
+    {
+        "id": "4107217c.47f9c",
+        "type": "change",
+        "z": "512d279b.4ca158",
+        "name": "REBOOTING",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "REBOOTING",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 690.1666641235352,
+        "y": 360.9999523162842,
+        "wires": [
+            [
+                "70e64b6f.83a7d4",
+                "ff8b990c.4b8878"
+            ]
+        ]
+    },
+    {
+        "id": "bf9ab52.06c3548",
+        "type": "change",
+        "z": "512d279b.4ca158",
+        "name": "UNKNOWN",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "UNKNOWN",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 679.8333053588867,
+        "y": 493.55552864074707,
+        "wires": [
+            [
+                "70e64b6f.83a7d4",
+                "ff8b990c.4b8878"
+            ]
+        ]
+    },
+    {
+        "id": "cb3b1103.c0419",
+        "type": "change",
+        "z": "512d279b.4ca158",
+        "name": "DISCONNECTED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DISCONNECTED",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700.8888282775879,
+        "y": 404.666597366333,
+        "wires": [
+            [
+                "70e64b6f.83a7d4",
+                "ff8b990c.4b8878"
+            ]
+        ]
+    },
+    {
+        "id": "9e6cd8bd.bd9898",
+        "type": "change",
+        "z": "512d279b.4ca158",
+        "name": "LOST HEARTBEAT",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "LOST HEARTBEAT",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700.4602890014648,
+        "y": 449.1110782623291,
+        "wires": [
+            [
+                "70e64b6f.83a7d4",
+                "ff8b990c.4b8878"
+            ]
+        ]
+    },
+    {
+        "id": "64098863.58cd18",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "Main Puzzle States (Game)",
+        "info": "",
+        "x": 723.7936630249023,
+        "y": 58.92064666748047,
+        "wires": []
+    },
+    {
+        "id": "fece0809.577de8",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "Puzzle Controller (Trouble) States",
+        "info": "",
+        "x": 740,
+        "y": 319.9999885559082,
+        "wires": []
+    },
+    {
+        "id": "20ec4f75.36183",
+        "type": "function",
+        "z": "512d279b.4ca158",
+        "name": "GLOBAL/fuel_solved=FALSE",
+        "func": "\nglobal.set('fuel_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 981.9999389648438,
+        "y": 137.3333282470703,
+        "wires": [
+            [
+                "4e87be60.17b57"
+            ]
+        ]
+    },
+    {
+        "id": "41d8df40.b415d",
+        "type": "function",
+        "z": "512d279b.4ca158",
+        "name": "GLOBAL/fuel_solved=FALSE",
+        "func": "\nglobal.set('fuel_solved', 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 981.9999389648438,
+        "y": 98.33332824707031,
+        "wires": [
+            [
+                "f65f4ff2.09f3"
+            ]
+        ]
+    },
+    {
+        "id": "4e87be60.17b57",
+        "type": "link out",
+        "z": "512d279b.4ca158",
+        "name": "ACTIVE CUE",
+        "links": [],
+        "x": 1308.9999771118164,
+        "y": 136.6666488647461,
+        "wires": []
+    },
+    {
+        "id": "f65f4ff2.09f3",
+        "type": "link out",
+        "z": "512d279b.4ca158",
+        "name": "AUTO CUE",
+        "links": [],
+        "x": 1309.666603088379,
+        "y": 97.99999046325684,
+        "wires": []
+    },
+    {
+        "id": "f5728c9b.5ed03",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "ACTIVE OUT",
+        "info": "",
+        "x": 1411.333267211914,
+        "y": 135.66666412353516,
+        "wires": []
+    },
+    {
+        "id": "d26f2ba2.b36398",
+        "type": "comment",
+        "z": "512d279b.4ca158",
+        "name": "AUTO OUT",
+        "info": "",
+        "x": 1410.9999771118164,
+        "y": 97.00000476837158,
+        "wires": []
+    },
+    {
+        "id": "ad313914.abe9e8",
+        "type": "change",
+        "z": "512d279b.4ca158",
+        "name": "ACTIVATE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVATE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 371.1666564941406,
+        "y": 482.2539596557617,
+        "wires": [
+            [
+                "940dc67c.b82788"
+            ]
+        ]
+    },
+    {
+        "id": "5e0f21f1.ebf1",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "TERMINATE SOUND PLAYBACK",
+        "links": [
+            "e0563d75.4c263",
+            "a5ec6346.e5833",
+            "8dd3efe9.6c197"
+        ],
+        "x": 375,
+        "y": 980,
+        "wires": [
+            [
+                "b8d50a1d.d77078"
+            ]
+        ]
+    },
+    {
+        "id": "8f23e832.3a78a8",
+        "type": "link in",
+        "z": "9c0dfef0.e3929",
+        "name": "TERMINATE SOUND PLAYBACK",
+        "links": [
+            "e0563d75.4c263",
+            "a5ec6346.e5833",
+            "8dd3efe9.6c197"
+        ],
+        "x": 315,
+        "y": 640,
+        "wires": [
+            [
+                "cf66e317.4fdba"
+            ]
+        ]
+    },
+    {
+        "id": "519caa75.3465a4",
+        "type": "comment",
+        "z": "89bb5440.869c68",
+        "name": "Flashes an IO Pin every second, so you can see Nodered is running",
+        "info": "",
+        "x": 340,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "575e1b70.2bd2a4",
+        "type": "delay",
+        "z": "89bb5440.869c68",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "250.",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 270,
+        "y": 1140,
+        "wires": [
+            [
+                "f7a14c8d.5ef93"
+            ]
+        ]
+    },
+    {
+        "id": "f6643a76.52d0f8",
+        "type": "inject",
+        "z": "89bb5440.869c68",
+        "name": "",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 1060,
+        "wires": [
+            [
+                "9f807c93.9cb06",
+                "575e1b70.2bd2a4"
+            ]
+        ]
+    },
+    {
+        "id": "f7a14c8d.5ef93",
+        "type": "change",
+        "z": "89bb5440.869c68",
+        "name": "NOT",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 1140,
+        "wires": [
+            [
+                "9f807c93.9cb06"
+            ]
+        ]
+    },
+    {
+        "id": "7fa8a87.0dccc58",
+        "type": "comment",
+        "z": "89bb5440.869c68",
+        "name": "(even better) Flashes an IO Pin every second, so you can see Nodered is running",
+        "info": "",
+        "x": 360,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "1bc122a9.2f70dd",
+        "type": "mqtt in",
+        "z": "89bb5440.869c68",
+        "name": "",
+        "topic": "CIMO/PING/#",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "2314bf76.4267c",
+        "x": 190,
+        "y": 320,
+        "wires": [
+            [
+                "4e512423.77edfc"
+            ]
+        ]
+    },
+    {
+        "id": "947d38c6.357b98",
+        "type": "inject",
+        "z": "99c79979.bfcad8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "x": 150,
+        "y": 1280,
+        "wires": [
+            [
+                "89ca5211.5b1d5"
+            ]
+        ]
+    },
+    {
+        "id": "89ca5211.5b1d5",
+        "type": "change",
+        "z": "99c79979.bfcad8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "puzzleTimerSecondsRemaining",
+                "pt": "global",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 1280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fa0fe8c.18c2018",
+        "type": "comment",
+        "z": "99c79979.bfcad8",
+        "name": "One-Time Initialize on bootup",
+        "info": "",
+        "x": 200,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "b3c355d1.dd8988",
+        "type": "mqtt out",
+        "z": "61f84baa.8c8894",
+        "name": "",
+        "topic": "COPI/finalcues/COMMANDS",
+        "qos": "1",
+        "retain": "",
+        "broker": "2314bf76.4267c",
+        "x": 1500,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "1dc24c06.c71334",
+        "type": "inject",
+        "z": "61f84baa.8c8894",
+        "name": "",
+        "topic": "",
+        "payload": "SOLVE",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1250,
+        "y": 720,
+        "wires": [
+            [
+                "b3c355d1.dd8988"
+            ]
+        ]
+    },
+    {
+        "id": "c1575b00.d63dc8",
+        "type": "inject",
+        "z": "61f84baa.8c8894",
+        "name": "",
+        "topic": "",
+        "payload": "FAIL",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1250,
+        "y": 760,
+        "wires": [
+            [
+                "b3c355d1.dd8988"
+            ]
+        ]
+    },
+    {
+        "id": "dab5b24d.1bd9a",
+        "type": "inject",
+        "z": "61f84baa.8c8894",
+        "name": "",
+        "topic": "",
+        "payload": "ACTIVATE",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1260,
+        "y": 680,
+        "wires": [
+            [
+                "b3c355d1.dd8988"
+            ]
+        ]
+    },
+    {
+        "id": "3da69205.d4bb4e",
+        "type": "inject",
+        "z": "61f84baa.8c8894",
+        "name": "",
+        "topic": "",
+        "payload": "RESET",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1250,
+        "y": 640,
+        "wires": [
+            [
+                "b3c355d1.dd8988"
+            ]
+        ]
+    },
+    {
+        "id": "6620b6b7.108958",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "SOLVE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "SOLVE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1460,
+        "y": 440,
+        "wires": [
+            [
+                "b3c355d1.dd8988"
+            ]
+        ]
+    },
+    {
+        "id": "e55a9930.a1a928",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "FAIL",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "FAIL",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1450,
+        "y": 480,
+        "wires": [
+            [
+                "b3c355d1.dd8988"
+            ]
+        ]
+    },
+    {
+        "id": "6ad303c1.7eaf2c",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "ACTIVATE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ACTIVATE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1470,
+        "y": 400,
+        "wires": [
+            [
+                "b3c355d1.dd8988"
+            ]
+        ]
+    },
+    {
+        "id": "5c52491.013a0b8",
+        "type": "change",
+        "z": "61f84baa.8c8894",
+        "name": "RESET",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "RESET",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1460,
+        "y": 360,
+        "wires": [
+            [
+                "b3c355d1.dd8988"
+            ]
+        ]
+    },
+    {
+        "id": "22e184c6.dd97ec",
+        "type": "ui_button",
+        "z": "99c79979.bfcad8",
+        "name": "",
+        "group": "bc061b5a.165388",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "START GAME (short)",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "RESET",
+        "payloadType": "str",
+        "topic": "",
+        "x": 840,
+        "y": 140,
+        "wires": [
+            [
+                "45e7650b.752bec",
+                "bdd667e4.85fb58",
+                "af8f8caf.82f92"
+            ]
+        ]
+    },
+    {
+        "id": "45e7650b.752bec",
+        "type": "function",
+        "z": "99c79979.bfcad8",
+        "name": "SET PUZZLE TIMER = 10 SEC",
+        "func": "var puzzleTimer = 10;\n\nglobal.set('puzzleTimerSecondsRemaining', puzzleTimer);\nglobal.set('puzzleTimerRunning', true)\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c4bcd2.08d493",
+        "type": "link out",
+        "z": "99c79979.bfcad8",
+        "name": "TO FINAL FAIL CUE",
+        "links": [
+            "d62f1c3e.16916"
+        ],
+        "x": 575,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "d62f1c3e.16916",
+        "type": "link in",
+        "z": "61f84baa.8c8894",
+        "name": "FINAL FAIL CUE",
+        "links": [
+            "9c4bcd2.08d493"
+        ],
+        "x": 1155,
+        "y": 520,
+        "wires": [
+            [
+                "e55a9930.a1a928"
+            ]
+        ]
+    },
+    {
+        "id": "e4f1a1a8.69f99",
+        "type": "comment",
+        "z": "61f84baa.8c8894",
+        "name": "FINAL FAIL CUE (TIMEOUT)",
+        "info": "",
+        "x": 1120,
+        "y": 560,
+        "wires": []
+    }
+]

@@ -74,8 +74,7 @@ from class_puzzle_contact_algo import AlgoMatchPuzzleContacts as AlgoMatchPuzzle
 from controller_communications import ControllerCommunications
 
 #FIXME - let's move this to a config file and/or command-line arguments someday
-#MQTTserver = '192.168.1.220'
-MQTTserver = '192.168.200.138'
+MQTTserver = 'ms-roomcontroller.local'
 DebugFlag  = True
 #ProbeTimeout = 120
 ProbeTimeout = 10
@@ -86,17 +85,17 @@ probeTimer = None
 # "reset" -> 9,  "fail" -> 8,  "success" -> 11,  "countdown" -> 25
 timerAssemblyOutputs = {}
 ### REAL ONES
-#timerAssemblyOutputs.update( { 'reset'     : gpiozero.LED(9, active_high = False)  } )
-#timerAssemblyOutputs.update( { 'fail'      : gpiozero.LED(8, active_high = False)  } )
-#timerAssemblyOutputs.update( { 'success'   : gpiozero.LED(11, active_high = False) } )
-#timerAssemblyOutputs.update( { 'countdown' : gpiozero.LED(25, active_high = False) } )
+timerAssemblyOutputs.update( { 'reset'     : gpiozero.LED(9, active_high = False)  } )
+timerAssemblyOutputs.update( { 'fail'      : gpiozero.LED(8, active_high = False)  } )
+timerAssemblyOutputs.update( { 'success'   : gpiozero.LED(11, active_high = False) } )
+timerAssemblyOutputs.update( { 'countdown' : gpiozero.LED(25, active_high = False) } )
 #########################################################################################
 
 ### TEST ONES
-timerAssemblyOutputs.update( { 'reset'     : gpiozero.LED(13, active_high = False)  } )
-timerAssemblyOutputs.update( { 'countdown' : gpiozero.LED(19, active_high = False) } )
-timerAssemblyOutputs.update( { 'fail'      : gpiozero.LED(26, active_high = False)  } )
-timerAssemblyOutputs.update( { 'success'   : gpiozero.LED(20, active_high = False) } )
+#timerAssemblyOutputs.update( { 'reset'     : gpiozero.LED(13, active_high = False)  } )
+#timerAssemblyOutputs.update( { 'countdown' : gpiozero.LED(19, active_high = False) } )
+#timerAssemblyOutputs.update( { 'fail'      : gpiozero.LED(26, active_high = False)  } )
+#timerAssemblyOutputs.update( { 'success'   : gpiozero.LED(20, active_high = False) } )
 #########################################################################################
 
 
@@ -149,6 +148,7 @@ def handlerReactorPuzzleSolved():
   
 
   # Show "SUCCESS" on the timer subassemly
+  timerAssemblyOutputs['reset'].blink(on_time=.2, n=1)
   timerAssemblyOutputs['success'].blink(on_time=.2, n=1)
 
 #end def
@@ -173,10 +173,15 @@ def handlerReactorPuzzleFailed():
 #end def
 
 ReactorPuzzle = AlgoMatchPuzzleContacts(Debug = DebugFlag, AlwaysActive = False)
-#ReactorPuzzle.SetAlgorithmInputs( [26, 13, 20, 12, 6, 5, 19, 21], FailPin = 16)
-ReactorPuzzle.SetAlgorithmInputs( [17, 27, 5], FailPin = 6)
+#ReactorPuzzle.SetAlgorithmInputs ( [13, 20, 12 , 6,  5, 19,    16], FailPin = 26, ActiveLow = False)
+ReactorPuzzle.SetAlgorithmInputs ( [13, 20, 12 , 6,  5, 19,    16], ActiveLow = False)
+#                 21 is number 7 and appears to be broken?? ^^
+
+ReactorPuzzle.SetAlgorithmOutputs( [27, 3,  23, 22, 17, 24,  2, 4], ActiveLow = True )
+#ReactorPuzzle.SetAlgorithmInputs( [17, 27, 5], FailPin = 6)
 #ReactorPuzzle.AddSolvedOutput()
-#ReactorPuzzle.AddActiveOutput()
+ReactorPuzzle.AddActiveOutput(7, ActiveLow = True)
+ReactorPuzzle.AddActiveOutput(18, ActiveLow = True)
 #ReactorPuzzle.AddFailedOutput()
 
 ReactorPuzzle.RegisterCallback('activated', handlerReactorPuzzleActivated)

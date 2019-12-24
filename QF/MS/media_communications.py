@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# Room Controller Communications Class
+# Media Controller <-> Room Controller Communications Class
 # Part of the RCPCS project (Room Control and Puzle Coordination System)
 # Copyright (C) 2019  Joel D. Caturia
 #
@@ -46,37 +46,36 @@ import sys
 
 __version__  = '0.9'
 
-print('\r\n----------------------------------------------------------')
-print('Room Controller Communications Class v{}'.format(__version__))
+print('\r\n----------------------------------------------------------------')
+print('Media Controller <-> Room Controller Communications Class v{}'.format(__version__))
 print('Room Control and Puzzle Coordination System (RCPCS)')
 print('(c)2019 Joel Caturia <jcaturia@katratech.com>')
-print('----------------------------------------------------------\r\n')
+print('----------------------------------------------------------------\r\n')
 
 
 class ControllerCommunications:
 
-  def __init__(self, puzzleID, mqttBroker, mqttPort = 1883):
+  def __init__(self, mediaID, mqttBroker, mqttPort = 1883):
     self.mqttBroker = mqttBroker
     self.mqttPort = mqttPort
-    self.puzzleID = puzzleID
+    self.mediaID = mediaID
   
     self.mqttKeepalive = 15
+    self.__puzzleState = 'ONLINE'
 
     self.__pingDelay = 3
     self.__timestampLastPing = time.time()
-    self.__puzzleState = None
     self.__callbacks = {}
     self.__MQTTConnected = False
 
     
     
     def handlerMQTTonConnect(client, userdata, flags, rc):
-      print('>> Puzzle ID [{}] successfully connected to MQTT Broker [{}:{}]..'.format(self.puzzleID, self.mqttBroker, self.mqttPort) )
+      print('>> Media Controller ID [{}] successfully connected to MQTT Broker [{}:{}]..'.format(self.mediaID, self.mqttBroker, self.mqttPort) )
       
       self.__MQTTConnected = True
       
-      self.mqttClient.subscribe('COPI/' + self.puzzleID + '/#')	# Subscribe to Controller-Out-Puzzle-In		
-      self.mqttClient.subscribe('POPI/' + self.puzzleID + '/#')	# Subscribe to Puzzle-Out-Puzzle-In topic
+      self.mqttClient.subscribe('COMI/' + self.mediaID + '/#')	# Subscribe to Controller-Out-Media-In		
       
       self.PublishState(self.__puzzleState)
       
@@ -105,21 +104,12 @@ class ControllerCommunications:
             
         incomingCommand = message.payload.decode()
                     
-        if incomingCommand in ['RESET', 'ACTIVATE', 'SOLVE', 'PONG', 'REBOOT', 'FAIL']:
+        if incomingCommand in ['RESET', 'PONG', 'REBOOT']:
           print(' -> Received MQTT command: [{}]'.format(incomingCommand))
                             
           if incomingCommand == 'RESET':
             self.__callbacks['command_reset']()
-            
-          elif incomingCommand == 'ACTIVATE':
-            self.__callbacks['command_activate']()
-                            
-          elif incomingCommand == 'SOLVE':
-            self.__callbacks['command_solve']()
-
-          elif incomingCommand == 'FAIL':
-            self.__callbacks['command_fail']()
-
+                                        
           elif incomingCommand == 'REBOOT':
             self.PublishStatus('REBOOTING')
             self.mqttClient.disconnect()
@@ -130,8 +120,8 @@ class ControllerCommunications:
             self.__callbacks['pong']()
                   
       else:
-        self.mqttClient.publish('CIPO/' + self.puzzleID + '/ERROR', 'Unknown COMMAND received: [{}]'.format(incomingCommand))
-        self.mqttClient.publish('CIPO/' + self.puzzleID + '/STATE', self.__puzzleState)
+        self.mqttClient.publish('CIMO/' + self.mediaID + '/ERROR', 'Unknown COMMAND received: [{}]'.format(incomingCommand))
+        self.mqttClient.publish('CIMO/' + self.mediaID + '/STATE', self.__puzzleState)
       #end if
                                                                                                                                                                                                                                                                                         
     #end def (handlerMQTTonMessage)
@@ -144,7 +134,7 @@ class ControllerCommunications:
     self.mqttClient.on_disconnect = handlerMQTTonDisconnect
     self.mqttClient.on_message    = handlerMQTTonMessage
 
-    self.mqttClient.will_set('CIPO/' + self.puzzleID + '/STATE', payload='UNKNOWN', qos=1)
+    self.mqttClient.will_set('CIMO/' + self.mediaID + '/STATE', payload='UNKNOWN', qos=1)
 
     backOffTimer = 2
 
@@ -187,17 +177,18 @@ class ControllerCommunications:
     #TODO - add wireless signal strength as well
     data = {}
     data['timestamp']    = time.time()
-    data['puzzleID']     = self.puzzleID
+    data['puzzleID']     = self.mediaID
     data['ipAddress']    = self.__getIPAddress()
     data['uptime']       = self.__getUptime()
     data['MACaddress']   = self.__getMACaddress()
     data['temperature']  = self.__getTemperature()
-    data['role']         = 'puzzle'
+    data['role']         = 'media'
     data['platform']     = platform
-    data['currentStatus'] = self.__puzzleState
+    data['currentStatus'] = 'n/a'
+    self.__puzzleState
     json_data = json.dumps(data)
     
-    self.mqttClient.publish('CIPO/PING/' + self.puzzleID, json_data )
+    self.mqttClient.publish('CIMO/PING/' + self.mediaID, json_data )
     
     self.__callbacks['ping']()
   
@@ -215,22 +206,21 @@ class ControllerCommunications:
 
 
   def PublishStatus(self, newStatus):
-    if newStatus in ['RESET', 'ACTIVE', 'SOLVED', 'FAILED', 'REBOOTING']:
+    if newStatus in ['RESET', 'ACTIVE', 'REBOOTING']:
       self.__puzzleState = newStatus
-      self.mqttClient.publish('CIPO/' + self.puzzleID + '/STATE', self.__puzzleState, qos=1)
+      self.mqttClient.publish('CIMO/' + self.mediaID + '/STATE', self.__puzzleState, qos=1)
     #end if
   #end def
   
       
   # These are the callbacks we will support at the moment:
   # - command_reset 
-  # - command_activate
-  # - command_solve
   # - command_reboot
+  # - ping
   # - pong
   def RegisterCallback(self, eventName, callbackFunction):
   
-    if eventName in ['command_reset', 'command_activate', 'command_solve', 'command_reboot', 'command_fail', 'pong', 'ping']:
+    if eventName in ['command_reset', 'command_reboot', 'pong', 'ping']:
       self.__callbacks[eventName] = callbackFunction
     #end if
         
@@ -238,12 +228,17 @@ class ControllerCommunications:
 
 
   def __getTemperature(self):
-    with open('/sys/class/thermal/thermal_zone0/temp', 'r') as f:
-      celsius = int(f.readline().strip()) / 1000;
 
-      fahrenheit = math.floor((celsius * 1.8) + 32);
+    # If we are running on anyting other than a Raspberry Pi, this file will probably not exist.
+    try:
+      with open('/sys/class/thermal/thermal_zone0/temp', 'r') as f:
+        celsius = int(f.readline().strip()) / 1000;
+        fahrenheit = math.floor((celsius * 1.8) + 32);
 
-    return fahrenheit
+      return fahrenheit
+    except:
+      return 'n/a'
+    #end except
   #end def (__getTemperature)
   
   
@@ -280,12 +275,63 @@ class ControllerCommunications:
   def __getRaspberryPiVersion(self):
   
     # Only Raspberry Pi's will have this, so we catch the error to mean we're running on some other platform (Simu-Puzzle perhaps?)
-#    try:
-    with open('/proc/device-tree/model', 'r') as f:
-      model = f.readline()
-      return model
-        
-#    except:
-#      return 'Unknown'
-      #end try
+    try:
+      with open('/proc/device-tree/model', 'r') as f:
+        model = f.readline()
+        return model
+      #end with
+
+    except:
+      return 'Unknown'
+    #end try
+
   #end def (__getRaspberryPiVersion)
+
+
+
+  ####################################################################################
+
+MQTTserver = 'ms-roomcontroller.local'
+MediaID    = 'media1'
+DebugFlag = True
+
+RoomController = ControllerCommunications(MediaID, MQTTserver)
+
+def handlerRoomControllerReboot():
+  print('>> Processing a remote reboot command!')
+  os.system('sudo reboot')
+#end def
+
+def handlerRoomControllerReset():
+  pass
+#end def
+
+def handlerRoomControllerPing():
+  pass
+#end def
+
+def handlerRoomControllerPong():
+  pass
+#end def
+
+
+RoomController.RegisterCallback('command_reboot',   handlerRoomControllerReboot)
+RoomController.RegisterCallback('command_reset',    handlerRoomControllerReset)
+RoomController.RegisterCallback('ping',             handlerRoomControllerPing)
+RoomController.RegisterCallback('pong',             handlerRoomControllerPong)
+
+try:
+
+  while True:
+    RoomController.ProcessEvents()
+    time.sleep(.25)
+  #end while
+  
+except (KeyboardInterrupt, SystemExit):
+
+  print("\r\nExiting..")
+  quit()
+
+except:
+  raise
+#end try

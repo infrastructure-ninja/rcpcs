@@ -37,6 +37,9 @@ class AlgoMatchPuzzleContacts:
     def __init__(self, Debug = False, AlwaysActive = False):
     
         self.__debugFlag       = Debug
+        if Debug is True:
+            print('>> DEBUG is enabled')
+
 #        self.__delayAllowance  = DelayAllowance      # How much time is allowed to elapse (in milliseconds) between the different contact closures
         self.__callbacks       = {}        
 
@@ -57,7 +60,7 @@ class AlgoMatchPuzzleContacts:
     #end def
     
     
-    def SetAlgorithmInputs(self, inputPins, FailPin = None):
+    def SetAlgorithmInputs(self, inputPins, FailPin = None, ActiveLow = False):
     
         if self.__debugFlag is True:
             print('>> Added Puzzle Pattern Inputs #[{}], Fail Pin: [{}]'.format(inputPins, FailPin))
@@ -66,14 +69,24 @@ class AlgoMatchPuzzleContacts:
         self.__puzzleInputPinObjects.clear()
         
         for individualPin in inputPins:
-            tmpButtonObject = gpiozero.Button(individualPin, pull_up=True, active_state=None)   #FIXME - this is where we fix active HI/LO
+            if ActiveLow is False:
+                tmpButtonObject = gpiozero.Button(individualPin, pull_up=False, bounce_time=.2)
+            else:
+                tmpButtonObject = gpiozero.Button(individualPin, pull_up=True, bounce_time=.2)
+            #end if
+
             tmpButtonObject.when_pressed  = self.__handlerContactCallback 
 
             self.__puzzleInputPinObjects.append(tmpButtonObject)
         #end for
 
         if FailPin is not None:
-            tmpButtonObject = gpiozero.Button(FailPin, pull_up=True, active_state=None)   #FIXME - this is where we fix active HI/LO
+            if ActiveLow is False:
+                tmpButtonObject = gpiozero.Button(FailPin, pull_up=False)
+            else:
+                tmpButtonObject = gpiozero.Button(FailPin, pull_up=True)
+            #end if
+
             tmpButtonObject.when_pressed  = self.__handlerContactCallback 
 
             self.__puzzleInputFailPinObjects.append(tmpButtonObject)
@@ -82,7 +95,7 @@ class AlgoMatchPuzzleContacts:
     #end def (SetAlgorithmInputs)
 
     
-    def SetAlgorithmOutputs(self, outputPins):
+    def SetAlgorithmOutputs(self, outputPins, ActiveLow=False):
         if self.__debugFlag is True:
             print('>> Added Puzzle Pattern Outputs #[{}]'.format(outputPins))
         #end if
@@ -90,7 +103,12 @@ class AlgoMatchPuzzleContacts:
         self.__puzzleOutputPinObjects.clear()
             
         for individualOutput in outputPins:
-            tmpOutputObject = gpiozero.PWMLED(individualOutput)
+            if ActiveLow is False:
+                tmpOutputObject = gpiozero.PWMLED(individualOutput, active_high=True)
+            else:
+                tmpOutputObject = gpiozero.PWMLED(individualOutput, active_high=False)
+            #end if
+
             tmpOutputObject.off()
             
             self.__puzzleOutputPinObjects.append(tmpOutputObject)
@@ -100,37 +118,49 @@ class AlgoMatchPuzzleContacts:
     
     
     
-    def AddActiveOutput(self, activeOutputPinNumber):
+    def AddActiveOutput(self, activeOutputPinNumber, ActiveLow=False):
         if self.__debugFlag is True:
             print('>> Added Puzzle Active Output Pin #[{}]'.format(activeOutputPinNumber))
         #end if
-        
-#        tmpOutputObject = gpiozero.LED(activeOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
-        tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
+
+        if ActiveLow is False:
+            tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber, active_high=True)
+        else:
+            tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber, active_high=False)
+        #end if
+
         tmpOutputObject.off()
         self.__puzzleActiveOutputObjects.append(tmpOutputObject)
     #end def (AddActiveOutput)
 
 
-    def AddSolvedOutput(self, solvedOutputPinNumber):
+    def AddSolvedOutput(self, solvedOutputPinNumber, ActiveLow=False):
         if self.__debugFlag is True:
             print('>> Added Puzzle Solved Output Pin #[{}]'.format(solvedOutputPinNumber))
         #end if
 
-        #tmpOutputObject = gpiozero.LED(solvedOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
-        tmpOutputObject = gpiozero.PWMLED(solvedOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
+        if ActiveLow is False:
+            tmpOutputObject = gpiozero.PWMLED(solvedOutputPinNumber, active_high=True)    #FIXME - this is where we'll add stuff about active HI/LO
+        else:
+            tmpOutputObject = gpiozero.PWMLED(solvedOutputPinNumber, active_high=False)    #FIXME - this is where we'll add stuff about active HI/LO
+        #end if
+
         tmpOutputObject.off()
         self.__puzzleSolvedOutputObjects.append(tmpOutputObject)
     #end def (AddActiveOutput)
 
 
-    def AddFailedOutput(self, activeOutputPinNumber):
+    def AddFailedOutput(self, activeOutputPinNumber, ActiveLow=False):
         if self.__debugFlag is True:
             print('>> Added Puzzle Failed Output Pin #[{}]'.format(activeOutputPinNumber))
         #end if
         
-#        tmpOutputObject = gpiozero.LED(activeOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
-        tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber)	#FIXME - this is where we'll add stuff about active HI/LO
+        if ActiveLow is False:
+            tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber, active_high=True)    #FIXME - this is where we'll add stuff about active HI/LO
+        else:
+            tmpOutputObject = gpiozero.PWMLED(activeOutputPinNumber, active_high=False)    #FIXME - this is where we'll add stuff about active HI/LO
+        #end if
+
         tmpOutputObject.off()
         self.__puzzleFailedOutputObjects.append(tmpOutputObject)
     #end def (AddFailedOutput)
@@ -148,7 +178,9 @@ class AlgoMatchPuzzleContacts:
                 if ( btnObject.pin is self.__puzzleInputPinObjects[self.__puzzlePatternPosition].pin ):
                     
                     try:  # if we don't have an output pin established for this input, we should silently fail
-                        self.__puzzleOutputPinObjects[self.__puzzlePatternPosition].pulse()
+                        self.__puzzleOutputPinObjects[self.__puzzlePatternPosition].on()
+                        #FIXME: once these are not relays, we can do PWM on these!
+                        #self.__puzzleOutputPinObjects[self.__puzzlePatternPosition].pulse()
                     except:
                         pass
                     #end try
@@ -229,7 +261,8 @@ class AlgoMatchPuzzleContacts:
     def Fail(self):
         self.__puzzleFailed = True
         self.__puzzleActive = False
-        
+        self.__puzzlePatternPosition = 0
+
         if self.__debugFlag is True:
             print('>> PUZZLE FAILED!')
         #end if
