@@ -24,7 +24,6 @@
 
 
 # TODO:
-#  * Fix the places where I did not let you specify active LO/HI for inputs and outputs
 #  * Add a failed state: contacts, callback, and an output, with an optional timer for reset
 
 
@@ -48,6 +47,7 @@ class ANDMatchPuzzleContacts:
         self.__puzzleAlwaysActive        = AlwaysActive
         self.__puzzleActive              = AlwaysActive
         self.__puzzleSolved              = False
+        self.__puzzleFailed              = False
 
     #end def
     
@@ -119,8 +119,8 @@ class ANDMatchPuzzleContacts:
         if ( self.__puzzleActive is True ) and ( self.__puzzleSolved is False ):
 
             if btnObject.is_active is True:
-                #currentMilliseconds = round( time.monotonic_ns() / 1000000 )
-                currentMilliseconds = round( time.monotonic() / 1000000 ) #FIME-HP
+                currentMilliseconds = round( time.monotonic_ns() / 1000000 )
+                #currentMilliseconds = round( time.monotonic() / 1000000 ) #FIME-HP
                 self.__puzzleInputPinTimers[btnObject.pin] = currentMilliseconds
 
                 self.__checkForSolve()
@@ -135,8 +135,7 @@ class ANDMatchPuzzleContacts:
 
     def __checkForSolve(self):
 
-#        currentMilliseconds = round( time.monotonic_ns() / 1000000 )  #FIXME-HP
-        currentMilliseconds = round( time.monotonic() / 1000000 )  #FIXME-HP
+        currentMilliseconds = round( time.monotonic_ns() / 1000000 )
 
         for pinName, pinMilliseconds in self.__puzzleInputPinTimers.items():
             if self.__debugFlag is True:
@@ -148,6 +147,10 @@ class ANDMatchPuzzleContacts:
                 
             elif ( currentMilliseconds - pinMilliseconds ) < self.__delayAllowance:
                 pass
+
+            elif ( currentMilliseconds - pinMilliseconds ) > self.__delayAllowance:
+                self.Fail()
+                return False
 
             else:
                 return False
@@ -169,6 +172,7 @@ class ANDMatchPuzzleContacts:
     def Activate(self):
         
         self.__puzzleActive = True
+        self.__puzzleSolved = False
 
         if self.__debugFlag is True:
             print('>> PUZZLE IS ACTIVE: [{}]'.format(self.__puzzleActive))
@@ -211,6 +215,32 @@ class ANDMatchPuzzleContacts:
     #end def (Solve)
 
 
+    def Fail(self):
+        
+        self.__puzzleFailed = True
+        self.__puzzleActive = False
+
+        # Reset the timestamp on the contacts
+        for pinName, pinMilliseconds in self.__puzzleInputPinTimers.items():
+            self.__puzzleInputPinTimers[pinName] = None
+        #end for
+
+        for individualOutputObject in self.__puzzleActiveOutputObjects:
+            individualOutputObject.off()            
+        #end for
+
+        for individualOutputObject in self.__puzzleSolvedOutputObjects:
+            individualOutputObject.on()
+        #end for
+
+        try:
+            self.__callbacks['failed']()
+        except:
+            pass
+        #end try
+
+    #end def (Fail)
+
     def Reset(self):
         
         if self.__debugFlag is True:
@@ -218,8 +248,15 @@ class ANDMatchPuzzleContacts:
         #end if
 
         self.__puzzleSolved = False
+        self.__puzzleFailed = False
         self.__puzzleActive = False
-                
+         
+
+        # Reset the timestamp on the contacts
+        for pinName, pinMilliseconds in self.__puzzleInputPinTimers.items():
+            self.__puzzleInputPinTimers[pinName] = None
+        #end for
+       
         for individualOutputObjects in self.__puzzleActiveOutputObjects:
             individualOutputObjects.off()
         #end for

@@ -76,8 +76,8 @@ from controller_communications import ControllerCommunications
 #FIXME - let's move this to a config file and/or command-line arguments someday
 MQTTserver = 'ms-roomcontroller.local'
 DebugFlag  = True
-#ProbeTimeout = 120
-ProbeTimeout = 10
+ProbeTimeout = 120
+#ProbeTimeout = 10
 
 probeTimer = None
 
@@ -173,16 +173,16 @@ def handlerReactorPuzzleFailed():
 #end def
 
 ReactorPuzzle = AlgoMatchPuzzleContacts(Debug = DebugFlag, AlwaysActive = False)
-#ReactorPuzzle.SetAlgorithmInputs ( [13, 20, 12 , 6,  5, 19,    16], FailPin = 26, ActiveLow = False)
-ReactorPuzzle.SetAlgorithmInputs ( [13, 20, 12 , 6,  5, 19,    16], ActiveLow = False)
-#                 21 is number 7 and appears to be broken?? ^^
+ReactorPuzzle.SetAlgorithmInputs (  [13, 20, 12 , 6,  5, 19, 21], FailPin = 26, ActiveLow = False)
+#ReactorPuzzle.SetAlgorithmInputs ( [13, 20, 12 , 6,  5, 19, 21, 16], FailPin = 26, ActiveLow = False)
+#                    16 is number 8 and appears to be broken?? ^^
 
-ReactorPuzzle.SetAlgorithmOutputs( [27, 3,  23, 22, 17, 24,  2, 4], ActiveLow = True )
-#ReactorPuzzle.SetAlgorithmInputs( [17, 27, 5], FailPin = 6)
-#ReactorPuzzle.AddSolvedOutput()
+ReactorPuzzle.SetAlgorithmOutputs( [27, 3,  23, 22, 17, 24,  2], ActiveLow = True )
+
 ReactorPuzzle.AddActiveOutput(7, ActiveLow = True)
 ReactorPuzzle.AddActiveOutput(18, ActiveLow = True)
-#ReactorPuzzle.AddFailedOutput()
+
+ReactorPuzzle.AddSolvedOutput(4, ActiveLow = True)   #this is the 8th LED (with a contact that does not currently work)
 
 ReactorPuzzle.RegisterCallback('activated', handlerReactorPuzzleActivated)
 ReactorPuzzle.RegisterCallback('solved',    handlerReactorPuzzleSolved)

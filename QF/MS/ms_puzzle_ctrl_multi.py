@@ -287,7 +287,7 @@ def handlerPatchPuzzleSolved():
 PatchPuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = True)
 PatchPuzzle.AddContact(22, ActiveLow = True)
 #PatchPuzzle.AddActiveOutput()
-#PatchPuzzle.AddSolvedOutput()
+PatchPuzzle.AddSolvedOutput(19, ActiveLow = True)
 
 PatchPuzzle.RegisterCallback('activated', handlerPatchPuzzleActivated)
 PatchPuzzle.RegisterCallback('solved',    handlerPatchPuzzleSolved)
@@ -355,18 +355,24 @@ def handlerKeysPuzzleSolved():
   KeysRoomController.PublishStatus('SOLVED')
 #end def
 
+def handlerKeysPuzzleFailed():
+  KeysRoomController.PublishStatus('FAILED')
+#end def
+
 KeysPuzzle = ANDMatchPuzzleContactClass(Debug = DebugFlag, AlwaysActive = False)
 KeysPuzzle.AddContact(8, ActiveLow = True)
-#KeysPuzzle.AddContact(25, ActiveLow = True)   #FIXME - Add this when we're ready for the full puzzle
+KeysPuzzle.AddContact(25, ActiveLow = True)   # You can always disable one if you need to be able to play-test alone
 
 KeysPuzzle.AddActiveOutput(14, ActiveLow = True)  # LED on keys
 KeysPuzzle.AddSolvedOutput(26, ActiveLow = True)  # power to probe
-KeysPuzzle.AddSolvedOutput(13, ActiveLow = True)  # LED on probe to probe
+KeysPuzzle.AddSolvedOutput(13, ActiveLow = True)  # LED on probe
 
-KeysPuzzle.SetDelay(2000)
+KeysPuzzle.SetDelay(2000)     # 2 second delay
+#KeysPuzzle.SetDelay(20000)   # 20 second delay (for testing)
 
 KeysPuzzle.RegisterCallback('activated', handlerKeysPuzzleActivated)
 KeysPuzzle.RegisterCallback('solved',    handlerKeysPuzzleSolved)
+KeysPuzzle.RegisterCallback('failed',    handlerKeysPuzzleFailed)
 KeysPuzzle.RegisterCallback('reset',     handlerKeysPuzzleReset)
 #####################################################
 ## (END) PUZZLE CONTROLLER -> KEYS PUZZLE ##
